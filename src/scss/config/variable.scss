@@ -1,0 +1,36 @@
+$deepgreen: #215154 !default;
+$secondarygreen: #5F9A80 !default;
+$lightOrange: #d8856b !default;
+$lightGreen: #c1d3c0 !default;
+$cyan: #efede9 !default;
+$white: #ffffff !default;
+$black: #000000 !default;
+$gray-100: #dcdcdc !default;
+$gray-200: #464a4b !default;
+$gray-300: #CACACA !default;
+$gray-400: #EBEBF1 !default;
+$gray-900: #181A1C !default;
+$gray-800: #1F1F1F !default;
+$deepgreengradient: linear-gradient(180deg, #215154 0%, #2B8489 100%) !default;
+
+
+// scss-docs-start theme-color-variables
+$primary: $deepgreen !default;
+$secondary: $secondarygreen !default;
+$warning: $lightOrange !default;
+$success: $lightGreen !default;
+$info: $cyan !default;
+$light: $gray-100 !default;
+$dark: $gray-900 !default;
+
+// fontFamily
+$fontPoppins: 'Poppins', sans-serif;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);

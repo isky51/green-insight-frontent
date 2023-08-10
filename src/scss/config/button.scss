@@ -1,0 +1,16 @@
+@import "./variable.scss";
+
+.btn-deepgreen{
+    background-color: $primary;
+    border: 1px solid $primary;
+    color: $white;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: 500;
+    transition: all .5s ease-out;
+    &:hover{
+        background-color: $white;
+        border: 1px solid $primary;
+        color: $primary;
+    }
+}

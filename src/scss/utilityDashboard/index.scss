@@ -1,0 +1,112 @@
+@import "../config/variable.scss";
+
+.utilityDashboard {
+
+    // top heading css
+    .topHeading {
+        h1 {
+            font-size: 36px;
+            color: $white;
+            font-weight: 500;
+        }
+
+        background: $primary;
+    }
+
+    .utilityDashboardWrapper {
+
+        // database dropdown css
+        .databaseDropdown {
+            .form-select {
+                padding: 16px 51px 16px 14px;
+                width: auto;
+                font-size: 16px;
+                font-weight: 500;
+                border: 1px solid $gray-300;
+                border-radius: 8px;
+
+                &:focus {
+                    box-shadow: none;
+                    border: 1px solid $gray-300;
+                }
+            }
+        }
+
+        // databse table accordian css
+        .dataTable_Accordion {
+            margin-top: 37px;
+            .accordion {
+                .accordion-item {
+                    margin-bottom: 16px;
+                    border: none;
+
+                    .accordion-header {
+                        .accordion-button {
+                            font-weight: 500;
+                            border-radius: 8px 8px 0px 0px;
+                            background: $gray-400;
+
+                            &:not(.collapsed) {
+                                box-shadow: none;
+                                color: $dark;
+                            }
+
+                            &:focus {
+                                z-index: 3;
+                                border-color: none;
+                                outline: 0;
+                                box-shadow: none;
+                            }
+
+                            .form-check-input {
+                                border-radius: 2px;
+                                border: 1px solid $primary;
+                                --bs-form-check-bg: $gray-400;
+
+                                &:checked {
+                                    background-color: $primary;
+                                }
+
+                                &:focus {
+                                    box-shadow: none;
+                                }
+                            }
+                        }
+                    }
+
+                    .accordion-body {
+                        border-radius: 0px 0px 8px 8px;
+                        background: rgba(235, 235, 241, 0.40);
+
+                        .accordianTable_column {
+                            display: flex;
+                            gap: 24px;
+                            flex-wrap: wrap;
+
+                            .form-check-input {
+                                border-radius: 2px;
+                                border: 1px solid $primary;
+                                --bs-form-check-bg: $gray-400;
+
+                                &:checked {
+                                    background-color: $primary;
+                                }
+
+                                &:focus {
+                                    box-shadow: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // submit-btn css
+        .submitBtn{
+            .btn-deepgreen{
+                min-width: 241px;
+            }
+        }
+    }
+}
