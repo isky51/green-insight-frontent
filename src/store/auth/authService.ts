@@ -41,7 +41,7 @@ const authPostOtp = async (userData: any) => {
 
     try {
         const response = await axios.post(
-            baseURL + "verify-otp", userData
+            baseURL + "verifyOTP", userData
         );
         localStorage.setItem("loginDetails", JSON.stringify(response?.data?.data))
         return response?.data?.data
@@ -51,8 +51,8 @@ const authPostOtp = async (userData: any) => {
     }
 }
 const authLogoutPost = async () => {
-
-    localStorage.removeItem("user");
+    
+    localStorage.removeItem("loginDetails");
 
 }
 

@@ -10,6 +10,7 @@ const initialState = {
     isLoading: false,
     message: "",
     loginDetails: null,
+    isOtp:false,
     OtpDetails: "",
     otpSuccess: false,
     otpError: false,
@@ -50,7 +51,7 @@ export const bucketLoginPost = createAsyncThunk("bucket/post/login", async (user
 })
 
 export const logoutPost = createAsyncThunk("post/logout", async (_, thunkApi) => {
-    try {
+    try { 
 
         return await authService.authLogoutPost();
     }
@@ -106,6 +107,7 @@ export const authDataReducer = createSlice({
             state.isSuccess = false;
             state.message = "";
             state.loginDetails = null
+            state.isOtp=false
             state.OtpDetails = ""
             state.otpError = false
             state.otpSuccess = false;
@@ -125,6 +127,7 @@ export const authDataReducer = createSlice({
             .addCase(loginPost.fulfilled, (state: any, action: any) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isOtp = action.payload.otp
                 state.loginDetails = action.payload;
                 setLoading(false)
             })
@@ -157,7 +160,7 @@ export const authDataReducer = createSlice({
             .addCase(otpPost.fulfilled, (state: any, action: any) => {
                 state.isLoading = false;
                 state.otpSuccess = true;
-                state.OtpDetails = action.payload;
+                state.loginDetails = action.payload;
             })
             .addCase(otpPost.rejected, (state: any, action: any) => {
                 state.isLoading = true;

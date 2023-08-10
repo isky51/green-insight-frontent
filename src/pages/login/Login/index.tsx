@@ -15,7 +15,7 @@ import Modal from "react-bootstrap/Modal";
 
 
 const LoginForm = () => {
-    const { loginDetails, isSuccess, otpSuccess, otpError } = useSelector(
+    const { loginDetails, isSuccess, otpSuccess, otpError, isOtp } = useSelector(
         (state: any) => state.auth
     );
 
@@ -43,27 +43,19 @@ const LoginForm = () => {
 
     let _Fields = { email: "", password: "" };
 
-    console.log(isSuccess , loginDetails?.message, "logindetails")
-
     useEffect(() => {  
         if (
-            isSuccess && 
-            loginDetails?.message ===
-            "Verification code send to registered phone number."
+            isSuccess && isOtp
         ) {
             setShow(true);
             setotpErrorShow(false);
         } else if (
-            !isSuccess &&
-            loginDetails?.message !==
-            "Verification code send to registered phone number."
+            !isSuccess && !isOtp
         ) {
             setShow(false);
             setotpErrorShow(false);
             localStorage.clear();
-        } else if (isSuccess &&
-            loginDetails?.message ===
-            "User Logged In Successfully.") {
+        } else if (isSuccess && !isOtp){
             setShow(false);
             setotpErrorShow(false);
             if (dataCheck?.loggedIn) {
@@ -88,21 +80,22 @@ const LoginForm = () => {
         }
     }, [isSuccess]);
 
-console.log(show,"show")
-
     useEffect(() => {
         if (otpSuccess && dataCheck?.loggedIn) {
-            if (dataCheck?.userdata?.role === 1) {
-                if (dataCheck?.userdata?.Region?.id) {
-                    localStorage.setItem(
-                        "regionalLevel",
-                        dataCheck?.userdata?.Region?.id
-                    );
-                }
-                navigate("/regional-level");
-            } else {
-                navigate("/sustainable");
-            }
+                 setShow(false)
+                 navigate("/dashboard");
+
+            // if (dataCheck?.userdata?.role === 1) {
+            //     if (dataCheck?.userdata?.Region?.id) {
+            //         localStorage.setItem(
+            //             "regionalLevel",
+            //             dataCheck?.userdata?.Region?.id
+            //         );
+            //     }
+            //     navigate("/regional-level");
+            // } else {
+            //     navigate("/sustainable");
+            // }
         }
     }, [otpSuccess]);
     useEffect(() => {
@@ -121,7 +114,6 @@ console.log(show,"show")
             email: event.email,
             password: event.password,
         };
-        console.log(userPayload,"Login Email, Password")
         dispatch(loginPost(userPayload));
 
     };

@@ -1,10 +1,15 @@
 import { Form, Accordion } from 'react-bootstrap';
 import LogOut from '../../assets/images/utilityDashboard/logout.svg'
 import { useEffect, useState } from 'react';
+import { logoutPost } from '../../store/auth/authDataSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
+ 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    console.log("Dashboard page")
     let initialArray = [
         {
             databaseName: 'Schinder',
@@ -53,7 +58,10 @@ const Dashboard = () => {
         setSelectedDatabase(event.target.value)
     }
 
-    console.log(selectedDatabase, "database")
+    const handleLogout =()=>{
+        dispatch(logoutPost() as any);
+        navigate('/')
+    }
 
     return (
         <>
@@ -64,7 +72,7 @@ const Dashboard = () => {
                     {/* top utility heading starts */}
                     <div className='topHeading p-4 d-flex justify-content-between align-items-center'>
                         <h1 className='mb-0'>Utility Portal Dashboard</h1>
-                        <div>
+                        <div onClick={handleLogout}>
                             <img src={LogOut} alt="logout" />
                             <span className='text-white ps-2 fs-6'>Logout</span>
                         </div>
@@ -78,7 +86,7 @@ const Dashboard = () => {
                             <Form.Select aria-label="Default select example" onChange={(e) => handleSelectDatabase(e)} value={selectedDatabase}>
                                 <option>Select Datatbase</option>
                                 {initialArray.map((elem, index) => {
-                                    console.log(elem, "Element")
+
                                     return <option key={index} value={index}>{elem.databaseName}</option>
                                 })}
                                 {/* <option value="1">One</option>
