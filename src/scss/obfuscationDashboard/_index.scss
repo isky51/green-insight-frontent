@@ -1,0 +1,170 @@
+@import "../config/variable.scss";
+
+.obfuscationDashboard {
+
+    // top heading css
+    .topHeading {
+        h1 {
+            color: $white;
+            font-weight: 500;
+        }
+
+        background: $primary;
+
+        img {
+            width: 20px;
+        }
+
+        .logoutBtn {
+            white-space: nowrap;
+        }
+    }
+
+    .obfuscationDashboardWrapper {
+
+        // database dropdown css
+        .databaseDropdown {
+
+            .custom-select {
+                max-width: 230px;
+
+                .css-1fdsijx-ValueContainer {
+                    padding: 13px 0px 13px 14px;
+                    font-size: 16px;
+                    font-weight: 500;
+
+                    @media(max-width: $sm) {
+                        padding: 9px 0px 9px 9px;
+                    }
+                }
+
+                .css-1u9des2-indicatorSeparator {
+                    display: none;
+                }
+
+                .css-t3ipsp-control {
+                    &:hover {
+                        border-color: hsl(0, 0%, 80%) !important;
+                    }
+
+                    box-shadow: none !important;
+                    border-color: hsl(0, 0%, 80%) !important;
+                }
+            }
+        }
+
+        // databse table accordian css
+        .dataTable_Accordion {
+            margin-top: 37px;
+
+            .accordion {
+                .accordion-item {
+                    margin-bottom: 16px;
+                    border: none;
+
+                    .accordion-header {
+                        .accordion-button {
+                            font-weight: 500;
+                            border-radius: 8px 8px 0px 0px;
+                            background: $gray-400;
+                            padding: 22.5px;
+
+                            @media (max-width: $sm) {
+                                word-break: break-all;
+                            }
+
+                            &::after {
+                                background-size: 1.05rem;
+                            }
+
+                            &:not(.collapsed) {
+                                box-shadow: none;
+                                color: $dark;
+                            }
+
+                            &:focus {
+                                z-index: 3;
+                                border-color: none;
+                                outline: 0;
+                                box-shadow: none;
+                            }
+
+                            .form-check-input {
+                                border-radius: 2px;
+                                border: 1px solid $primary;
+                                --bs-form-check-bg: $gray-400;
+
+                                &:checked {
+                                    background-color: $primary;
+                                }
+
+                                &:focus {
+                                    box-shadow: none;
+                                }
+                            }
+                        }
+                    }
+
+                    .accordion-body {
+                        border-radius: 0px 0px 8px 8px;
+                        background: rgba(235, 235, 241, 0.40);
+                        padding: 35px 24px 55px 22.5px;
+
+                        .accordianTable_column {
+                            display: flex;
+                            gap: 24px;
+                            flex-wrap: wrap;
+
+                            h6 {
+                                font-weight: 400;
+                            }
+
+                            .form-check-input {
+                                border-radius: 2px;
+                                border: 1px solid $primary;
+                                --bs-form-check-bg: $gray-400;
+
+                                &:checked {
+                                    background-color: $primary;
+                                }
+
+                                &:focus {
+                                    box-shadow: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // submit-btn css
+        .submitBtn {
+            .btn-deepgreen {
+                min-width: 241px;
+            }
+        }
+
+    }
+
+    .cursor {
+        cursor: pointer;
+    }
+}
+
+.modalObfuscate.modal {
+    --bs-modal-width: 517px !important;
+
+    .obfuscate-btn {
+        background-color: transparent;
+        border: none;
+    }
+
+    .databaseCreation-txt {
+        h3 {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 36px;
+        }
+    }
+}

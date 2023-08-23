@@ -3,7 +3,7 @@
 const SidebarLayout = () => {
     return (
         <>
-            SidebarLayout
+            
         </>
     )
 }

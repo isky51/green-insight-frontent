@@ -1,57 +1,73 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
 import { setLoading } from "../home/homeSlice"
-// import { userDetailsApi } from "../auth/graph/graphDetailsSlice"
-
+import { resetDashboard } from "../dashboard/dashboardDataSlice"
 import authService from "./authService";
-const initialState = {
+/**
+ * @returns Slices for authentication 
+ */
+
+interface AuthState {
+    isError: boolean;
+    isSuccess: boolean;
+    isLoading: boolean;
+    isAuthLoginLoading: boolean;
+    isOtpVerifyLoading: boolean;
+    message: string;
+    loginDetails: null,
+    isOtp: boolean;
+    otpSuccess: boolean;
+    otpError: boolean;
+}
+const initialState:AuthState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
+    isAuthLoginLoading: false,
+    isOtpVerifyLoading: false,
     message: "",
     loginDetails: null,
-    isOtp:false,
-    OtpDetails: "",
+    isOtp: false,
     otpSuccess: false,
-    otpError: false,
-    sideBarStatus: true,
-    headerName: null,
-    emissionDates: null
+    otpError: false
 }
 
+// Login slice
 export const loginPost = createAsyncThunk("post/login", async (userData: any, thunkApi: any) => {
+    thunkApi.dispatch(setLoading(true))
     try {
         const res = await authService.authLoginPost(userData);
-        // if (res) {
-        //     // thunkApi.dispatch(userDetailsApi())
-        // }
+        thunkApi.dispatch(setLoading(false))
+        thunkApi.dispatch(resetDashboard())
         return res
     }
     catch (error: any) {
         const message = error?.response?.data?.message || error.message || error.string();
-        toast.error("Invalid Email or Password");
+        toast.error("Invalid email or password");
+        thunkApi.dispatch(setLoading(false))
         return thunkApi.rejectWithValue(message)
     }
 })
 
-export const bucketLoginPost = createAsyncThunk("bucket/post/login", async (userData, thunkApi) => {
+// verify otp slice
+export const otpPost = createAsyncThunk("post/otp", async (useData: any, thunkApi: any) => {
+    thunkApi.dispatch(setLoading(true))
     try {
-        const res = await authService.authLoginBucketPost(userData);
-        if (res?.data?.role !== 2) {
-            toast.error("Please login detail")
-        }
-
+        const res = await authService.authPostOtp(useData);
+        thunkApi.dispatch(setLoading(false))
         return res
     }
     catch (error: any) {
         const message = error?.response?.data?.message || error.message || error.string();
-        toast.error("Invalid Email or Password")
+        toast.error("Invalid authentication code");
+        thunkApi.dispatch(setLoading(false))
         return thunkApi.rejectWithValue(message)
     }
 })
 
+// logout slice
 export const logoutPost = createAsyncThunk("post/logout", async (_, thunkApi) => {
-    try { 
+    try {
 
         return await authService.authLogoutPost();
     }
@@ -61,92 +77,39 @@ export const logoutPost = createAsyncThunk("post/logout", async (_, thunkApi) =>
     }
 })
 
-export const otpPost = createAsyncThunk("post/otp", async (useData: any, thunkApi: any) => {
-    try {
 
-        const res = await authService.authPostOtp(useData);
-        // if (res) {
-        //     thunkApi.dispatch(getFiltersDate())
-        //     // thunkApi.dispatch(userDetailsApi())
-        // }
-        return res
-    }
-    catch (error: any) {
-        const message = error?.response?.data?.message || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
-    }
-})
-
-export const sideBarToggleStatus = createAsyncThunk("Toggle", async (status) => {
-    return status
-})
-
-export const setHeaderName = createAsyncThunk("HeaderName", async (name) => {
-    return name
-})
-
-export const getFiltersDate = createAsyncThunk("graph/filters/dates", async (_, thunkApi) => {
-    try {
-        return await authService.getFiltersDate();
-    }
-    catch (error: any) {
-        const message = error?.response?.data?.message || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
-    }
-})
-
-
-
+// Authentication Reducer
 export const authDataReducer = createSlice({
     name: "auth-login",
     initialState,
     reducers: {
         reset: (state) => {
             state.isLoading = false;
+            state.isAuthLoginLoading = false;
+            state.isOtpVerifyLoading = false
             state.isError = false;
             state.isSuccess = false;
-            state.message = "";
-            state.loginDetails = null
-            state.isOtp=false
-            state.OtpDetails = ""
-            state.otpError = false
+            state.loginDetails = null;
+            state.isOtp = false;
             state.otpSuccess = false;
-            state.sideBarStatus = true;
-            state.emissionDates = null
-            state.headerName = null
-
+            state.otpError = false;
+            state.message = "";
         },
     },
     extraReducers: (builder) => {
         builder
-            .addCase(loginPost.pending, (state) => {
-                state.isLoading = true;
+            .addCase(loginPost.pending, (state: any, action: any) => {
+                state.isAuthLoginLoading = true;
                 state.isSuccess = false;
-                setLoading(true)
             })
             .addCase(loginPost.fulfilled, (state: any, action: any) => {
-                state.isLoading = false;
+                state.isAuthLoginLoading = false;
                 state.isSuccess = true;
-                state.isOtp = action.payload.otp
-                state.loginDetails = action.payload;
-                setLoading(false)
-            })
-            .addCase(loginPost.rejected, (state: any, action: any) => {
-                state.isLoading = true;
-                state.isSuccess = false;
-                setLoading(false)
-            })
-            .addCase(bucketLoginPost.pending, (state) => {
-                state.isLoading = true;
-                state.isSuccess = false;
-            })
-            .addCase(bucketLoginPost.fulfilled, (state: any, action: any) => {
-                state.isLoading = false;
-                state.isSuccess = true;
+                state.isOtp = action.payload.otp || false
                 state.loginDetails = action.payload;
             })
-            .addCase(bucketLoginPost.rejected, (state: any, action: any) => {
-                state.isLoading = true;
+            .addCase(loginPost.rejected, (state: any) => {
+                state.isAuthLoginLoading = false;
                 state.isSuccess = false;
             })
             .addCase(logoutPost.fulfilled, (state) => {
@@ -154,37 +117,19 @@ export const authDataReducer = createSlice({
                 reset()
             })
             .addCase(otpPost.pending, (state) => {
-                state.isLoading = true;
+                state.isOtpVerifyLoading = true;
                 state.otpSuccess = false;
             })
             .addCase(otpPost.fulfilled, (state: any, action: any) => {
-                state.isLoading = false;
+                state.isOtpVerifyLoading = false;
                 state.otpSuccess = true;
+                state.isOtp = false;
                 state.loginDetails = action.payload;
             })
             .addCase(otpPost.rejected, (state: any, action: any) => {
-                state.isLoading = true;
+                state.isOtpVerifyLoading = false;
                 state.otpSuccess = false;
             })
-            .addCase(sideBarToggleStatus.fulfilled, (state: any, action: any) => {
-                state.isLoading = false;
-                state.sideBarStatus = action.payload || false;
-            })
-            .addCase(getFiltersDate.fulfilled, (state: any, action: any) => {
-                state.isLoading = false;
-                state.isSuccess = true;
-                state.emissionDates = action.payload;
-            })
-            .addCase(getFiltersDate.rejected, (state: any, action: any) => {
-                state.isLoading = true;
-                state.isSuccess = false;
-                state.emissionDates = null
-            })
-            .addCase(setHeaderName.fulfilled, (state: any, action: any) => {
-                state.isLoading = false;
-                state.headerName = action.payload || null;
-            })
-
 
 
     }
