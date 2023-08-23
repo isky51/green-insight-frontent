@@ -8,7 +8,6 @@ export const setLoading = createAsyncThunk("HeaderName", async (status: boolean)
     return status
 })
 
-
 export const homeReducer = createSlice({
     name: "home",
     initialState,

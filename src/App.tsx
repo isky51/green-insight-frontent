@@ -1,7 +1,7 @@
 import GreenInsightRoute from './routes/greenInsightRoute';
 
 
-function App() {
+const App = () => {
   return (
     <GreenInsightRoute />
 

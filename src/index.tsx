@@ -2,21 +2,21 @@ import ReactDOM from 'react-dom/client';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js'
+import 'bootstrap/dist/js/bootstrap.min.js';
+import '../node_modules/bootstrap/scss/bootstrap.scss';
 import './scss/index.scss';
-
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
 import store from './store'
 import { Provider } from 'react-redux';
-import Interceptor from "./utils/interceptors";
+import InterceptorApi from "./utils/InterceptorApi";
 
-Interceptor(store);
+InterceptorApi(store);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <>
     <ToastContainer position="top-right"

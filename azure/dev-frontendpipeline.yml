@@ -1,0 +1,76 @@
+trigger:
+  - develop
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+pr: none
+
+stages:
+- stage: SONARQUBE 
+  displayName: SONARQUBE 
+  jobs:  
+  - job: Sonarqube
+    displayName: Sonarqube
+    steps:
+    - script: |
+          echo "SONARQUBE SLOT"
+          
+
+- stage: BUILD 
+  displayName: BUILD 
+  jobs:  
+  - job: Build
+    displayName: Build
+    steps:
+    
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '16.x'
+      displayName: 'Use Node.js'
+    
+    - script: |
+        npm install
+        npm run build
+      displayName: 'Build React app'
+    
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)/build'  # Update the path to your build output
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      displayName: 'Copy build to artifact staging directory'
+      
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'GS'
+        publishLocation: 'Container'
+        
+
+- stage: TEST 
+  displayName: TEST 
+  jobs:  
+  - job: Test
+    displayName: Test
+    steps:
+    - script: |
+         echo "TEST CASES"
+
+
+- stage: DEPLOY 
+  displayName: DEPLOY 
+  jobs:  
+  - job: Deploy
+    displayName: Deploy
+    steps:
+    
+    - task: AzureStaticWebApp@0
+      inputs:
+        azure_static_web_apps_api_token: "4fd295b9232407f854b697dc46b3ed2628e4853c98bf264e99fa6ddb28ffe75e3-2fd82268-6a43-4785-993d-5e199debae6e010227934"
+        app_location: "/" 
+        api_location: "" 
+        output_location: "build"
+      env: # Add environment variables here
+        REACT_APP_BASE_URL: $(REACT_APP_BASE_URL)
+        REACT_APP_EN_KEY: $(REACT_APP_EN_KEY)

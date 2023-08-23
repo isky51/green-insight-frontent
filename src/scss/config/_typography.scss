@@ -1,0 +1,77 @@
+@import "./variable.scss";
+
+// font family
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: $fontPoppins;
+    color: $dark;
+    font-size: 14px;
+}
+
+// SET RANGE
+$range: 100;
+
+// PREFIX
+$prefix: '';
+
+// GENERATE FONTS FOR ALL SIZES 
+@for $font from 1 to $range {
+    .#{$prefix}font-#{$font} {
+        font-size: 1px * $font;
+    }
+}
+
+// FONTS MIN 576 PX
+@media(min-width:$sm) {
+    @for $font from 1 to $range {
+        .#{$prefix}font-sm-#{$font} {
+            font-size: 1px * $font;
+        }
+    }
+}
+
+// FONTS MIN 768 PX
+@media(min-width:$md) {
+    @for $font from 1 to $range {
+        .#{$prefix}font-md-#{$font} {
+            font-size: 1px * $font;
+        }
+    }
+}
+
+// FONTS MIN 992 PX 
+@media(min-width:$lg) {
+    @for $font from 1 to $range {
+        .#{$prefix}font-lg-#{$font} {
+            font-size: 1px * $font;
+        }
+    }
+}
+
+// FONTS MIN 1200 PX
+@media(min-width:$xl) {
+    @for $font from 1 to $range {
+        .#{$prefix}font-xl-#{$font} {
+            font-size: 1px * $font;
+        }
+    }
+}
+
+// FONTS MIN 1367 PX
+@media(min-width:$xxl) {
+    @for $font from 1 to $range {
+        .#{$prefix}font-xxl-#{$font} {
+            font-size: 1px * $font;
+        }
+    }
+}
+
+// FONTS MIN 1921 PX 
+@media(min-width:1921px) {
+    @for $font from 1 to $range {
+        .#{$prefix}font-xxxl-#{$font} {
+            font-size: 1px * $font;
+        }
+    }
+}
