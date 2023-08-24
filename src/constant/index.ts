@@ -100,6 +100,17 @@ export const isCompanyEnable = (userDetail: any): boolean => {
     }
 };
 
+export const getCompanyName = (userDetail: any): string => {
+    if (userDetail?.Company?.name === "General mills") {
+        return userDetail?.Company?.name;
+    } else if (userDetail?.Company?.name === "Lowes") {
+        return "LOWE'S GROUP";
+    } else {
+        return "LOWE'S GROUP";
+    }
+};
+
+
 // Function to determine which sort icon to display
 export const sortIcon = (key: string, col_name: string, order: string): string => {
     if (col_name === key) {
