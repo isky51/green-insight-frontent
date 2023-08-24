@@ -1,27 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-
 // import "../regional/regional.scss";
 // import "../vendor/vendor.scss";
 // import Pagination from "../lanes/pagination/Pagination";
-// import {
-//   yearList,
-//   pageSizeList,
-//   sortIcon,
-//   getQuarters,
-//   getQuarterName,
-//   getRegionName,
-//   capitalizeText,
-// } from "../../constant/index";
-// import {
-//   vendorGraphData,
-//   vendorTableData,
-// } from "../../component/store/vendor/vendorDetailsSlice";
-// import { useDispatch, useSelector } from "react-redux";
 // import BubbleHighChart from "../../component/BubbleHighChart";
-// import {  } from regionShow"../../component/store/auth/graph/graphDetailsSlice";
-// import DateTimeShow from "../../component/main/DateTimeShow";
-// import { setHeaderName } from "../../component/store/auth/authDataSlice";
-// import { useAuth } from "../../routes/ProtectedRoute";
 import { useNavigate, Link } from "react-router-dom";
 import DateTimeShow from "../../component/DateTimeShow";
 import { useAuth } from "../../auth/ProtectedRoute";
@@ -47,9 +28,6 @@ const VendorViewController = () => {
 
   const [quarterDetails, setQuarterDetails] = useState(1);
 
-  //   const { isLoading, vendorTableDetails, vendorGraphDetails } = useSelector(
-  //     (state) => state.vendor
-  //   );
   const { regions, emissionDates } = useAppSelector(
     (state) => state.commonData
   );
@@ -109,9 +87,8 @@ const VendorViewController = () => {
       dispatch(vendorGraphData(payloadData));
     }
   };
-
   const handleSearchCarrier = async (e: any) => {
-    await setSearchCarrier(e.target.value);
+    setSearchCarrier(e.target.value);
     if (e.target.value.length >= 3 || e.target.value.length === 0) {
       setCurrentPage(1);
     }
