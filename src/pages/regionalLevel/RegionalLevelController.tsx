@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { useFormik } from 'formik';
-import * as yup from "yup";
 import { useAppDispatch, useAppSelector } from '../../store/redux.hooks';
 import { useAuth } from '../../auth/ProtectedRoute';
 import { getProjectCount, regionLevelGlidePath, regionShow } from '../../store/commonData/commonSlice';
-import { regionEmissionIntensityOverall, totalEmissionOverall } from '../../store/region/regionOverviewSlice';
+import { regionEmissionIntensityOverall, regionFacilityEmissions, totalEmissionOverall } from '../../store/region/regionOverviewSlice';
 import { regionGraphData } from '../../store/region/regionSlice';
 import { changeRegion,changeLane,changeCarrier,changeFacility} from'../../store/dashRegion/dashRegionSlice'
+import { laneGraphData } from '../../store/lane/laneDetailsSlice';
 // Predefined models 
 
 /**
@@ -139,49 +138,48 @@ const RegionalLevelController = () => {
     // let lanePageArr = getGraphData(laneGraphDetails);
     // let laneFacilityEmessionArr = getGraphDataHorizontal(regionFacilityEmissionDto);
   
-    // useEffect(() => {
-    //   if (isRegion) {
-    //     dispatch(
-    //       regionGraphData({
-    //         region_id: "",
-    //         quarter: quarterDetails,
-    //         toggel_data: checkedRegion ? 1 : 0,
-    //         year: yearlyData
-    //       })
-    //     );
-    //   }
-    // }, [dispatch, isRegion, quarterDetails, checkedRegion, yearlyData])
+    useEffect(() => {
+      if (isRegion) {
+        dispatch(
+          regionGraphData({
+            region_id: "",
+            quarter: quarterDetails,
+            toggel_data: checkedRegion ? 1 : 0,
+            year: yearlyData
+          })
+        );
+      }
+    }, [dispatch, isRegion, quarterDetails, checkedRegion, yearlyData])
   
-    // useEffect(() => {
-    //   if (isFacility && regionsLevel) {
-    //     dispatch(
-    //       regionFacilityEmissions({
-  
-    //         region_id: regionsLevel,
-    //         facility_id: "",
-    //         quarter: quarterDetails,
-    //         toggel_data: checkedFacilityEmissions ? 1 : 0,
-    //         year: yearlyData
-    //       })
-    //     );
-    //   }
-    // }, [regionsLevel, dispatch, isFacility, quarterDetails, checkedFacilityEmissions, yearlyData]);
+    useEffect(() => {
+      if (isFacility && regionsLevel) {
+        dispatch(
+          regionFacilityEmissions({
+            region_id: regionsLevel,
+            facility_id: "",
+            quarter: quarterDetails,
+            toggel_data: checkedFacilityEmissions ? 1 : 0,
+            year: yearlyData
+          })
+        );
+      }
+    }, [regionsLevel, dispatch, isFacility, quarterDetails, checkedFacilityEmissions, yearlyData]);
    
-    // useEffect(() => {
-    //   if (isLane && regionsLevel) {
-    //     dispatch(
-    //       laneGraphData({
-    //         page: currentPage,
-    //         page_size: pageSize,
-    //         region_id: regionsLevel,
-    //         facility_id: "",
-    //         toggel_data: checked ? 1 : 0,
-    //         quarter: quarterDetails,
-    //         year: yearlyData
-    //       })
-    //     );
-    //   }
-    // }, [regionsLevel, dispatch, isLane, quarterDetails, checked, yearlyData]);
+    useEffect(() => {
+      if (isLane && regionsLevel) {
+        dispatch(
+          laneGraphData({
+            page: currentPage,
+            page_size: pageSize,
+            region_id: regionsLevel,
+            facility_id: "",
+            toggel_data: checked ? 1 : 0,
+            quarter: quarterDetails,
+            year: yearlyData
+          })
+        );
+      }
+    }, [regionsLevel, dispatch, isLane, quarterDetails, checked, yearlyData]);
   
     // useEffect(() => {
     //   if (isCarrier && regionsLevel) {
@@ -240,6 +238,7 @@ const RegionalLevelController = () => {
         setRegionsLevel,
         setRelaodData,
         setChecked,
+        projectCountData,
         dispatch,
         dataCheck,
         checked,

@@ -7,10 +7,10 @@ import RegionalView from "../pages/region/RegionalView";
 import { useAppDispatch } from "../store/redux.hooks";
 import { useEffect } from "react";
 import { getFiltersDate } from "../store/commonData/commonSlice";
-import Vendor from "../pages/carrier/vendorView";
 import RegionOverview from "../pages/regionOverview/RegionOverview";
 import SustainView from "../pages/sustainable/SustainView";
-// import RegionalLevel from "../pages/regionalLevel/RegionalLevelView";
+import CarrierVendorView from "../pages/carrier/VendorView";
+import RegionalLevelView from "../pages/regionalLevel/RegionalLevelView";
 
 /**
  * Component that defines all the routes for the website
@@ -45,14 +45,13 @@ const GreenInsightRoute = () => {
             </AuthRouteCheck>
           }
         />
-
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           {/* DashboardView route */}
           <Route path="/dashboard" element={<DashboardView />} />
 
           {/* RegionalLevel-Dashboard route */}
-          {/* <Route path="/region-level/:regionId/" element={<RegionalLevel />} /> */}
+          <Route path="/regional-level" element={<RegionalLevelView />} />
 
           {/* RegionalView route */}
           <Route path="/regional" element={<RegionalView />} />
@@ -60,10 +59,10 @@ const GreenInsightRoute = () => {
           {/* Regional-OverviewView route */}
           <Route path="/region-overview/:regionId/" element={<RegionOverview />} />
 
-          <Route path="/carrier" element={<Vendor />} />
-
           {/* SustainView route */} 
           <Route path="/sustainable" element={<SustainView />} />
+
+          <Route path="/carrier" element={<CarrierVendorView />} />
         </Route>
 
         {/* ErrorPage route */}

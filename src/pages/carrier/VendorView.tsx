@@ -1,164 +1,58 @@
-import React, { useEffect, useRef, useState } from "react";
-// import "../regional/regional.scss";
-// import "../vendor/vendor.scss";
-import Back from "../../assets/images/common/back.svg";
-// import Search from "../../assets/images/searchcarrier.svg";
-// import Pagination from "../lanes/pagination/Pagination";
-// import {
-//   yearList,
-//   pageSizeList,
-//   sortIcon,
-//   getQuarters,
-//   getQuarterName,
-//   getRegionName,
-//   capitalizeText,
-// } from "../../constant/index";
-// import { Range, getTrackBackground } from "react-range";
-// import {
-//   vendorGraphData,
-//   vendorTableData,
-// } from "../../component/store/vendor/vendorDetailsSlice";
-import { FormGroup, Row, Col, Input } from "reactstrap";
-
-// import { useDispatch, useSelector } from "react-redux";
-// import BubbleHighChart from "../../component/BubbleHighChart";
-// import { regionShow } from "../../component/store/auth/graph/graphDetailsSlice";
-// import DateTimeShow from "../../component/main/DateTimeShow";
-// import { setHeaderName } from "../../component/store/auth/authDataSlice";
-// import { useAuth } from "../../routes/ProtectedRoute";
-import { useNavigate, Link } from "react-router-dom";
+import React from "react";
 import DateTimeShow from "../../component/DateTimeShow";
 import { useAuth } from "../../auth/ProtectedRoute";
+import Search from "../../assets/images/common/searchcarrier.svg";
 
-const Vendor = () => {
-  //   let id = JSON.parse(localStorage.getItem("regionalLevel"));
-  let currentYear = new Date().getFullYear();
-  const navigate = useNavigate();
-  var quarter = Math.floor((new Date().getMonth() + 3) / 3);
+import { FormGroup, Row, Col, Input } from "reactstrap";
+import Back from "../../assets/images/common/back.svg";
+import { useNavigate, Link } from "react-router-dom";
+import {
+  capitalizeText,
+  getQuarterName,
+  getQuarters,
+  getRegionName,
+  pageSizeList,
+  sortIcon,
+  yearList,
+} from "../../constant";
+import { Range, getTrackBackground } from "react-range";
+import VendorViewController from "./VendorViewController";
+import TitleComponent from "../../component/tittle";
 
-  //   const [regionalLevel, setRegionsLevel] = useState(id ? id : "");
-  const [yearlyData, setYearlyData] = useState(currentYear);
-
-  const [quarterDetails, setQuarterDetails] = useState(1);
-
-  //   const { isLoading, vendorTableDetails, vendorGraphDetails } = useSelector(
-  //     (state) => state.vendor
-  //   );
-  //   const { regions } = useSelector((state) => state.graphDetails);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [relaodData, setRelaodData] = useState(true);
-  const [searchCarrier, setSearchCarrier] = useState("");
-  const [order, setOrder] = useState("desc");
-  const [col_name, setCol_name] = useState("intensity");
-  const [pageSize, setPageSize] = useState(20);
-  const [regionName, setRegionName] = useState("");
-  const [values, setValues] = React.useState([60, 390]);
+export default function CarrierVendorView() {
+  const {
+    fetchTableData,
+    regionalLevel,
+    setRegoinDetail,
+    setCurrentPage,
+    regions,
+    yearlyData,
+    handleChangeYear,
+    quarterDetails,
+    handleQuarterChange,
+    handleChangeRange,
+    fetchGraphData,
+    pageSize,
+    regionName,
+    handlePageChange,
+    values,
+    searchCarrier,
+    handleSearchCarrier,
+    handleChangeOrder,
+    col_name,
+    order,
+    emissionDates,
+    vendorTableDetails,
+    navigate,
+    isLoading,
+  } = VendorViewController();
   const STEP = 1;
   const MIN = 60;
   const MAX = 390;
   const rtl = false;
-  //   const { emissionDates } = useSelector((state) => state.auth);
-
-  //   useEffect(() => {
-  //     if (regionalLevel) {
-  //       regions?.data?.length !== 0 &&
-  //         regions?.data?.regions.map((x) => {
-  //           x.id === Number.parseInt(regionalLevel) && setRegionName(x.name);
-  //           return true;
-  //         });
-  //     }
-  //   }, [regionalLevel, regions]);
-
-  const fetchTableData = (search = "") => {
-    if (searchCarrier.length >= 3 || searchCarrier.length === 0) {
-      //   dispatch(
-      //     vendorTableData({
-      //       region_id: regionalLevel,
-      //       year: yearlyData,
-      //       quarter: quarterDetails,
-      //       page: currentPage,
-      //       page_size: pageSize,
-      //       order_by: order,
-      //       col_name: col_name,
-      //       search_name: searchCarrier?.length >= 3 ? searchCarrier : "",
-      //       min_range: values[0],
-      //       max_range: values[1],
-      //     })
-      //   );
-    }
-  };
-
-  const fetchGraphData = (search = "") => {
-    if (searchCarrier.length >= 3 || searchCarrier.length === 0) {
-      //   dispatch(
-      //     vendorGraphData({
-      //       region_id: regionalLevel,
-      //       year: yearlyData,
-      //       quarter: quarterDetails,
-      //       page: currentPage,
-      //       page_size: pageSize,
-      //       order_by: order,
-      //       col_name: col_name,
-      //       search_name: searchCarrier?.length >= 3 ? searchCarrier : "",
-      //       min_range: values[0],
-      //       max_range: values[1],
-      //     })
-      //   );
-    }
-  };
-
-  //   const handleSearchCarrier = async (e) => {
-  //     await setSearchCarrier(e.target.value);
-  //     if (e.target.value.length >= 3 || e.target.value.length === 0) {
-  //       setCurrentPage(1);
-  //     }
-  //   };
-
-  //   const handleChangeOrder = (choose_Col_name) => {
-  //     setOrder(order === "desc" ? "asc" : "desc");
-  //     setCol_name(choose_Col_name);
-  //   };
-
-  //   const dispatch = useDispatch();
-  //   useEffect(() => {
-  //     dispatch(regionShow(regionalLevel));
-  //   }, [dispatch, regionalLevel]);
-
-  //   useEffect(() => {
-  //     fetchTableData();
-  //     fetchGraphData();
-  //   }, [
-  //     dispatch,
-  //     searchCarrier,
-  //     yearlyData,
-  //     quarterDetails,
-  //     regionalLevel,
-  //     currentPage,
-  //     order,
-  //     col_name,
-  //     pageSize,
-  //   ]);
-
-  //   const setRegoinDetail = (id) => {
-  //     setRegionsLevel(id);
-
-  //     setRegionName(
-  //       regions?.data?.regions.filter((e) => {
-  //         return e.id === Number.parseInt(id);
-  //       })[0]?.name
-  //     );
-  //   };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  //   useEffect(() => {
-  //     dispatch(setHeaderName("Segmentation By Carrier"));
-  //   }, [dispatch]);
-
   return (
     <>
+      <TitleComponent title={"Segmentation By Carrier"} />
       <section className="insight_top_wrapper">
         <div className="regional-wrapper vendor-wrapper">
           <div className="container-fluid">
@@ -199,28 +93,29 @@ const Vendor = () => {
                               name="select"
                               type="select"
                               className="ms-2 mt-2"
-                            //   value={regionalLevel}
-                            //   onChange={(e) => {
-                            //     setCurrentPage(1);
-                            //     setRegoinDetail(e.target.value);
-                            //     if (e.target.value === "") {
-                            //       localStorage.removeItem("regionalLevel");
-                            //     } else {
-                            //       localStorage.setItem(
-                            //         "regionalLevel",
-                            //         e.target.value
-                            //       );
-                            //     }
-                            //   }}
+                              value={regionalLevel}
+                              onChange={(e) => {
+                                setCurrentPage(1);
+                                setRegoinDetail(e.target.value);
+                                if (e.target.value === "") {
+                                  localStorage.removeItem("regionalLevel");
+                                } else {
+                                  localStorage.setItem(
+                                    "regionalLevel",
+                                    e.target.value
+                                  );
+                                }
+                              }}
                             >
                               <option value="">All Regions</option>
-
-                              {/* {regions?.data?.length !== 0 &&
-                                regions?.data?.regions.map((x, index) => (
-                                  <option value={x.id} key={x.id}>
-                                    {x.name}{" "}
-                                  </option>
-                                ))} */}
+                              {regions?.data?.length !== 0 &&
+                                regions?.data?.regions.map(
+                                  (x: any, index: number) => (
+                                    <option value={x.id} key={x.id}>
+                                      {x.name}{" "}
+                                    </option>
+                                  )
+                                )}
                             </Input>
                           )}
 
@@ -229,31 +124,30 @@ const Vendor = () => {
                             name="select"
                             type="select"
                             className="ms-2 mt-2"
-                            // value={yearlyData}
-                            // onChange={(e) => {
-                            //   setQuarterDetails(1);
-                            //   setYearlyData(e.target.value);
-                            // }}
+                            value={yearlyData}
+                            onChange={(e) => {
+                              handleChangeYear(e);
+                            }}
                           >
-                            {/* {yearList(emissionDates?.data?.emission_dates).map(
+                            {yearList(emissionDates?.data?.emission_dates).map(
                               (x, index) => (
                                 <option key={index} value={x}>
                                   {x}
                                 </option>
                               )
-                            )} */}
+                            )}
                           </Input>
                           <Input
                             id="exampleSelect"
                             name="select"
                             type="select"
                             className="mx-2 mt-2 quater-dropdown"
-                            // value={quarterDetails}
-                            // onChange={(e) => setQuarterDetails(e.target.value)}
+                            value={quarterDetails}
+                            onChange={(e) => handleQuarterChange(e)}
                           >
-                            {/* {getQuarters(yearlyData).map((i) => (
+                            {getQuarters(yearlyData).map((i) => (
                               <option value={i?.value}>{i?.name}</option>
-                            ))} */}
+                            ))}
                           </Input>
                         </FormGroup>
                       </div>
@@ -262,13 +156,13 @@ const Vendor = () => {
                           <h6 className="mb-0 ms-0 ms-lg-4 ps-3 color-primary fs-14 fw-semibold me-4">
                             Emissions Intensity Range Selector
                           </h6>
-                          {/* <Range
+                          <Range
                             values={values}
                             step={STEP}
                             min={MIN}
                             max={MAX}
                             rtl={rtl}
-                            onChange={(values) => setValues(values)}
+                            onChange={(values) => handleChangeRange(values)}
                             onFinalChange={() => {
                               fetchTableData();
                               fetchGraphData();
@@ -352,7 +246,7 @@ const Vendor = () => {
                                 />
                               </div>
                             )}
-                          /> */}
+                          />
                         </div>
                       </div>
                     </div>
@@ -365,9 +259,9 @@ const Vendor = () => {
                   <div className=" vendor-emission-graph mt-3 p-3 h-100 x-axis-hide1">
                     <h6 className="datafrom-txt mb-2">
                       Emissions of{" "}
-                      {/* {getRegionName(regionName, regionalLevel, true)} Carrier
+                      {getRegionName(regionName, regionalLevel, true)} Carrier
                       for {getQuarterName(quarterDetails, yearlyData)}{" "}
-                      {yearlyData} */}
+                      {yearlyData}
                     </h6>
                     <div className="emi-inten d-flex justify-content-between pb-4">
                       <div>
@@ -397,14 +291,14 @@ const Vendor = () => {
                       </div>
                     </div>
                     {/* <BubbleHighChart
-                      relaodData={relaodData}
-                      chart={"vendor"}
-                      options={
-                        vendorGraphDetails?.data
-                          ? vendorGraphDetails?.data?.responseData
-                          : []
-                      }
-                    /> */}
+                          relaodData={relaodData}
+                          chart={"vendor"}
+                          options={
+                            vendorGraphDetails?.data
+                              ? vendorGraphDetails?.data?.responseData
+                              : []
+                          }
+                        /> */}
                   </div>
                 </Col>
               </Row>
@@ -424,8 +318,8 @@ const Vendor = () => {
                   <div className="px-3 table-region mt-3  py-3">
                     <h6 className="datafrom-txt mb-2">
                       Carrier of{" "}
-                      {/* {getRegionName(regionName, regionalLevel, true)} for{" "}
-                      {getQuarterName(quarterDetails, yearlyData)} {yearlyData} */}
+                      {getRegionName(regionName, regionalLevel, true)} for{" "}
+                      {getQuarterName(quarterDetails, yearlyData)} {yearlyData}
                     </h6>
                     <div className="">
                       <div className="d-lg-flex">
@@ -444,7 +338,7 @@ const Vendor = () => {
                         <div className="d-flex align-items-center ps-lg-4">
                           <h6 className="mb-0 ps-2">
                             Average Emissions Intensity (
-                            {/* {vendorTableDetails?.data?.average} g) */}
+                            {vendorTableDetails?.data?.average} g)
                           </h6>
                         </div>
                       </div>
@@ -456,31 +350,26 @@ const Vendor = () => {
                             type="select"
                             className="me-2 mt-2 my-md-0 w-auto pagination-search pb-1"
                             value={pageSize}
-                            // onChange={(e) => {
-                            //   setPageSize(e.target.value);
-                            //   setCurrentPage(1);
-                            //   setRelaodData(false);
-                            // }}
+                            onChange={(e) => {
+                              handlePageChange(e);
+                            }}
                           >
-                            {/* {pageSizeList.map((x, index) => (
+                            {pageSizeList.map((x, index) => (
                               <option key={index} value={x}>
                                 {x}
                               </option>
-                            ))} */}
+                            ))}
                             <option value={400}>All</option>
                           </Input>
                           <div className="position-relative d-flex justify-content-end">
                             <span>
-                              <img
-                                //    src={Search}
-                                alt="ico"
-                              />
+                              <img src={Search} alt="ico" />
                             </span>
                             <input
                               type="text"
                               placeholder="Search Carrier Name"
                               value={searchCarrier}
-                              //   onChange={handleSearchCarrier}
+                              onChange={handleSearchCarrier}
                             />
                           </div>
                         </div>
@@ -494,20 +383,20 @@ const Vendor = () => {
                                 <tr>
                                   <th>
                                     <div
-                                      //   onClick={() =>
-                                      //     handleChangeOrder("carrier_name")
-                                      //   }
+                                      onClick={() =>
+                                        handleChangeOrder("carrier_name")
+                                      }
                                       className="pointer d-flex align-items-center"
                                     >
                                       Carrier Name
                                       <span>
                                         <img
                                           className="pointer"
-                                          //   src={sortIcon(
-                                          //     "carrier_name",
-                                          //     col_name,
-                                          //     order
-                                          //   )}
+                                          src={sortIcon(
+                                            "carrier_name",
+                                            col_name,
+                                            order
+                                          )}
                                           alt="ico"
                                         />
                                       </span>
@@ -517,19 +406,19 @@ const Vendor = () => {
                                   <th>
                                     <div
                                       className="d-flex align-items-center pointer"
-                                      //   onClick={() =>
-                                      //     handleChangeOrder("intensity")
-                                      //   }
+                                      onClick={() =>
+                                        handleChangeOrder("intensity")
+                                      }
                                     >
                                       Emissions Intensity
                                       <span>
                                         <img
                                           className="pointer"
-                                          //   src={sortIcon(
-                                          //     "intensity",
-                                          //     col_name,
-                                          //     order
-                                          //   )}
+                                          src={sortIcon(
+                                            "intensity",
+                                            col_name,
+                                            order
+                                          )}
                                           alt="ico"
                                         />
                                       </span>
@@ -540,38 +429,38 @@ const Vendor = () => {
                                   </th>
                                   <th
                                     className="pointer"
-                                    // onClick={() =>
-                                    //   handleChangeOrder("shipment_count")
-                                    // }
+                                    onClick={() =>
+                                      handleChangeOrder("shipment_count")
+                                    }
                                   >
                                     Total Shipments
                                     <span>
                                       <img
                                         className="pointer"
-                                        // src={sortIcon(
-                                        //   "shipment_count",
-                                        //   col_name,
-                                        //   order
-                                        // )}
+                                        src={sortIcon(
+                                          "shipment_count",
+                                          col_name,
+                                          order
+                                        )}
                                         alt="ico"
                                       />
                                     </span>
                                   </th>
                                   <th
                                     className="pointer"
-                                    // onClick={() =>
-                                    //   handleChangeOrder("emissions")
-                                    // }
+                                    onClick={() =>
+                                      handleChangeOrder("emissions")
+                                    }
                                   >
                                     Total Emissions{" "}
                                     <span>
                                       <img
                                         className="pointer"
-                                        // src={sortIcon(
-                                        //   "emissions",
-                                        //   col_name,
-                                        //   order
-                                        // )}
+                                        src={sortIcon(
+                                          "emissions",
+                                          col_name,
+                                          order
+                                        )}
                                         alt="ico"
                                       />
                                     </span>
@@ -586,17 +475,17 @@ const Vendor = () => {
                           <div className="tWrap__body">
                             <table>
                               <tbody>
-                                {/* {isLoading ? (
+                                {isLoading ? (
                                   <div
                                     className="spinner-border  spinner-ui"
                                     role="status"
                                   >
-                                    <span class="visually-hidden"></span>
+                                    <span className="visually-hidden"></span>
                                   </div>
                                 ) : vendorTableDetails?.data?.responseData
                                     .length > 0 ? (
                                   vendorTableDetails?.data.responseData?.map(
-                                    (xx, index) => (
+                                    (xx: any, index: Number) => (
                                       <tr
                                         onClick={() =>
                                           navigate(
@@ -680,7 +569,7 @@ const Vendor = () => {
                                       </tr>
                                     )
                                   )
-                                 ) : (
+                                ) : (
                                   <tr>
                                     <td className="border-0"></td>
                                     <td className="d-flex align-items-center justify-content-start border-0">
@@ -688,7 +577,7 @@ const Vendor = () => {
                                     </td>
                                     <td className="border-0"></td>
                                   </tr>
-                                )} */}
+                                )}
                               </tbody>
                             </table>
                           </div>
@@ -699,21 +588,21 @@ const Vendor = () => {
                         <nav aria-label="Page navigation example">
                           <ul className="pagination mb-0">
                             {/* <Pagination
-                              className="pagination-bar"
-                              currentPage={currentPage}
-                              totalCount={
-                                vendorTableDetails?.data?.pagination
-                                  ?.total_count
-                                  ? vendorTableDetails?.data?.pagination
+                                  className="pagination-bar"
+                                  currentPage={currentPage}
+                                  totalCount={
+                                    vendorTableDetails?.data?.pagination
                                       ?.total_count
-                                  : 1
-                              }
-                              pageSize={pageSize}
-                              onPageChange={(page) => {
-                                setCurrentPage(page);
-                                setRelaodData(false);
-                              }}
-                            /> */}
+                                      ? vendorTableDetails?.data?.pagination
+                                          ?.total_count
+                                      : 1
+                                  }
+                                  pageSize={pageSize}
+                                  onPageChange={(page) => {
+                                    setCurrentPage(page);
+                                    setRelaodData(false);
+                                  }}
+                                /> */}
                           </ul>
                         </nav>
                       </div>
@@ -727,5 +616,4 @@ const Vendor = () => {
       </section>
     </>
   );
-};
-export default Vendor;
+}

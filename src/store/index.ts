@@ -9,6 +9,7 @@ import laneDetailsReducer from './lane/laneDetailsSlice';
 import regionOverviewReducer from './region/regionOverviewSlice';
 import sustainDataReducer from './sustain/sustainSlice';
 import dashRegionReducer from './dashRegion/dashRegionSlice';
+import carrierDetailsReducer from './carrier/vendorSlice';
 
 // Array to hold middleware
 const middleware: any = [];
@@ -27,7 +28,8 @@ const store = configureStore({
     regionOverview: regionOverviewReducer,
     lane : laneDetailsReducer,
     home: homeReducer,
-    sustain:sustainDataReducer
+    sustain:sustainDataReducer,
+    carrier: carrierDetailsReducer
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({
     // Disable checks for immutability and serializability for improved performance

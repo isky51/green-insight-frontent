@@ -2,15 +2,15 @@
 // import "../regional-level/regional-level.scss";
 import ArrowDown from "../../assets/images/common/arrow-down.svg";
 import ExportButton from "../../component/export-button";
-import Export from "../../assets/images/export.svg";
+import Export from "../../assets/images/common/export.svg";
 import Up from "../../assets/images/common/up.svg";
-import Down from "../../assets/images/down.svg";
-import Garrow from "../../assets/images/g-arrow.svg";
-import Delete from "../../assets/images/delete.svg";
-import Plus from "../../assets/images/plus.svg";
-import AvgLanes from "../../assets/images/avg-lanes.png";
-import AvgCarrier from "../../assets/images/avg-carriers.png";
-import AvgFacility from "../../assets/images/avg-facilities.png";
+import Down from "../../assets/images/common/down.svg";
+import Garrow from "../../assets/images/common/g-arrow.svg";
+import Delete from "../../assets/images/common/delete.svg";
+import Plus from "../../assets/images/regional/plus.svg";
+import AvgLanes from "../../assets/images/regional/avg-lanes.png";
+import AvgCarrier from "../../assets/images/regional/avg-carriers.png";
+import AvgFacility from "../../assets/images/regional/avg-facilities.png";
 import {
   FormGroup,
   Button,
@@ -22,19 +22,14 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 // import ChartsHigh from "../../component/ChartsHigh";
-// import { laneGraphData } from "../../component/store/lane/laneDetailsSlice";
-// import { vendorGraphData } from "../../component/store/vendor/vendorDetailsSlice";
 // import BubbleHighChart from "../../component/BubbleHighChart";
-// import { regionGraphData } from "../../component/store/region/regionDetailsSlice";
-import { yearList, getQuarters, 
-  //getGraphData, 
-  getQuarterName, 
-  //getRegionName, 
+import {
+  yearList, getQuarters,
+  getQuarterName,
   getGraphDataHorizontal,
   getRegionName,
-  isCompanyEnable, 
-  //getCompanyName, 
- // isCompayEnable 
+  isCompanyEnable,
+  getCompanyName
 } from "../../constant/index"
 
 import moment from "moment";
@@ -42,61 +37,62 @@ import DateTimeShow from "../../component/DateTimeShow";
 import { useAuth } from "../../auth/ProtectedRoute";
 import RegionalLevelController from "./RegionalLevelController";
 
-const RegionalLevel = () => {
-  
+const RegionalLevelView = () => {
+
   const {
     relaodData,
-        regionName,
-        quarterDetails,
-        emissionDates,
-        yearlyData,
-        yearlyData1,
-        quartelyData,
-        dispatch,
-        dataCheck,
-        checkedFacilityEmissions,
-        regionFacilityEmissionIsLoading,
-        checkedEmissionsReductionGlide,
-        regionLevelGlideData,
-        isLoadingRegionLevelGlidePath,
-        regionFacilityEmissionDto,
-        pieChartCount,
-        isFacilityState,
-        isCarrierState,
-        isLaneState,
-        isRegionState,
-        laneGraphDetails,
-        laneGraphDetailsLoading,
-        regionEmissionIntensityDetails, 
-        totalEmissionOverallDetails, 
-        regionEmissionIntensityDetailsIsLoading,
-        setCheckedFacilityEmissions,
-        changeRegion,changeLane,changeCarrier,changeFacility,
-        setCheckedEmissionsReductionGlide,
-        setYearlyData,
-        setYearlyData1,
-        setQuarterDetails,
-        setQuartelyData,
-        checkedRegion, setCheckedRegion,
-        regions,
-        regionsLevel,
-        regionGraphDetails, regionGraphDetailsLoading ,
-        isRegion,
-        isLane,
-        isCarrier,
-        isFacility,
-        modal, setModal,
-        toggle,
-        setIsRegionState,
-        setIsLaneState,
-        setIsCarrierState,
-        setIsFacilityState,
-        setRegionsLevel,
-        setRelaodData,
-        setChecked,
-        checked
+    regionName,
+    quarterDetails,
+    emissionDates,
+    yearlyData,
+    yearlyData1,
+    quartelyData,
+    dispatch,
+    dataCheck,
+    projectCountData,
+    checkedFacilityEmissions,
+    regionFacilityEmissionIsLoading,
+    checkedEmissionsReductionGlide,
+    regionLevelGlideData,
+    isLoadingRegionLevelGlidePath,
+    regionFacilityEmissionDto,
+    pieChartCount,
+    isFacilityState,
+    isCarrierState,
+    isLaneState,
+    isRegionState,
+    laneGraphDetails,
+    laneGraphDetailsLoading,
+    regionEmissionIntensityDetails,
+    totalEmissionOverallDetails,
+    regionEmissionIntensityDetailsIsLoading,
+    setCheckedFacilityEmissions,
+    changeRegion, changeLane, changeCarrier, changeFacility,
+    setCheckedEmissionsReductionGlide,
+    setYearlyData,
+    setYearlyData1,
+    setQuarterDetails,
+    setQuartelyData,
+    checkedRegion, setCheckedRegion,
+    regions,
+    regionsLevel,
+    regionGraphDetails, regionGraphDetailsLoading,
+    isRegion,
+    isLane,
+    isCarrier,
+    isFacility,
+    modal, setModal,
+    toggle,
+    setIsRegionState,
+    setIsLaneState,
+    setIsCarrierState,
+    setIsFacilityState,
+    setRegionsLevel,
+    setRelaodData,
+    setChecked,
+    checked
   } = RegionalLevelController()
-  
+
   return (
     <>
       <section className="insight_top_wrapper">
@@ -123,9 +119,6 @@ const RegionalLevel = () => {
                     </Row>
                     <Row className=" p-3 ps-0 substain-h-wrapper align-items-center">
                       <Col lg="9" md="12">
-
-
-
                         <FormGroup className="select-box d-flex">
                           {useAuth().userdata?.role === 0 && (
                             <Input
@@ -137,7 +130,6 @@ const RegionalLevel = () => {
                               onChange={(e) => {
                                 setRegionsLevel(e.target.value)
                                 setRelaodData(false);
-
                                 if (e.target.value === "") {
                                   localStorage.removeItem("regionalLevel")
                                 }
@@ -147,17 +139,14 @@ const RegionalLevel = () => {
                               }}
                             >
                               <option value=""> All Regions</option>
-
                               {
-                                regions?.data?.regions.map((x:any) => (
+                                regions?.data?.regions.map((x: any) => (
                                   <option value={x.id} key={x.id}>
                                     {x.name}
                                   </option>
                                 ))}
                             </Input>
-
                           )}
-
                           <Input
                             id="exampleSelect"
                             name="select"
@@ -216,10 +205,7 @@ const RegionalLevel = () => {
                           <div className="tracker-data p-3 tracker-card h-100 ">
                             <div className="tracker-inner">
                               <div className="mt-3">
-
-
                                 <div className="d-xl-flex justify-content-between">
-
                                   <div>
                                     <div className="co-txt d-flex arrow-down align-items-center mb-3">
                                       <div className="green-div me-2">
@@ -230,8 +216,8 @@ const RegionalLevel = () => {
                                       </h4>
                                     </div>
                                     <h6>
-                                      {/* {getCompanyName(dataCheck?.userdata)} */}
-                                      </h6>
+                                      {getCompanyName(dataCheck?.userdata)}
+                                    </h6>
                                     <h3>Emissions Reduction Target</h3>
                                     <div className="by-date">
                                       <p className="mb-0">By {new Date().getFullYear()}</p>
@@ -245,13 +231,10 @@ const RegionalLevel = () => {
                         <Col lg="3" className=" mt-3 mt-lg-0">
                           <div className="tracker-data p-3 tracker-card h-100">
                             <div className="tracker-inner">
-
-
                               <div className="mt-3">
                                 <div className="co-txt d-flex align-items-center mb-3">
                                   <div className="green-div me-2"></div>
                                   <div className="co-txt d-flex arrow-down align-items-center">
-
                                     <h4 className="mb-0"> <span> <img src={ArrowDown} alt="ico" /></span>4%</h4>
                                   </div>
                                 </div>
@@ -268,14 +251,11 @@ const RegionalLevel = () => {
                           <div className="tracker-data p-3 tracker-card h-100">
                             <div className="tracker-inner">
                               <div className="mt-3">
-
-
                                 <div className="">
                                   <div className="co-txt d-flex align-items-center mb-3">
                                     <div className="green-div me-2"></div>
-
-                                    {/* <h4 className="mb-0">{Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")}
-                                    </h4> */}
+                                    <h4 className="mb-0">{Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")}
+                                    </h4>
                                   </div>
                                   <h6>{regionName} Region</h6>
                                   <h3 className="min-height48">Projects in Progress</h3>
@@ -303,11 +283,8 @@ const RegionalLevel = () => {
                                   <h3 className="">Gap to Target</h3>
                                   <div className="by-date company-commit">
                                     <p className="mb-0"> Reduction needed between now and Q{Math.floor((new Date().getMonth() + 3) / 3)} {new Date().getFullYear()}
-
                                     </p>
                                     <a target="_blank" rel="noreferrer" href="https://corporate.lowes.com/our-responsibilities/corporate-responsibility-reports-policies" className="text-decoration-underline text-white"> See company commitment</a>
-
-
                                   </div>
                                 </div>
                               </div>
@@ -328,7 +305,7 @@ const RegionalLevel = () => {
                         {+yearlyData1 > Number.parseInt(moment(emissionDates?.data?.emission_dates?.start_date).format("YYYY")) && <button onClick={() => {
                           setRelaodData(false)
 
-                          setYearlyData1((prev:any) => Number.parseInt(prev) - 1)
+                          setYearlyData1((prev: any) => Number.parseInt(prev) - 1)
                         }}><svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M-1.07292e-06 9.99996C-1.07015e-06 10.2325 0.0888614 10.4652 0.266361 10.6427L9.35726 19.7336C9.71248 20.0888 10.2877 20.0888 10.6427 19.7336C10.9977 19.3784 10.9979 18.8031 10.6427 18.4481L2.19454 9.99996L10.6427 1.55179C10.9979 1.19656 10.9979 0.621334 10.6427 0.266335C10.2875 -0.088665 9.71226 -0.088892 9.35726 0.266335L0.266361 9.35723C0.0888613 9.53473 -1.0757e-06 9.76746 -1.07292e-06 9.99996Z" fill="#5f9a80" />
                           </svg>
@@ -338,7 +315,7 @@ const RegionalLevel = () => {
                         {+yearlyData1 < 2023 && <button onClick={() => {
                           setRelaodData(false)
 
-                          setYearlyData1((prev:any) => Number.parseInt(prev) + 1)
+                          setYearlyData1((prev: any) => Number.parseInt(prev) + 1)
                         }}><svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.9091 9.99996C10.9091 10.2325 10.8203 10.4652 10.6428 10.6427L1.55187 19.7336C1.19665 20.0888 0.62142 20.0888 0.26642 19.7336C-0.0885794 19.3784 -0.0888067 18.8031 0.26642 18.4481L8.71459 9.99996L0.26642 1.55179C-0.0888064 1.19656 -0.0888064 0.621334 0.26642 0.266335C0.621647 -0.088665 1.19687 -0.088892 1.55187 0.266335L10.6428 9.35723C10.8203 9.53473 10.9091 9.76746 10.9091 9.99996Z" fill="#5f9a80" />
                           </svg>
@@ -388,16 +365,16 @@ const RegionalLevel = () => {
                           <span className="visually-hidden"></span>
                         </div>
                       </div> : ""
-                      //  (
-                      //   <RegionLevelHighChart
-                      //     key={1}
-                      //     chart={"emissionReduction"}
-                      //     options={regionLevelGlideData?.data || {}}
-                      //     regionName={regionName}
-                      //     reloadData={false}
-                      //     maxRegionsValue={Math.max(...regionLevelGlideData?.data?.region_level || [1]) * 1.10}
-                      //     unitReduction={!checkedEmissionsReductionGlide}
-                      //   />)
+                        //  (
+                        //   <RegionLevelHighChart
+                        //     key={1}
+                        //     chart={"emissionReduction"}
+                        //     options={regionLevelGlideData?.data || {}}
+                        //     regionName={regionName}
+                        //     reloadData={false}
+                        //     maxRegionsValue={Math.max(...regionLevelGlideData?.data?.region_level || [1]) * 1.10}
+                        //     unitReduction={!checkedEmissionsReductionGlide}
+                        //   />)
                       }
 
 
@@ -528,27 +505,18 @@ const RegionalLevel = () => {
                                     </div>
                                   </div>
                                 </Col>
-
-
-
                               </Row>
-
                             </div>
-
                           </div>
                         </Col>
                       </Row>
-
                     </div>
                   </Col>
                 </Row>
               </div>
-
               <div>
                 <div className="data-sources py-2">
-
                   <a target="_blank" rel="noreferrer" href="https://smartfreightcentre.org/en/about-sfc/about-us/" className="d-flex align-items-center"><span className="glec-txt me-1">GLEC</span>See data sources and Methodologies</a>
-
                 </div>
               </div>
               {/* pacific section */}
@@ -559,11 +527,8 @@ const RegionalLevel = () => {
                     <div className="h-100 inner-data-region p-3 x-axis-hide opacity-1">
                       <div className="emi-inten d-flex justify-content-between">
                         <div>
-
                           <div className="d-flex text-items-center">
-
                             <div>
-
                               <h6 className="mb-0 ps-1 fw-bold">Emissions of {getRegionName(regionName, regionsLevel, true)}  for {getQuarterName(quartelyData, yearlyData)} {yearlyData}</h6>
                               <div className="d-flex align-items-center">
                                 <h4 className="fw-semibold ps-1">
@@ -571,9 +536,7 @@ const RegionalLevel = () => {
                                 </h4>
                                 <span className="fs-12 color-primary fw-semibold">(gCO2e/Ton-Mile)</span>
                               </div>
-
                             </div>
-
                           </div>
                         </div>
                         <FormGroup className="select-box d-flex ms-lg-5">
@@ -586,7 +549,6 @@ const RegionalLevel = () => {
                             value={quartelyData}
                             onChange={(e) => {
                               setRelaodData(false)
-
                               setQuartelyData(e.target.value)
                             }}
                           >
@@ -597,16 +559,12 @@ const RegionalLevel = () => {
                         </FormGroup>
                       </div>
                       {/* {totalEmissionOverallDetails?.data?.length > 0 && (
-
                         // <RegionLevelHighChart
                         //   reloadData={relaodData}
-
                         //   chart={"totalEmission"}
                         //   options={totalEmissionOverallDetails?.data}
                         // />
                       )} */}
-
-
                       <div>
                         {Math.round(
                           ((totalEmissionOverallDetails?.data?.[0]
@@ -666,10 +624,8 @@ const RegionalLevel = () => {
                     <div className="h-100 inner-data-region p-3 x-axis-hide position-relative">
                       <div className="emi-inten d-flex justify-content-between">
                         <div>
-
                           <div className="d-flex text-align-center">
                             <div className="popup-dots-wrap position-relative mt-2">
-
                               <div className="popup-data px-3 py-3">
                                 <div className="d-flex align-items-center mb-4">
                                   <h5 className="mb-0">
@@ -691,17 +647,14 @@ const RegionalLevel = () => {
                             </div>
                             <div>
                               <h6 className="mb-0 ps-1 fw-bold">Emissions Intensity of {getRegionName(regionName, regionsLevel, true)} for {getQuarterName(quartelyData, yearlyData)} {yearlyData}</h6>
-
                               <h4 className="fw-semibold ps-1">
                                 Emissions Intensity   <span className="fs-12">
                                   (gCO2e/Ton-Mile of freight)
                                 </span>
                               </h4>
                             </div>
-
                           </div>
                         </div>
-
                         <FormGroup className="select-box d-flex ms-lg-6">
                           <Input
                             id="exampleSelect"
@@ -717,38 +670,32 @@ const RegionalLevel = () => {
                             {getQuarters(yearlyData).map(i => (
                               <option value={i?.value}>{i?.name}</option>
                             ))}
-
                           </Input>
                         </FormGroup>
                       </div>
-                     
                       {regionEmissionIntensityDetailsIsLoading ? <div className="graph-loader">
-
                         <div className="spinner-border position-absolute spinner-ui" role="status">
                           <span className="visually-hidden"></span>
                         </div>
-                        </div> : ""
+                      </div> : ""
                         // regionEmissionIntensityDetails?.data[0]?.dataset?.length> 0 &&
                         // <RegionLevelHighChart
                         //   chart={"emissionIntensity"}
                         //   options={regionEmissionIntensityDetails?.data}
                         //   reloadData={relaodData}
                         //   quartelyData={quartelyData}
-
                         // />
-                      
                       }
-                      {!regionEmissionIntensityDetailsIsLoading && regionEmissionIntensityDetails?.data[0]?.dataset?.length === 0 && 
+                      {!regionEmissionIntensityDetailsIsLoading && regionEmissionIntensityDetails?.data[0]?.dataset?.length === 0 &&
                         <div className="d-flex justify-content-center align-items-center my-5 py-5">
                           <p> No Data Found</p>
                         </div>
                       }
-
                       <div>
                         {(
-                          ((regionEmissionIntensityDetails?.data?.[0]?.max  -
+                          ((regionEmissionIntensityDetails?.data?.[0]?.max -
                             regionEmissionIntensityDetails?.data?.[0]?.industrialAverage) /
-                            regionEmissionIntensityDetails?.data?.[0]?.max ) *
+                            regionEmissionIntensityDetails?.data?.[0]?.max) *
                           100
                         ) < 0 ? (
                           <div className="model-overview px-3 py-2 bottom-card">
@@ -758,11 +705,11 @@ const RegionalLevel = () => {
                               </span>
                               Your emissions intensity for the {regionName} region
                               is{" "}
-                              {regionEmissionIntensityDetails?.data?.[0]?.max ?  Math.abs(
+                              {regionEmissionIntensityDetails?.data?.[0]?.max ? Math.abs(
                                 Math.round(
-                                  ((regionEmissionIntensityDetails?.data?.[0]?.max  -
+                                  ((regionEmissionIntensityDetails?.data?.[0]?.max -
                                     regionEmissionIntensityDetails?.data?.[0]?.industrialAverage) /
-                                    regionEmissionIntensityDetails?.data?.[0]?.max ) *
+                                    regionEmissionIntensityDetails?.data?.[0]?.max) *
                                   100
                                 )
                               ) : 0 + "% "}
@@ -778,9 +725,9 @@ const RegionalLevel = () => {
                               Your emissions intensity for the {regionName} region is{" "}
                               {Math.abs(
                                 Math.round(
-                                  ((regionEmissionIntensityDetails?.data?.[0]?.max  -
+                                  ((regionEmissionIntensityDetails?.data?.[0]?.max -
                                     regionEmissionIntensityDetails?.data?.[0]?.industrialAverage) /
-                                    regionEmissionIntensityDetails?.data?.[0]?.max ) * 100
+                                    regionEmissionIntensityDetails?.data?.[0]?.max) * 100
                                 )
                               ) + "% "}
                               higher than industry average for this region
@@ -799,20 +746,16 @@ const RegionalLevel = () => {
                         <h6 className="datafrom-txt mb-2">
                           Emissions of {getRegionName(regionName, regionsLevel, true)} Carrier for {getQuarterName(quarterDetails, yearlyData)} {yearlyData}
                         </h6>
-
                         <div className="emi-inten d-flex justify-content-between mb-2">
                           <div>
                             <div className="d-flex vendor-emsn">
                               <h4 className="fw-bold mb-0">Carrier Emissions</h4>
                             </div>
-
                             <div className="avg-img"></div>
                           </div>
                           <div>
                             <Link to={"/carrier"} className="text-dark fs-14">Show All</Link>
                           </div>
-
-
                         </div>
                         <div className="emi-inten d-flex justify-content-end pb-4">
                           <div className="ps-4">
@@ -910,25 +853,24 @@ const RegionalLevel = () => {
                                   </div>
                                 </div>
                                   : ""
-                                  // regionPageArr?.length > 0 && (
-                                  //   <ChartsHigh
-                                  //     chart={"region"}
-                                  //     isLoading={true}
-                                  //     regionPageArr={regionPageArr}
-                                  //     regionPagecontributor={[]}
-                                  //     regionPagedetractor={[]}
-                                  //     reloadData={relaodData}
-                                  //     unitDto={regionGraphDetails?.data?.unit}
-                                  //   />
-                                  // )
-                                  }
+                                // regionPageArr?.length > 0 && (
+                                //   <ChartsHigh
+                                //     chart={"region"}
+                                //     isLoading={true}
+                                //     regionPageArr={regionPageArr}
+                                //     regionPagecontributor={[]}
+                                //     regionPagedetractor={[]}
+                                //     reloadData={relaodData}
+                                //     unitDto={regionGraphDetails?.data?.unit}
+                                //   />
+                                // )
+                              }
                             </div>
                           </div>
                         </div>
                       </div>
                     </Col>
                   )}
-
                   {isLane && (
                     <Col lg="6" className="mt-3">
                       <div className="inner-data-region region-graph-outer mt-3 h-100">
@@ -953,7 +895,6 @@ const RegionalLevel = () => {
                                     label="Total Emissions"
                                     className="fw-semibold"
                                     checked={checked}
-
                                     onChange={() => setChecked(!checked)}
                                   />
                                 </Form>
@@ -990,18 +931,18 @@ const RegionalLevel = () => {
                                   </div>
                                 </div>
                               ) : ""
-                              //  (
-                              //   lanePageArr?.length > 0 && (
-                              //     <ChartsHigh
-                              //       chart={"lane"}
-                              //       isLoading={true}
-                              //       lanePageArr={lanePageArr}
-                              //       lanePagecontributor={[]}
-                              //       lanePagedetractor={[]}
-                              //       unitDto={regionGraphDetails?.data?.unit}
-                              //     />
-                              //   )
-                              // )
+                                //  (
+                                //   lanePageArr?.length > 0 && (
+                                //     <ChartsHigh
+                                //       chart={"lane"}
+                                //       isLoading={true}
+                                //       lanePageArr={lanePageArr}
+                                //       lanePagecontributor={[]}
+                                //       lanePagedetractor={[]}
+                                //       unitDto={regionGraphDetails?.data?.unit}
+                                //     />
+                                //   )
+                                // )
                               }
                             </div>
                           </div>
@@ -1009,8 +950,7 @@ const RegionalLevel = () => {
                       </div>
                     </Col>
                   )}
-
-                  {/* {isFacility && (
+                  {isFacility && (
                     <Col lg="6" className="mt-3">
                       <div className="inner-data-region region-graph-outer mt-3 h-100">
                         <div className=" p-3">
@@ -1073,29 +1013,29 @@ const RegionalLevel = () => {
                                     <span className="visually-hidden"></span>
                                   </div>
                                 </div>
-                              ) : "" 
-                              // (
-                              //   laneFacilityEmessionArr?.length > 0 && (
-                              //     <ChartsHigh
-                              //       chart={"region"}
-                              //       isLoading={true}
-                              //       regionPageArr={laneFacilityEmessionArr}
-                              //       lanePagecontributor={[]}
-                              //       lanePagedetractor={[]}
-                              //       reloadData={relaodData}
-                              //       unitDto={
-                              //         regionFacilityEmissionDto?.data?.unit
-                              //       }
-                              //     />
-                              //   )
-                              // )
+                              ) : ""
+                                // (
+                                //   laneFacilityEmessionArr?.length > 0 && (
+                                //     <ChartsHigh
+                                //       chart={"region"}
+                                //       isLoading={true}
+                                //       regionPageArr={laneFacilityEmessionArr}
+                                //       lanePagecontributor={[]}
+                                //       lanePagedetractor={[]}
+                                //       reloadData={relaodData}
+                                //       unitDto={
+                                //         regionFacilityEmissionDto?.data?.unit
+                                //       }
+                                //     />
+                                //   )
+                                // )
                               }
                             </div>
                           </div>
                         </div>
                       </div>
                     </Col>
-                  )} */}
+                  )}
                 </Row>
                 <div className="add-btn mt-4">
                   <Button
@@ -1114,7 +1054,6 @@ const RegionalLevel = () => {
                       <img src={Plus} alt="icon" />
                     </span>
                   </Button>
-
                   <Modal
                     isOpen={modal}
                     toggle={toggle}
@@ -1293,9 +1232,8 @@ const RegionalLevel = () => {
           </div>
           <div />
         </section>
-
       </section>
     </>
   );
 }
-export default RegionalLevel
+export default RegionalLevelView

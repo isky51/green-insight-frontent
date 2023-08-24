@@ -1,8 +1,8 @@
 import axios from "axios";
 
 // Fetch base URLs from environment variables
-export const baseURL = process.env.REACT_APP_BASE_URL;
-export const baseURL1 = process.env.REACT_APP_BASE_URL1;
+const baseURL = process.env.REACT_APP_BASE_URL;
+const baseURL1 = process.env.REACT_APP_BASE_URL1;
 
 /**
  * Common Services
@@ -21,7 +21,7 @@ const getFiltersDate = async (token: { headers: { Authorization: string } }) => 
     }
 }
 
-const postRegionIntensity = async(userData: any, token:{headers:{Authorization:string}}) => {
+const postRegionIntensity = async (userData: any, token: { headers: { Authorization: string } }) => {
     try {
         const response = await axios.post(
             baseURL1 + "get-region-intensity-yearly", userData, token
@@ -34,10 +34,10 @@ const postRegionIntensity = async(userData: any, token:{headers:{Authorization:s
     }
 }
 
-const getRegions = async (token: { headers: { Authorization: string; };}) => {
+const getRegions = async (token: { headers: { Authorization: string; }; }) => {
     try {
         const response = await axios.get(
-            baseURL + "get-regions",token
+            baseURL1 + "get-regions", token
         );
         return response?.data;
     } catch (error) {
@@ -46,10 +46,10 @@ const getRegions = async (token: { headers: { Authorization: string; };}) => {
     }
 };
 
-const postRegionLevelGlidePath = async (userData: any, token: { headers: { Authorization: string; };}) => {
+const postRegionLevelGlidePath = async (userData: any, token: { headers: { Authorization: string; }; }) => {
     try {
         const response = await axios.post(
-            baseURL + "get-region-reduction", userData, token
+            baseURL1 + "get-region-reduction", userData, token
         );
         return response?.data;
     } catch (error) {
@@ -61,7 +61,7 @@ const postRegionLevelGlidePath = async (userData: any, token: { headers: { Autho
 const getProjectCountApi = async (userData:any,  token: { headers: { Authorization: string }}) => {
     try {
         const response = await axios.post(
-            baseURL + "get-project-count", userData, token
+            baseURL1 + "get-project-count", userData, token
         );
         return response?.data
     }
