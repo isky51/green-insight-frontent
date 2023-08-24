@@ -210,3 +210,17 @@ export const getGraphDataHorizontal = (res: { data: { contributor?: ContributorI
     // Return merged array of contributor and detractor data
     return [...regionPageArr, ...regionPageArrMerge];
 };
+
+
+export const getRegionName = (regions: any, regionalLevel: string | null, isList = false): string => {
+    if (regionalLevel) {
+        if (isList) {
+            return `${regions} Region`;
+        } else {
+            const matchedRegion = regions?.data?.regions.find((e: any) => e.id === Number.parseInt(regionalLevel));
+            return `${matchedRegion?.name} Region`;
+        }
+    } else {
+        return "All Regions";
+    }
+};

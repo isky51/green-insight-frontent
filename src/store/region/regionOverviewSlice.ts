@@ -29,7 +29,7 @@ const initialState :RegionOverviewState = {
     regionFacilityEmissionIsLoading: true
 }
 
-export const regionEmissionIntensityOverall = createAsyncThunk("get/region-overall/emission-intensity", async (userData, thunkApi) => {
+export const regionEmissionIntensityOverall = createAsyncThunk("get/region-overall/emission-intensity", async (userData:any, thunkApi) => {
     try {
         
         return await commonService.postRegionIntensity(userData,getTokenHeader());
@@ -39,7 +39,7 @@ export const regionEmissionIntensityOverall = createAsyncThunk("get/region-overa
         return thunkApi.rejectWithValue(message)
     }
 })
-export const totalEmissionOverall = createAsyncThunk("get/region-overall/totalEmission", async (userData, thunkApi) => {
+export const totalEmissionOverall = createAsyncThunk("get/region-overall/totalEmission", async (userData:any, thunkApi) => {
     try {
        
         return await regionService.regionQuartelyGet(userData,getTokenHeader());

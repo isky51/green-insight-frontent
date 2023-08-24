@@ -36,6 +36,13 @@ const RegionOverview = () => {
         checkedEmissionsReductionGlide,
         getRegionOverviewDetailData,
         regionLevelGlideData,
+        isLoadingRegionLevelGlidePath,
+        regionCarrierComparisonData,
+        regionFacilityEmissionIsLoading,
+        regionFacilityEmissionDto,
+        laneGraphDetailsLoading,
+        laneGraphDetails,
+        regionCarrierComparisonLoading,
         setCheckedEmissionsReductionGlide,
         setYearlyData,
         setCheckedEmissions,
@@ -169,7 +176,7 @@ const RegionOverview = () => {
                                             <div className="left-arrow-slider">
                                                 {yearlyData1 > Number.parseInt(moment(emissionDates?.data?.emission_dates?.start_date).format("YYYY")) && <button onClick={() => {
                                                     setRelaodData(false)
-                                                    // setYearlyData1(prev => Number.parseInt(prev) - 1)
+                                                    setYearlyData1((prev:any) => Number.parseInt(prev) - 1)
                                                 }}><svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M-1.07292e-06 9.99996C-1.07015e-06 10.2325 0.0888614 10.4652 0.266361 10.6427L9.35726 19.7336C9.71248 20.0888 10.2877 20.0888 10.6427 19.7336C10.9977 19.3784 10.9979 18.8031 10.6427 18.4481L2.19454 9.99996L10.6427 1.55179C10.9979 1.19656 10.9979 0.621334 10.6427 0.266335C10.2875 -0.088665 9.71226 -0.088892 9.35726 0.266335L0.266361 9.35723C0.0888613 9.53473 -1.0757e-06 9.76746 -1.07292e-06 9.99996Z" fill="#5f9a80" />
                                                     </svg>
@@ -178,7 +185,7 @@ const RegionOverview = () => {
                                             <div className="right-arrow-slider">
                                                 {yearlyData1 < 2023 && <button onClick={() => {
                                                     setRelaodData(false)
-                                                    // setYearlyData1(prev => Number.parseInt(prev) + 1)
+                                                    setYearlyData1((prev:any) => Number.parseInt(prev) + 1)
                                                 }}><svg width="11" height="20" viewBox="0 0 11 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                         <path d="M10.9091 9.99996C10.9091 10.2325 10.8203 10.4652 10.6428 10.6427L1.55187 19.7336C1.19665 20.0888 0.62142 20.0888 0.26642 19.7336C-0.0885794 19.3784 -0.0888067 18.8031 0.26642 18.4481L8.71459 9.99996L0.26642 1.55179C-0.0888064 1.19656 -0.0888064 0.621334 0.26642 0.266335C0.621647 -0.088665 1.19687 -0.088892 1.55187 0.266335L10.6428 9.35723C10.8203 9.53473 10.9091 9.76746 10.9091 9.99996Z" fill="#5f9a80" />
                                                     </svg>
@@ -225,23 +232,23 @@ const RegionOverview = () => {
                                             </div>
                                             {/* maps */}
                                         </div>
-                                        {/* {isLoadingRegionLevelGlidePath ? <div className="graph-loader">
+                                         {isLoadingRegionLevelGlidePath ? <div className="graph-loader">
 
                                             <div className="spinner-border position-absolute spinner-ui" role="status">
                                                 <span className="visually-hidden"></span>
                                             </div>
-                                        </div> :
-                                            <RegionLevelHighChart
-                                                key={1}
-                                                chart={"emissionReduction"}
-                                                options={regionLevelGlideData?.data}
-                                                regionName={params?.regionId}
-                                                reloadData={false}
-                                                maxRegionsValue={Math.max(...regionLevelGlideData?.data?.region_level || [1]) * 1.10}
-                                                unitReduction={!checkedEmissionsReductionGlide}
+                                        </div> : ""
+                                            // <RegionLevelHighChart
+                                            //     key={1}
+                                            //     chart={"emissionReduction"}
+                                            //     options={regionLevelGlideData?.data}
+                                            //     regionName={params?.regionId}
+                                            //     reloadData={false}
+                                            //     maxRegionsValue={Math.max(...regionLevelGlideData?.data?.region_level || [1]) * 1.10}
+                                            //     unitReduction={!checkedEmissionsReductionGlide}
 
-                                            />
-                                        } */}
+                                            // />
+                                        } 
 
 
                                         <div className="d-lg-flex quartely-wrapper  p-3">
@@ -423,34 +430,34 @@ const RegionOverview = () => {
                                             <div className="avg-region text-center x-axis-hide">
                                                 <h6 className="fs-6">
                                                     Average of all carriers (
-                                                    {/* {regionCarrierComparisonData?.data?.average?.toLocaleString(
+                                                    {regionCarrierComparisonData?.data?.average?.toLocaleString(
                                                         "en-US",
                                                         { minimumFractionDigits: 1 }
                                                     )}{" "}
-                                                    {regionCarrierComparisonData?.data?.unit} */}
+                                                    {regionCarrierComparisonData?.data?.unit}
                                                     )
                                                 </h6>
-                                                <div className="avg-img">
-{/* 
+                                                <div className="avg-img"> 
                                                     {
                                                         regionCarrierComparisonLoading ? <div className="graph-loader d-flex justify-content-center align-items-center">
 
                                                             <div className="spinner-border  spinner-ui" role="status">
                                                                 <span className="visually-hidden"></span>
                                                             </div>
-                                                        </div> :
-                                                            (
-                                                                <ChartsHigh
-                                                                    chart={"lane"}
-                                                                    isLoading={true}
-                                                                    lanePageArr={laneCarrierArr}
-                                                                    lanePagecontributor={[]}
-                                                                    lanePagedetractor={[]}
-                                                                    reloadData={relaodData}
-                                                                    unitDto={regionCarrierComparisonData?.data?.unit}
+                                                        </div> : ""
+                                                            // (
+                                                            //     <ChartsHigh
+                                                            //         chart={"lane"}
+                                                            //         isLoading={true}
+                                                            //         lanePageArr={laneCarrierArr}
+                                                            //         lanePagecontributor={[]}
+                                                            //         lanePagedetractor={[]}
+                                                            //         reloadData={relaodData}
+                                                            //         unitDto={regionCarrierComparisonData?.data?.unit}
 
-                                                                />
-                                                            )} */}
+                                                            //     />
+                                                            // )
+                                                            } 
                                                 </div>
                                             </div>
 
@@ -508,16 +515,16 @@ const RegionOverview = () => {
                                             <div className="avg-region text-center x-axis-hide">
                                                 <h6>
                                                     Average of all lanes (
-                                                    {/* {laneGraphDetails?.data?.average?.toLocaleString(
+                                                    {laneGraphDetails?.data?.average?.toLocaleString(
                                                         "en-US",
                                                         { minimumFractionDigits: 1 }
                                                     )}{" "}
-                                                    {laneGraphDetails?.data?.unit} */}
+                                                    {laneGraphDetails?.data?.unit}
                                                     )
                                                 </h6>
                                                 <div className="avg-img">
 
-                                                    {/* {
+                                                    {
                                                         laneGraphDetailsLoading ? <div className="graph-loader d-flex justify-content-center align-items-center">
 
                                                             <div className="spinner-border  spinner-ui" role="status">
@@ -536,7 +543,7 @@ const RegionOverview = () => {
 
                                                             //     />
                                                             // )
-                                                            } */}
+                                                            } 
                                                 </div>
                                             </div>
                                         </div>
@@ -592,35 +599,35 @@ const RegionOverview = () => {
                                                 <div className="avg-region text-center x-axis-hide">
                                                     <h6>
                                                         Average of all facilities (
-                                                        {/* {regionFacilityEmissionDto?.data?.average?.toLocaleString(
+                                                        {regionFacilityEmissionDto?.data?.average?.toLocaleString(
                                                             "en-US",
                                                             { minimumFractionDigits: 1 }
                                                         )}{" "}
-                                                        {regionFacilityEmissionDto?.data?.unit} */}
+                                                        {regionFacilityEmissionDto?.data?.unit}
                                                         )
                                                     </h6>
                                                     <div className="avg-img">
 
                                                         {
-                                                            // regionFacilityEmissionIsLoading ? 
-                                                            // <div className="graph-loader d-flex justify-content-center align-items-center">
+                                                            regionFacilityEmissionIsLoading ? 
+                                                            <div className="graph-loader d-flex justify-content-center align-items-center">
 
-                                                            //     <div className="spinner-border  spinner-ui" role="status">
-                                                            //         <span className="visually-hidden"></span>
-                                                            //     </div>
-                                                            // </div> : ""
-                                                            //     // (
-                                                            //     //     <ChartsHigh
-                                                            //     //         chart={"region"}
-                                                            //     //         isLoading={true}
-                                                            //     //         regionPageArr={laneFacilityEmessionArr}
-                                                            //     //         lanePagecontributor={[]}
-                                                            //     //         lanePagedetractor={[]}
-                                                            //     //         reloadData={relaodData}
-                                                            //     //         unitDto={regionFacilityEmissionDto?.data?.unit}
+                                                                <div className="spinner-border  spinner-ui" role="status">
+                                                                    <span className="visually-hidden"></span>
+                                                                </div>
+                                                            </div> : ""
+                                                                // (
+                                                                //     <ChartsHigh
+                                                                //         chart={"region"}
+                                                                //         isLoading={true}
+                                                                //         regionPageArr={laneFacilityEmessionArr}
+                                                                //         lanePagecontributor={[]}
+                                                                //         lanePagedetractor={[]}
+                                                                //         reloadData={relaodData}
+                                                                //         unitDto={regionFacilityEmissionDto?.data?.unit}
 
-                                                            //     //     />
-                                                            //     // )
+                                                                //     />
+                                                                // )
                                                                 }
                                                     </div>
                                                 </div>
