@@ -8,6 +8,7 @@ import regionDataReducer from './region/regionSlice';
 import laneDetailsReducer from './lane/laneDetailsSlice';
 import regionOverviewReducer from './region/regionOverviewSlice';
 import sustainDataReducer from './sustain/sustainSlice';
+import dashRegionReducer from './dashRegion/dashRegionSlice';
 
 // Array to hold middleware
 const middleware: any = [];
@@ -22,6 +23,7 @@ const store = configureStore({
     dashboard: dashboardDataReducer,
     commonData: commonDataReducer,
     region: regionDataReducer,
+    regionDash: dashRegionReducer,
     regionOverview: regionOverviewReducer,
     lane : laneDetailsReducer,
     home: homeReducer,

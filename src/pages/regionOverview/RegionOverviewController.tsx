@@ -5,7 +5,7 @@ import { useAuth } from '../../auth/ProtectedRoute';
 import { getRegionOverviewDetail, laneGraphData, regionCarrierComparison } from '../../store/lane/laneDetailsSlice';
 import { regionFacilityEmissions } from '../../store/region/regionOverviewSlice';
 import { getGraphDataHorizontal } from '../../constant';
-import { regionShow } from '../../store/commonData/commonSlice';
+import { regionLevelGlidePath, regionShow } from '../../store/commonData/commonSlice';
 
 
 /**
@@ -25,10 +25,7 @@ const RegionOverviewController = () => {
     const [checkedFacilityEmissions, setCheckedFacilityEmissions] = useState(true);
 
     // Get relevant data from Redux store using selector hooks
-    const { regions,
-        emissionDates,
-        //  isLoadingRegionLevelGlidePath, 
-         regionLevelGlideData 
+    const { regions,emissionDates,isLoadingRegionLevelGlidePath,regionLevelGlideData 
         } = useAppSelector((state) => state.commonData);
     const { regionFacilityEmissionDto, regionFacilityEmissionIsLoading } = useAppSelector((state) => state.regionOverview)
     const { laneGraphDetails, laneGraphDetailsLoading, regionCarrierComparisonData, regionCarrierComparisonLoading, getRegionOverviewDetailData } = useAppSelector((state) => state.lane);
@@ -55,11 +52,11 @@ const RegionOverviewController = () => {
     }, [regions, params])
 
 
-    // useEffect(() => {
-    //     if (yearlyData1 && regionName) {
-    //         dispatch(regionLevelGlidePath({ region_id: regionName, company_id: "", year: yearlyData1, toggel_data: checkedEmissionsReductionGlide ? 0 : 1 }))
-    //     }
-    // }, [dispatch, yearlyData1, regionName, checkedEmissionsReductionGlide])
+    useEffect(() => {
+        if (yearlyData1 && regionName) {
+            dispatch(regionLevelGlidePath({ region_id: regionName, company_id: "", year: yearlyData1, toggel_data: checkedEmissionsReductionGlide ? 0 : 1 }))
+        }
+    }, [dispatch, yearlyData1, regionName, checkedEmissionsReductionGlide])
 
     useEffect(() => {
         if (regionName) {
@@ -139,6 +136,13 @@ const RegionOverviewController = () => {
         checkedEmissionsReductionGlide,
         getRegionOverviewDetailData,
         regionLevelGlideData,
+        isLoadingRegionLevelGlidePath,
+        regionCarrierComparisonData,
+        regionFacilityEmissionIsLoading,
+        regionFacilityEmissionDto,
+        laneGraphDetailsLoading,
+        laneGraphDetails,
+        regionCarrierComparisonLoading,
         setCheckedEmissionsReductionGlide,
         setYearlyData,
         setCheckedEmissions,

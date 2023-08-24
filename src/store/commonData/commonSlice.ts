@@ -13,6 +13,8 @@ interface commonState {
     message: string;
     emissionDates: any;
     regions:any;
+    isError:any;
+    projectCountData:any;
     emissionIntensityDetails:any
     emissionIntensityDetailsIsLoading:boolean;
     isLoadingRegionLevelGlidePath:boolean;
@@ -23,9 +25,11 @@ interface commonState {
 const initialState: commonState = {
     isSuccess:false,
     isLoading: false,
+    isError:"",
     message: "",
     emissionDates: null,
     regions:"",
+    projectCountData:"",
     emissionIntensityDetails: "",
     emissionIntensityDetailsIsLoading:true,
     isLoadingRegionLevelGlidePath:true,
@@ -67,10 +71,20 @@ export const regionShow = createAsyncThunk("get/region", async (_, thunkApi) => 
 })
 
 
-export const regionLevelGlidePath = createAsyncThunk("post/glideRegionPath/Details", async (userData, thunkApi) => {
+export const regionLevelGlidePath = createAsyncThunk("post/glideRegionPath/Details", async (userData:any, thunkApi) => {
     try {
 
         return await commonService.postRegionLevelGlidePath(userData, getTokenHeader());
+    }
+    catch (error:any) {
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
+        return thunkApi.rejectWithValue(message)
+    }
+})
+
+export const getProjectCount = createAsyncThunk("get/project/count", async (userData:any, thunkApi) => {
+    try {
+        return await commonService.getProjectCountApi(userData, getTokenHeader());
     }
     catch (error:any) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
@@ -89,6 +103,8 @@ export const commonDataReducer = createSlice({
             state.message = "";
             state.emissionDates = null;
             state.regions=""
+            state.isError= "";
+            state.projectCountData= "";
             state.emissionIntensityDetailsIsLoading = true
             state.isSuccess=false;
             state.isLoading= false;
@@ -154,6 +170,21 @@ export const commonDataReducer = createSlice({
             .addCase(regionLevelGlidePath.rejected, (state, _) => {
                 state.isLoadingRegionLevelGlidePath = false;
                 state.regionLevelGlideData = null;
+                state.isSuccess = false;
+            })
+            .addCase(getProjectCount.pending, (state) => {
+                state.isLoading = true;
+                state.isSuccess = false;
+                state.projectCountData = null
+            })
+            .addCase(getProjectCount.fulfilled, (state, action) => {
+                state.isLoading = true;
+                state.isSuccess = true;
+                state.projectCountData = action.payload;
+            })
+            .addCase(getProjectCount.rejected, (state, action) => {
+                state.isLoading = true;
+                state.isError = action.payload;
                 state.isSuccess = false;
             })
     }

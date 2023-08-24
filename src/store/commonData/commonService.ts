@@ -58,10 +58,22 @@ const postRegionLevelGlidePath = async (userData: any, token: { headers: { Autho
     }
 };
 
+const getProjectCountApi = async (userData:any,  token: { headers: { Authorization: string }}) => {
+    try {
+        const response = await axios.post(
+            baseURL + "get-project-count", userData, token
+        );
+        return response?.data
+    }
+    catch (error) {
+        throw (error)
+    }
+}
 
 // Object containing all common services
 const commonService = {
     getFiltersDate,
+    getProjectCountApi,
     postRegionIntensity,
     getRegions,
     postRegionLevelGlidePath
