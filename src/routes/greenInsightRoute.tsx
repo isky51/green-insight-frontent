@@ -7,8 +7,8 @@ import RegionalView from "../pages/region/RegionalView";
 import { useAppDispatch } from "../store/redux.hooks";
 import { useEffect } from "react";
 import { getFiltersDate } from "../store/commonData/commonSlice";
-import Vendor from "../pages/carrier/vendorView";
 import RegionOverview from "../pages/regionOverview/RegionOverview";
+import CarrierVendorView from "../pages/carrier/VendorView";
 
 /**
  * Component that defines all the routes for the website
@@ -58,7 +58,7 @@ const GreenInsightRoute = () => {
             element={<RegionOverview />}
           />
 
-          <Route path="/carrier" element={<Vendor />} />
+          <Route path="/carrier" element={<CarrierVendorView />} />
         </Route>
 
         {/* ErrorPage route */}

@@ -7,6 +7,7 @@ import commonDataReducer from './commonData/commonSlice';
 import regionDataReducer from './region/regionSlice';
 import laneDetailsReducer from './lane/laneDetailsSlice';
 import regionOverviewReducer from './region/regionOverviewSlice';
+import carrierDetailsReducer from './carrier/vendorSlice';
 
 // Array to hold middleware
 const middleware: any = [];
@@ -22,8 +23,9 @@ const store = configureStore({
     commonData: commonDataReducer,
     region: regionDataReducer,
     regionOverview: regionOverviewReducer,
-    lane : laneDetailsReducer,
-    home: homeReducer
+    lane: laneDetailsReducer,
+    home: homeReducer,
+    carrier: carrierDetailsReducer
   },
   middleware: getDefaultMiddleware => getDefaultMiddleware({
     // Disable checks for immutability and serializability for improved performance

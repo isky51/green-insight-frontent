@@ -113,7 +113,7 @@ export const sortIcon = (key: string, col_name: string, order: string): string =
 export const getQuarterYear = (date: string): string => {
     // Calculate the quarter based on the month of the given date
     const quarter = Math.ceil(Number(moment.utc(date).format("MM")) / 3);
-    
+
     // Get the year from the given date
     const year = Number(moment.utc(date).format("YYYY"));
 
@@ -210,3 +210,23 @@ export const getGraphDataHorizontal = (res: { data: { contributor?: ContributorI
     // Return merged array of contributor and detractor data
     return [...regionPageArr, ...regionPageArrMerge];
 };
+
+export const getRegionName = (regions: any, regionalLevel: any, isList = false) => {
+    if (regionalLevel) {
+        if (isList) {
+            return `${regions} Region`
+        } else {
+            return `${regions?.data?.regions.filter((e: any) => { return e.id === Number.parseInt(regionalLevel) })[0]?.name} Region`
+        }
+    } else {
+        return "All Regions"
+    }
+}
+export const pageSizeList = [10, 20, 30, 40, 50]
+
+export const capitalizeText = (str: String) => {
+    return str?.toLowerCase()
+        .split(' ')
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
