@@ -99,7 +99,6 @@ export const getLaneCarrierList = createAsyncThunk("get/carrier/name/detail", as
 
 export const getLaneCarrierCompaire = createAsyncThunk("get/carrier/compaire/detail", async (userData, thunkApi) => {
     try {
-
         return await vendorService.getLaneCarrierCompaire(userData, getTokenHeader());
     }
     catch (error: any) {

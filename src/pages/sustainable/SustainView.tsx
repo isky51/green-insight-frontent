@@ -7,7 +7,7 @@ import SidebarLayout from "../../component/sidebar";
 import HeaderLayout from "../../component/header";
 import { FormGroup, Row, Col, Input, Table } from "reactstrap";
 import ArrowDown from '../../assets/images/common/arrow-down.svg'
-import Down from '../../assets/images/common/Down.svg'
+import Down from '../../assets/images/common/down.svg'
 import Up from '../../assets/images/common/up.svg'
 import GArrow from '../../assets/images/common/g-arrow.svg'
 import Export from '../../assets/images/components/export.svg'

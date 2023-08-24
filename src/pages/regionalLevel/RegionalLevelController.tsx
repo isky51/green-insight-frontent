@@ -7,6 +7,7 @@ import { regionEmissionIntensityOverall, regionFacilityEmissions, totalEmissionO
 import { regionGraphData } from '../../store/region/regionSlice';
 import { changeRegion,changeLane,changeCarrier,changeFacility} from'../../store/dashRegion/dashRegionSlice'
 import { laneGraphData } from '../../store/lane/laneDetailsSlice';
+import { vendorGraphData } from '../../store/carrier/vendorSlice';
 // Predefined models 
 
 /**
@@ -57,7 +58,7 @@ const RegionalLevelController = () => {
       const { regionGraphDetails, regionGraphDetailsLoading } = useAppSelector(
         (state) => state.region
       );
-    //   const { vendorGraphDetails } = useAppSelector((state) => state.vendor)
+      const { vendorGraphDetails } = useAppSelector((state) => state.carrier)
       const { laneGraphDetails, laneGraphDetailsLoading } = useAppSelector(
         (state) => state.lane
       );
@@ -181,16 +182,16 @@ const RegionalLevelController = () => {
       }
     }, [regionsLevel, dispatch, isLane, quarterDetails, checked, yearlyData]);
   
-    // useEffect(() => {
-    //   if (isCarrier && regionsLevel) {
-    //     dispatch(vendorGraphData({
-    //       region_id: regionsLevel, page: currentPage,
-    //       page_size: 20,
-    //       quarter: quarterDetails,
-    //       year: yearlyData
-    //     }))
-    //   }
-    // }, [dispatch, isCarrier, quarterDetails, regionsLevel, yearlyData])
+    useEffect(() => {
+      if (isCarrier && regionsLevel) {
+        dispatch(vendorGraphData({
+          region_id: regionsLevel, page: currentPage,
+          page_size: 20,
+          quarter: quarterDetails,
+          year: yearlyData
+        }))
+      }
+    }, [dispatch, isCarrier, quarterDetails, regionsLevel, yearlyData])
 
     // All the state and function return to RegionalLevelController
     return {

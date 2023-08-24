@@ -144,7 +144,7 @@ const RegionOverview = () => {
                                                             <div className="green-div">
                                                             </div>
                                                             <h3 className="fw-bold mb-0 ps-2">
-                                                                {getRegionOverviewDetailData?.data?.carrierDto[0]?.emissions?.round(2)?.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                                                                {getRegionOverviewDetailData?.data?.carrierDto[0]?.emissions?.toFixed(2)?.toLocaleString("en-US", { minimumFractionDigits: 2 })}
 
                                                             </h3>
                                                         </div>

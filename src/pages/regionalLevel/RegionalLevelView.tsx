@@ -474,7 +474,7 @@ const RegionalLevelView = () => {
                                 <Col lg="4">
                                   <div className="overview-txt track-btn-lightgreen mb-4">
                                     <div className="co-txt d-flex justify-content-end">
-                                      {/* <h5 className="mb-0">{Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")}</h5> */}
+                                      <h5 className="mb-0">{Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")}</h5>
                                     </div>
                                   </div>
                                 </Col>
