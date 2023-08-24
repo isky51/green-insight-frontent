@@ -5,7 +5,7 @@ const CryptoJS = require("crypto-js");
  * Define interceptor to handle api resoponse and set header value
  */
 const InterceptorApi = (store: any) => {
-    axios.interceptors.request.use(function (config) {        
+    axios.interceptors.request.use(function (config) {
 
         return config;
     }, (error) => {
@@ -13,11 +13,17 @@ const InterceptorApi = (store: any) => {
     })
     axios.interceptors.response.use(response => {
         if (response?.data) {
+
             let bytes = CryptoJS.AES.decrypt(response?.data?.data, process.env.REACT_APP_EN_KEY);
+
             let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-            return {  ...response, data: { ...response.data, data: decryptedData } };
+
+            return { ...response, data: { ...response.data, data: decryptedData } };
+
         } else {
+
             return response
+
         }
     }, (error) => {
         return Promise.reject(error);

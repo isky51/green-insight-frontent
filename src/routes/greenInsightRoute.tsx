@@ -7,54 +7,65 @@ import RegionalView from "../pages/region/RegionalView";
 import { useAppDispatch } from "../store/redux.hooks";
 import { useEffect } from "react";
 import { getFiltersDate } from "../store/commonData/commonSlice";
+import Vendor from "../pages/carrier/vendorView";
 import RegionOverview from "../pages/regionOverview/RegionOverview";
 
 /**
  * Component that defines all the routes for the website
  */
 const GreenInsightRoute = () => {
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-    // Fetch user token from local storage
-    const userdata: any = localStorage.getItem("loginDetails") && JSON.parse(localStorage.getItem("loginDetails") || '');
-    let tokenDetails: string = process.env.REACT_APP_IS_DEV ? process.env.REACT_APP_TEST_TOKEN : userdata?.token;
+  // Fetch user token from local storage
+  const userdata: any =
+    localStorage.getItem("loginDetails") &&
+    JSON.parse(localStorage.getItem("loginDetails") || "");
+  let tokenDetails: string = process.env.REACT_APP_IS_DEV
+    ? process.env.REACT_APP_TEST_TOKEN
+    : userdata?.token;
 
-    // Fetch emission filter dates on component mount
-    useEffect(() => {
-        if (tokenDetails) {
-            dispatch(getFiltersDate(tokenDetails));
-        }
-    }, [dispatch, tokenDetails]);
+  // Fetch emission filter dates on component mount
+  useEffect(() => {
+    if (tokenDetails) {
+      dispatch(getFiltersDate(tokenDetails));
+    }
+  }, [dispatch, tokenDetails]);
 
-    return (
-        <Router basename="/">
-            <Routes>
-                {/* LoginView route */}
-                <Route
-                    path="/"
-                    element={
-                        <AuthRouteCheck>
-                            <LoginView />
-                        </AuthRouteCheck>
-                    }
-                />
-                {/* Protected routes */}
-                <Route element={<ProtectedRoute />}>
-                    {/* DashboardView route */}
-                    <Route path="/dashboard" element={<DashboardView />} />
+  return (
+    <Router basename="/">
+      <Routes>
+        {/* LoginView route */}
+        <Route
+          path="/"
+          element={
+            <AuthRouteCheck>
+              <LoginView />
+            </AuthRouteCheck>
+          }
+        />
 
-                    {/* RegionalView route */}
-                    <Route path="/regional" element={<RegionalView />} />
+        {/* Protected routes */}
+        <Route element={<ProtectedRoute />}>
+          {/* DashboardView route */}
+          <Route path="/dashboard" element={<DashboardView />} />
 
-                    {/* Regional-OverviewView route */}
-                    <Route path="/region-overview/:regionId/" element={<RegionOverview />} />
-                </Route>
+          {/* RegionalView route */}
+          <Route path="/regional" element={<RegionalView />} />
 
-                {/* ErrorPage route */}
-                <Route path="*" element={<ErrorPage />} />
-            </Routes>
-        </Router>
-    );
-}
+          {/* Regional-OverviewView route */}
+          <Route
+            path="/region-overview/:regionId/"
+            element={<RegionOverview />}
+          />
+
+          <Route path="/carrier" element={<Vendor />} />
+        </Route>
+
+        {/* ErrorPage route */}
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </Router>
+  );
+};
 
 export default GreenInsightRoute;
