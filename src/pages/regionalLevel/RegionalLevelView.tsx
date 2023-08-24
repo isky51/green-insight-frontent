@@ -53,6 +53,7 @@ const RegionalLevel = () => {
         yearlyData1,
         quartelyData,
         dispatch,
+        dataCheck,
         checkedFacilityEmissions,
         regionFacilityEmissionIsLoading,
         checkedEmissionsReductionGlide,
@@ -1236,7 +1237,7 @@ const RegionalLevel = () => {
                               </div>
                             </div>
                           </Col>
-                          {/* {!isCompanyEnable(dataCheck.userdata) && <Col lg={`${dataCheck.userdata?.role === 0 ? '3' : '4'}`} md="6" className="mb-3 mb-lg-0">
+                          {!isCompanyEnable(dataCheck.userdata) && <Col lg={`${dataCheck.userdata?.role === 0 ? '3' : '4'}`} md="6" className="mb-3 mb-lg-0">
                             <div className="card-border p-3 h-100">
                               <div className="card-wrapper-txt">
                                 <div className="d-sm-flex justify-content-between align-items-center mb-2">
@@ -1267,7 +1268,7 @@ const RegionalLevel = () => {
                                 />
                               </div>
                             </div>
-                          </Col>} */}
+                          </Col>}
                         </Row>
                       </div>
                     </ModalBody>

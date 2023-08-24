@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { getFiltersDate } from "../store/commonData/commonSlice";
 import Vendor from "../pages/carrier/vendorView";
 import RegionOverview from "../pages/regionOverview/RegionOverview";
+import RegionalLevel from "../pages/regionalLevel/RegionalLevelView";
 
 /**
  * Component that defines all the routes for the website
@@ -49,14 +50,14 @@ const GreenInsightRoute = () => {
           {/* DashboardView route */}
           <Route path="/dashboard" element={<DashboardView />} />
 
+          {/* RegionalLevel-Dashboard route */}
+          <Route path="/region-level/:regionId/" element={<RegionalLevel />} />
+
           {/* RegionalView route */}
           <Route path="/regional" element={<RegionalView />} />
 
           {/* Regional-OverviewView route */}
-          <Route
-            path="/region-overview/:regionId/"
-            element={<RegionOverview />}
-          />
+          <Route path="/region-overview/:regionId/" element={<RegionOverview />} />
 
           <Route path="/carrier" element={<Vendor />} />
         </Route>

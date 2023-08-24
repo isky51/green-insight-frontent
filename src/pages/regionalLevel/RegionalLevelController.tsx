@@ -241,6 +241,7 @@ const RegionalLevelController = () => {
         setRelaodData,
         setChecked,
         dispatch,
+        dataCheck,
         checked,
         checkedRegion, setCheckedRegion,
     }
