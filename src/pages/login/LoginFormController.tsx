@@ -65,10 +65,18 @@ const LoginFormController = () => {
     useEffect(() => {
         if (otpSuccess && dataCheck?.loggedIn) {
             setShow(false)
-            navigate("/dashboard");
+            if(dataCheck?.userdata?.role === 1){
+                navigate("/dashboard");
+            }else if(dataCheck?.userdata?.role === 3){
+                navigate("/sustainable");
+            }
         }
         if (isSuccess && !isOtp && dataCheck?.loggedIn) {
-            navigate("/dashboard");
+            if(dataCheck?.userdata?.user?.role === 1){
+                navigate("/dashboard");
+            }else if(dataCheck?.userdata?.user?.role === 3){
+                navigate("/sustainable");
+            }
         }
     }, [otpSuccess, isSuccess, isOtp, dataCheck, navigate]);
 

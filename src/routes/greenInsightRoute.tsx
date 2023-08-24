@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { getFiltersDate } from "../store/commonData/commonSlice";
 import Vendor from "../pages/carrier/vendorView";
 import RegionOverview from "../pages/regionOverview/RegionOverview";
+import SustainView from "../pages/sustainable/SustainView";
 
 /**
  * Component that defines all the routes for the website
@@ -59,6 +60,9 @@ const GreenInsightRoute = () => {
           />
 
           <Route path="/carrier" element={<Vendor />} />
+
+          {/* SustainView route */} 
+          <Route path="/sustainable" element={<SustainView />} />
         </Route>
 
         {/* ErrorPage route */}
