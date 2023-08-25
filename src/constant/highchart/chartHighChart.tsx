@@ -10,3 +10,5 @@ const ChartHighChart: React.FC<ChartProps> = ({ options }) => {
   return <HighchartsReact highcharts={Highcharts} options={options} />;
 };
 export default ChartHighChart;
+
+
