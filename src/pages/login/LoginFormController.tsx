@@ -63,6 +63,7 @@ const LoginFormController = () => {
 
     // If otp gets verified, redirects to dashboard
     useEffect(() => {
+        console.log(" ataCheck?.userdata ",dataCheck?.userdata);
         if (otpSuccess && dataCheck?.loggedIn) {
             setShow(false)
             if(dataCheck?.userdata?.role === 1){
@@ -72,9 +73,9 @@ const LoginFormController = () => {
             }
         }
         if (isSuccess && !isOtp && dataCheck?.loggedIn) {
-            if(dataCheck?.userdata?.user?.role === 1){
+            if(dataCheck?.userdata?.role === 1){
                 navigate("/dashboard");
-            }else if(dataCheck?.userdata?.user?.role === 3){
+            }else if(dataCheck?.userdata?.role === 3){
                 navigate("/sustainable");
             }
         }

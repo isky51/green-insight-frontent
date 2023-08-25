@@ -46,7 +46,7 @@ export const lineChart  = (props: any)=> {
             return true
        })
     }
-    const option = {
+    const optionRegional = {
         credits: {
             enabled: false
         },
@@ -207,5 +207,5 @@ export const lineChart  = (props: any)=> {
             }]
         },
     };
-    return option
+    return props.chart === "emissionReduction"? optionRegional : ""
 }
