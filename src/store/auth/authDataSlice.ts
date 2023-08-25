@@ -105,7 +105,7 @@ export const authDataReducer = createSlice({
             .addCase(loginPost.fulfilled, (state: any, action: any) => {
                 state.isAuthLoginLoading = false;
                 state.isSuccess = true;
-                state.isOtp = action.payload.otp || false
+                state.isOtp = action.payload.data.otp || false
                 state.loginDetails = action.payload;
             })
             .addCase(loginPost.rejected, (state: any) => {
