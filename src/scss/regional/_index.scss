@@ -5,6 +5,7 @@
     .region-screen-wraper {
         .region-heading {
             background-color: $gray-200;
+            border-radius: 8px;
         }
 
         .region-section {
@@ -20,11 +21,42 @@
                             font-size: 14px;
                         }
                     }
-                }
-
-               
+                }               
             }
         }
+
+        .static-table{
+            th {
+                @media (max-width:1300px) {
+                    font-size: 10px;
+                }
+            }
+        
+            td {
+                @media (max-width:1300px) {
+                    font-size: 12px;
+                }
+            }
+        
+            th:last-child,
+            td:last-child {
+                width: auto;
+        
+            }
+        
+            .fs-10 {
+                @media (max-width:1300px) {
+                    font-size: 9px;
+                }
+            }
+        
+            span {
+                img {
+                    width: 18px;
+                }
+            }
+        }
+        
     }
 }
 

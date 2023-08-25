@@ -5,7 +5,7 @@ import LatestUpdate from "../assets/images/components/latest-update.svg";
 export default function DateTimeShow() {
     return (
         // Paragraph to display the last update date and time
-        <p className=" font-12 d-flex align-items-center justify-content-end">
+        <p className=" font-12 mb-1 d-flex align-items-center justify-content-end">
             {/* Display the last updated time in "hh:mm A" format */}
             Last updated at {moment().format("hh:mm A")} on{" "}
             {/* Display the last updated date in "DD MMM YY" format */}
