@@ -1,6 +1,3 @@
-import React, { useEffect, useState } from "react";
-// import "../lanes-overview/lanes-overview.scss";
-// import "../region-overview/region-overview.scss";
 import Back from "../../assets/images/common/back.svg";
 import Up from "../../assets/images/common/up.svg";
 import Garrow from "../../assets/images/common/g-arrow.svg";
@@ -14,13 +11,12 @@ import {
     Input,
 } from 'reactstrap';
 import { Link } from "react-router-dom";
-// import ChartsHigh from "../../component/ChartsHigh";
-// import RegionLevelHighChart from "../regional-level/RegionLevelHighChart";
-
+import ChartHighChart from "../../constant/highchart/chartHighChart";
+import { columnChart } from "../../constant/highchart/columnChart";
 import DateTimeShow from "../../component/DateTimeShow";
-import RegionOverviewController from "./RegionOverviewController";
 import { getQuarterYear, isCompanyEnable, yearList } from "../../constant";
 import TitleComponent from "../../component/tittle";
+import RegionOverviewController from "./RegionOverviewController";
 
 const RegionOverview = () => {
     // Importing all states and functions from Region Overview Controller
@@ -192,8 +188,6 @@ const RegionOverview = () => {
                                                 </button>}
                                             </div>
                                             <div className="emi-inten">
-
-
                                                 <h6 className="datafrom-txt mb-2">
                                                     Emissions of {`${params?.regionId} Region`} for {regionLevelGlideData?.data?.year[0]} - {regionLevelGlideData?.data?.year[1]}
                                                 </h6>

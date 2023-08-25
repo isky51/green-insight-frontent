@@ -14,12 +14,11 @@ const InterceptorApi = (store: any) => {
     axios.interceptors.response.use(response => {
         if (response?.data) {
 
-            let bytes = CryptoJS.AES.decrypt(response?.data, process.env.REACT_APP_EN_KEY);
+            let bytes = CryptoJS.AES.decrypt(response?.data?.data, process.env.REACT_APP_EN_KEY);
 
             let decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
-            return { ...response, data:  decryptedData  };
-
+            return { ...response, data: { ...response.data, data: decryptedData } };
         } else {
 
             return response
