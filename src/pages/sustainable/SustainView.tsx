@@ -344,7 +344,7 @@ const SustainView = () => {
 
                         // />
                         <ChartHighChart
-                          options={pieChart(
+                          options={lineChart(
                             {
                               isLoading:isLoading,
                               options:regionEmission?.data,

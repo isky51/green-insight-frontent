@@ -37,7 +37,7 @@ const postRegionIntensity = async (userData: any, token: { headers: { Authorizat
 const getRegions = async (token: { headers: { Authorization: string; }; }) => {
     try {
         const response = await axios.get(
-            baseURL1 + "get-regions", token
+            baseURL1 + "get-regions",token
         );
         return response?.data;
     } catch (error) {
