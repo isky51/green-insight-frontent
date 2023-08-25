@@ -1,33 +1,38 @@
 import TitleComponent from "../../component/tittle";
-import RegionalController from './RegionalController';
+import RegionalController from "./RegionalController";
 import "../../scss/regional/regional.scss";
 import Back from "../../assets/images/common/back.svg";
-import Form from 'react-bootstrap/Form';
+import Form from "react-bootstrap/Form";
 import { FormGroup, Row, Col, Input, Table } from "reactstrap";
 import { Link } from "react-router-dom";
 import DateTimeShow from "../../component/DateTimeShow";
 import ExportButton from "../../component/export-button";
-import { getQuarterName, getQuarters, sortIcon, yearList } from "../../constant";
+import {
+  getQuarterName,
+  getQuarters,
+  sortIcon,
+  yearList,
+} from "../../constant";
+import ChartHighChart from "../../constant/highchart/chartHighChart";
+import { columnChart } from "../../constant/highchart/columnChart";
 // import ChartsHigh from "../../component/ChartsHigh";
 
-
 /**
- * 
+ *
  * @returns Regional view page
  */
 
 const RegionalView = () => {
-
   // Importing all states and functions from Region Controller
   const {
     quarterDetails,
     yearlyData,
     emissionDates,
-    order, 
+    order,
     col_name,
-    checked, 
-    regionTableDetails, 
-    regionGraphDetails, 
+    checked,
+    regionTableDetails,
+    regionGraphDetails,
     regionGraphDetailsLoading,
     regionPageArr,
     navigate,
@@ -35,8 +40,8 @@ const RegionalView = () => {
     setYearlyData,
     setQuarterDetails,
     setRelaodData,
-    handleChangeOrder
-  } = RegionalController()
+    handleChangeOrder,
+  } = RegionalController();
 
   return (
     <>
@@ -51,11 +56,11 @@ const RegionalView = () => {
                 <Col lg="12">
                   <div className="regional-heading pb-3">
                     <div className="d-flex justify-content-between align-items-center">
-                      <div
-
-                        className="small-font"
-                      >
-                        <Link to="/sustainable" className="d-flex align-items-center color-primary">
+                      <div className="small-font">
+                        <Link
+                          to="/sustainable"
+                          className="d-flex align-items-center color-primary"
+                        >
                           <span className="pe-2">
                             <img src={Back} alt="icon" />
                           </span>
@@ -67,7 +72,9 @@ const RegionalView = () => {
                       </div>
                     </div>
                     <div className="heading py-3 pt-1">
-                      <h2 className="mb-0 fs-3">Regional Emissions Comparison</h2>
+                      <h2 className="mb-0 fs-3">
+                        Regional Emissions Comparison
+                      </h2>
                     </div>
                     <Row className="align-items-center">
                       <Col lg="9" md="6">
@@ -80,15 +87,17 @@ const RegionalView = () => {
                               value={yearlyData}
                               onChange={(e) => {
                                 setYearlyData(e.target.value);
-                                setQuarterDetails(1)
+                                setQuarterDetails(1);
                                 setRelaodData(false);
                               }}
                             >
-                              {yearList(emissionDates?.data?.emission_dates).map((x, index) => (
-                                <option value={x} key={index} >
+                              {yearList(
+                                emissionDates?.data?.emission_dates
+                              ).map((x, index) => (
+                                <option value={x} key={index}>
                                   {x}
                                 </option>
-                              ))} 
+                              ))}
                             </Input>
                             <Input
                               id="exampleSelect"
@@ -101,21 +110,19 @@ const RegionalView = () => {
                                 setRelaodData(false);
                               }}
                             >
-                              {getQuarters(yearlyData).map(i => (
-                                <option key={i?.value} value={i?.value}>{i?.name}</option>
-                             ))}
-
+                              {getQuarters(yearlyData).map((i) => (
+                                <option key={i?.value} value={i?.value}>
+                                  {i?.name}
+                                </option>
+                              ))}
                             </Input>
-
                           </FormGroup>
                         </div>
                       </Col>
 
                       <Col lg="3" md="6">
                         <div className="dropdown-comp d-flex justify-content-between align-items-center">
-                          <FormGroup className="select-box d-flex">
-
-                          </FormGroup>
+                          <FormGroup className="select-box d-flex"></FormGroup>
                           <ExportButton />
                         </div>
                       </Col>
@@ -129,16 +136,19 @@ const RegionalView = () => {
                   <div className="inner-data-region region-graph-outer mt-3 h-100">
                     <div className=" p-3 px-2">
                       <h6 className="datafrom-txt mb-3">
-                        Region-Wise <span>{checked ? "Total Emissions" : "Emissions Intensity"}</span> for {getQuarterName(quarterDetails, yearlyData)} {yearlyData}
+                        Region-Wise{" "}
+                        <span>
+                          {checked ? "Total Emissions" : "Emissions Intensity"}
+                        </span>{" "}
+                        for {getQuarterName(quarterDetails, yearlyData)}{" "}
+                        {yearlyData}
                       </h6>
                       <div className="emi-inten d-flex justify-content-between pb-5">
-
                         <div className="d-flex align-items-center">
                           <h6 className="mb-0 fw-semibold text-capitalize fs-14">
                             Emissions intensity
                           </h6>
                           <div className="toggle-switch">
-
                             <Form>
                               <Form.Check
                                 type="switch"
@@ -163,15 +173,16 @@ const RegionalView = () => {
                         </div>
                       </div>
                       <div className="avg-region text-center x-axis-hide">
-                       {regionGraphDetails?.data?.average && <h6>
-                          Average of all regions (
-                          {regionGraphDetails?.data?.average?.toLocaleString(
-                            "en-US",
-                            { minimumFractionDigits: 1 }
-                          )}{" "}
-
-                          {regionGraphDetails?.data?.unit})
-                        </h6>}
+                        {regionGraphDetails?.data?.average && (
+                          <h6>
+                            Average of all regions (
+                            {regionGraphDetails?.data?.average?.toLocaleString(
+                              "en-US",
+                              { minimumFractionDigits: 1 }
+                            )}{" "}
+                            {regionGraphDetails?.data?.unit})
+                          </h6>
+                        )}
                         {/* <div className="region-namevalues">
                           {regionPageArr?.map(i => (
                             <h6 className="region-name">
@@ -181,26 +192,26 @@ const RegionalView = () => {
                         </div> */}
                         <div className="avg-img region-avg-img">
                           {
-                            regionGraphDetailsLoading ? <div className="graph-loader">
-
-                              <div className="spinner-border  spinner-ui" role="status">
-                                <span className="visually-hidden"></span>
+                            regionGraphDetailsLoading ? (
+                              <div className="graph-loader">
+                                <div
+                                  className="spinner-border  spinner-ui"
+                                  role="status"
+                                >
+                                  <span className="visually-hidden"></span>
+                                </div>
                               </div>
-                            </div>
-                              : ""
+                            ) : (
                               // regionPageArr?.length > 0 && (
-                              //   <ChartsHigh
-                              //     chart={"region"}
-                              //     isLoading={true}
-                              //     regionPageArr={regionPageArr}
-                              //     regionPagecontributor={[]}
-                              //     regionPagedetractor={[]}
-                              //     reloadData={relaodData}
-                              //     unitDto={regionGraphDetails?.data?.unit}
-
-                              //   />
-                              // )
-                              }
+                              <ChartHighChart
+                                options={columnChart(
+                                  regionGraphDetails?.data?.unit,
+                                  regionPageArr
+                                )}
+                              />
+                            )
+                            // )
+                          }
                         </div>
                       </div>
                     </div>
@@ -211,20 +222,31 @@ const RegionalView = () => {
                   <div className="table-region h-100 mt-lg-3 mt-5">
                     <div className=" py-3 px-2 pb-0">
                       <h6 className="datafrom-txt mb-3">
-                        Region-Wise <span>{checked ? "Total Emissions" : "Emissions Intensity"}</span> for {getQuarterName(quarterDetails, yearlyData)} {yearlyData}
+                        Region-Wise{" "}
+                        <span>
+                          {checked ? "Total Emissions" : "Emissions Intensity"}
+                        </span>{" "}
+                        for {getQuarterName(quarterDetails, yearlyData)}{" "}
+                        {yearlyData}
                       </h6>
                       <div className="d-md-flex">
                         <div className="d-flex align-items-center ">
                           <div className="green-div"></div>
-                          <h6 className="mb-0 ps-2 performance">High Performance</h6>
+                          <h6 className="mb-0 ps-2 performance">
+                            High Performance
+                          </h6>
                         </div>
                         <div className="d-flex align-items-center ps-0 ps-md-4">
                           <div className="white-div"></div>
-                          <h6 className="mb-0 ps-2 performance">Medium Performance</h6>
+                          <h6 className="mb-0 ps-2 performance">
+                            Medium Performance
+                          </h6>
                         </div>
                         <div className="d-flex align-items-center ps-0 ps-md-4">
                           <div className="red-div"></div>
-                          <h6 className="mb-0 ps-2 performance">Low Performance</h6>
+                          <h6 className="mb-0 ps-2 performance">
+                            Low Performance
+                          </h6>
                         </div>
                       </div>
                       {/* <Table responsive className="mt-3 mb-0 vendor-table facility-table">
@@ -319,33 +341,73 @@ const RegionalView = () => {
                                   <th>
                                     <div className="d-flex align-items-center">
                                       Regions
-
                                     </div>
                                   </th>
 
                                   <th>
-                                    <div className="d-flex align-items-center text-capitalize pointer" onClick={() => handleChangeOrder("intensity")}>
+                                    <div
+                                      className="d-flex align-items-center text-capitalize pointer"
+                                      onClick={() =>
+                                        handleChangeOrder("intensity")
+                                      }
+                                    >
                                       Emissions intensity
-                                      <span ><img className="pointer" src={sortIcon("intensity", col_name, order)} alt="ico" /></span> 
-
-
+                                      <span>
+                                        <img
+                                          className="pointer"
+                                          src={sortIcon(
+                                            "intensity",
+                                            col_name,
+                                            order
+                                          )}
+                                          alt="ico"
+                                        />
+                                      </span>
                                     </div>
                                     <h6 className="fs-10">
                                       gCO2e/Ton-Mile
                                       <br /> of freight
                                     </h6>
                                   </th>
-                                  <th className="pointer" onClick={() => handleChangeOrder("shipments")}>
+                                  <th
+                                    className="pointer"
+                                    onClick={() =>
+                                      handleChangeOrder("shipments")
+                                    }
+                                  >
                                     Total Shipments
-                                    <span ><img className="pointer" src={sortIcon("shipments", col_name, order)} alt="ico" /></span>
+                                    <span>
+                                      <img
+                                        className="pointer"
+                                        src={sortIcon(
+                                          "shipments",
+                                          col_name,
+                                          order
+                                        )}
+                                        alt="ico"
+                                      />
+                                    </span>
                                   </th>
-                                  <th className="pointer" onClick={() => handleChangeOrder("emission")}>
+                                  <th
+                                    className="pointer"
+                                    onClick={() =>
+                                      handleChangeOrder("emission")
+                                    }
+                                  >
                                     Total Emissions
-                                    <span ><img className="pointer" src={sortIcon("emission", col_name, order)} alt="ico" /></span>
-
+                                    <span>
+                                      <img
+                                        className="pointer"
+                                        src={sortIcon(
+                                          "emission",
+                                          col_name,
+                                          order
+                                        )}
+                                        alt="ico"
+                                      />
+                                    </span>
                                     <h6 className="fs-10">tCo2e</h6>
                                   </th>
-
 
                                   {/* <th></th> */}
                                 </tr>
@@ -355,8 +417,16 @@ const RegionalView = () => {
                           <div className="tWrap__body">
                             <table>
                               <tbody className=" text-left ">
-                                {regionTableDetails?.data?.map((row:any) => (
-                                  <tr onClick={() => navigate(`/region-overview/${row?.["Region.name"]}`)} key={row?.["Region.name"]} className="m-cursor">
+                                {regionTableDetails?.data?.map((row: any) => (
+                                  <tr
+                                    onClick={() =>
+                                      navigate(
+                                        `/region-overview/${row?.["Region.name"]}`
+                                      )
+                                    }
+                                    key={row?.["Region.name"]}
+                                    className="m-cursor"
+                                  >
                                     <td>{row?.["Region.name"]}</td>
 
                                     <td>
@@ -364,7 +434,8 @@ const RegionalView = () => {
                                         <div
                                           className="red-div me-2"
                                           style={{
-                                            backgroundColor: row?.intensity?.color,
+                                            backgroundColor:
+                                              row?.intensity?.color,
                                           }}
                                         ></div>
                                         {Number.parseFloat(
@@ -392,8 +463,6 @@ const RegionalView = () => {
                                         })}
                                       </div>
                                     </td>
-
-            
                                   </tr>
                                 ))}
                               </tbody>
@@ -421,9 +490,8 @@ const RegionalView = () => {
         </div>
       </section>
       {/* Carrier View ends */}
-
     </>
-  )
-}
+  );
+};
 
-export default RegionalView
+export default RegionalView;

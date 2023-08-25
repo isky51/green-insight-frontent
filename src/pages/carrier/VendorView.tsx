@@ -297,17 +297,6 @@ export default function CarrierVendorView() {
                         </div>
                       </div>
                     </div>
-
-                    {/* <BubbleHighChart
-                          relaodData={relaodData}
-                          chart={"vendor"}
-                          options={
-                            vendorGraphDetails?.data
-                              ? vendorGraphDetails?.data?.responseData
-                              : []
-                          }
-                        /> */}
-
                     {vendorGraphDetails?.data && (
                       <ChartHighChart
                         options={bubbleChart(

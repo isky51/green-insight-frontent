@@ -1,6 +1,5 @@
 
 export default function bubbleChart(props: any) {
-    console.log(props, "prop")
     let bubbleArr: any = []
     props?.map((x: any) =>
         bubbleArr.push({ color: x.color, name: x.name, x: x.x, y: x.y, z: Number(x.z), fillColor: x.color })
@@ -28,7 +27,6 @@ export default function bubbleChart(props: any) {
             },
             plotLines: [{
                 color: 'transparent',
-                // dashStyle: 'dot',
                 width: 2,
 
                 label: {
@@ -65,41 +63,38 @@ export default function bubbleChart(props: any) {
                     return String(valueAsNumber); // Convert back to string
                 }
             },
-            plotLines: [{
-                color: 'transparent',
-                // dashStyle: 'dot',
-                width: 2,
-                value: 800,
-
-                label: {
-                    rotation: 0,
-                    y: 180,
-                    x: 870,
-                    style: {
-                        fontWeight: "bold",
+            plotLines: [
+                {
+                    color: 'transparent',
+                    width: 2,
+                    value: 800,
+                    label: {
+                        rotation: 0,
+                        y: 180,
+                        x: 870,
+                        style: {
+                            fontWeight: "bold",
+                        },
+                        text: 'Ton Miles of Fright'
                     },
-                    text: 'Ton Miles of Fright'
-                },
-                zIndex: 3
-            }, {
-                // dashStyle: 'dot',
-                color: '#215154',
-                width: 2,
-                value: 1500,
-                zIndex: 10,
-                label: {
-                    text: 'Emissions <br />Intensity <br /> gCO2e ton-mile',
-                    align: 'left',
-                    x: 10,
-                    y: -20,
-                    useHTML: true,
-                    style: {
-                        fontSize: "14px",
-                        color: '#215154'
+                    zIndex: 3
+                }, {
+                    color: '#215154',
+                    width: 2,
+                    value: 1500,
+                    zIndex: 10,
+                    label: {
+                        text: 'Emissions <br />Intensity <br /> gCO2e ton-mile',
+                        align: 'left',
+                        x: 10,
+                        y: -20,
+                        useHTML: true,
+                        style: {
+                            fontSize: "14px",
+                            color: '#215154'
+                        }
                     }
-                }
-            }],
-
+                }],
         },
         tooltip: {
             useHTML: true,
@@ -109,7 +104,6 @@ export default function bubbleChart(props: any) {
             series: {
                 marker: {
                     fillOpacity: 1,
-                    // fillColor: '#FFFFFF',
                     lineWidth: 0,
                     lineColor: "" // inherit from series
                 },
@@ -121,15 +115,9 @@ export default function bubbleChart(props: any) {
                 }
             }
         },
-
-        // { x: 95, y: 95, z: 13.8, name: 'BE', country: 'Belgium' },
-        // { x: 86.5, y: 102.9, z: 14.7, name: 'DE', country: 'Germany' },
-        // { x: 80.8, y: 91.5, z: 15.8, name: 'FI', country: 'Finland' },
-
         series: [{
             type: 'bubble',
             data: bubbleArr,
-            // colorByPoint: true
         }]
     }
     return bubbleOption
