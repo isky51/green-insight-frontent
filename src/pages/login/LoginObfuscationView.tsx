@@ -7,13 +7,11 @@ import TitleComponent from "../../component/tittle";
 import { Modal, Button } from "react-bootstrap";
 import LoginFormController from "./LoginFormController";
 import OtpInput from 'react-otp-input';
-import Lottie from "react-lottie-player";
-import lottieJson from "./USA_Map.json";
 /**
  * 
- * @returns LoginView Component
+ * @returns LoginObfuscationView Component
  */
-const LoginView: React.FC = () => {
+const LoginObfuscationView: React.FC = () => {
 
     // imported functions and variables from LoginController
     const {
@@ -47,14 +45,9 @@ const LoginView: React.FC = () => {
                                     <img src={GreensightLogo} alt="logo" />
                                 </div>
                                 <div className="login-map text-center px-4">
-                                    <Lottie
-                                        loop
-                                        animationData={lottieJson}
-                                        play
-                                        style={{ background: "transparent" }}
-                                    />
                                     <h4 className="login-heading font-xxl-70 font-xl-45 font-45 fw-bold mb-0">
-                                       GreenSight
+                                        Data Obfuscation
+                                        Services Portal
                                     </h4>
                                 </div>
                             </div>
@@ -136,7 +129,7 @@ const LoginView: React.FC = () => {
 
                                     {/* Modal start for OTP verification*/}
                                     <div className="valid-otp-wrap">
-                                        <Modal show={show} className="modalLogin" onHide={handleClose} data-testid="authentication-modal">
+                                        <Modal show={show} className="modalLogin" onHide={handleClose}  data-testid="authentication-modal">
                                             <Modal.Header closeButton className="border-modal-login pb-2 pt-4 px-4 mx-2">
                                                 <h3 className=" font-22 mb-0 fw-semibold">
                                                     Authentication
@@ -380,4 +373,4 @@ const LoginView: React.FC = () => {
     );
 }
 
-export default LoginView
+export default LoginObfuscationView
