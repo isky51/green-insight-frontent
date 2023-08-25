@@ -1,9 +1,12 @@
-import Password from "../../assets/images/login/password.svg"
-import UserEmail from "../../assets/images/login/useremail.svg"
+import EyeOpen from '../../assets/images/login/eyeopen.svg';
+import EyeClosed from "../../assets/images/login/eyeclosed.svg";
+import UserEmail from "../../assets/images/login/useremail.svg";
+import Successful from "../../assets/images/login/successful.svg";
+import GreensightLogo from "../../assets/images/login/greensightLogo.svg";
 import TitleComponent from "../../component/tittle";
 import { Modal, Button } from "react-bootstrap";
 import LoginFormController from "./LoginFormController";
-import GreensightLogo from "../../assets/images/login/greensightLogo.svg"
+import OtpInput from 'react-otp-input';
 
 /**
  * 
@@ -11,7 +14,7 @@ import GreensightLogo from "../../assets/images/login/greensightLogo.svg"
  */
 const LoginView: React.FC = () => {
 
-    // Imported functions and variables from LoginController
+    // imported functions and variables from LoginController
     const {
         formik,
         show,
@@ -33,7 +36,7 @@ const LoginView: React.FC = () => {
             <TitleComponent title={"Login"} />
             {/* login page start */}
 
-            <section className="login" data-testid="login">
+            <section className="login bg-white" data-testid="login">
                 <div className="container-fluid px-0">
                     <div className="row gx-0 align-items-center ">
                         {/* left side content start */}
@@ -77,7 +80,7 @@ const LoginView: React.FC = () => {
                                                 <img src={UserEmail} alt="user email" />
                                             </div>
                                             {formik.touched.email && formik.errors.email ? (
-                                                <span data-testid="email-error"  className="error-code text-danger font-16">
+                                                <span data-testid="email-error" className="error-code text-danger font-16">
                                                     {formik.errors.email}
                                                 </span>
                                             ) : null}
@@ -95,10 +98,10 @@ const LoginView: React.FC = () => {
                                                     placeholder="Enter your password"
                                                 />
 
-                                                <img src={Password} alt="password" />
+                                                <img src={EyeOpen} alt="Eyeopen icon" />
                                             </div>
                                             {formik.touched.password && formik.errors.password ? (
-                                                <span data-testid="password-error" className="error-code text-danger font-16">
+                                                <span data-testid="email-error" className="error-code text-danger font-16">
                                                     {formik.errors.password}
                                                 </span>
                                             ) : null}
@@ -118,57 +121,248 @@ const LoginView: React.FC = () => {
                                             Remember Me
                                         </label>
                                     </div>
-                                    <button onClick={() => formik.handleSubmit()} disabled={isAuthLoginLoading} type="button" data-testid="login_btn" className="btn btn-deepgreen w-100 mb-md-0 mb-4">
+                                    <button onClick={() => formik.handleSubmit()} disabled={isAuthLoginLoading} type="button" data-testid="email-error" className="btn btn-deepgreen w-100 mb-md-0 mb-4">
 
                                         {isAuthLoginLoading ? <div className="spinner-border" role="status">
                                             <span className="visually-hidden">Loading...</span>
                                         </div> : 'Login'}
                                     </button>
 
+                                    {/* Modal start for OTP verification*/}
                                     <div className="valid-otp-wrap">
-                                        {/* Modal start for OTP verification*/}
-                                        <Modal show={show} className="modalLogin" onHide={handleClose} data-testid="authentication-modal">
-                                            <Modal.Header closeButton className="border-modal-login pb-4">
-                                            </Modal.Header>
-                                            <Modal.Body className="py-0 px-4 mx-4">
-                                                <h3 className="authentication-txt text-center font-22">
-                                                    Enter the authentication code
+                                        <Modal show={show} className="modalLogin" onHide={handleClose}  data-testid="authentication-modal">
+                                            <Modal.Header closeButton className="border-modal-login pb-2 pt-4 px-4 mx-2">
+                                                <h3 className=" font-22 mb-0 fw-semibold">
+                                                    Authentication
                                                 </h3>
+                                            </Modal.Header>
+                                            <Modal.Body className="py-0 px-4 mx-2">
+                                                <div className="authentication-txt">
+
+                                                    <p className="mb-0 font-16">Enter the 6 digits code that you have received on your registered contact number.</p>
+                                                </div>
+
                                                 {" "}
-                                                <input
-                                                    id="otp"
-                                                    name="otp"
-                                                    className="form-control"
-                                                    placeholder=" Enter the authentication code"
-                                                    type="text"
-                                                    maxLength={6}
-                                                    value={otpNumber}
-                                                    onChange={(e) => {
-                                                        setOtpNumber(e.target.value);
-                                                        setOtpErrorShow(false);
-                                                    }}
-                                                />
+                                                <div className="inputotp">
+                                                    <OtpInput
+                                                        value={otpNumber}
+                                                        numInputs={6}
+                                                        onChange={setOtpNumber}
+                                                        renderInput={(props) => <input {...props} />
+                                                        }
+                                                    />
+                                                </div>
                                                 {otpErrorShow && (
                                                     <h6 className="error-code text-danger ps-0 pt-2">
                                                         Please enter the authentication code
                                                     </h6>
                                                 )}
-                                                <div className="border-bottom-modal mb-4">
+                                                <div className="border-bottom-modal mb-4 pb-2">
                                                     <Button
                                                         type="submit"
                                                         onClick={() => handleSubmitOtp()}
-                                                        className="btn btn-deepgreen"
+                                                        className="btn btn-deepgreen fs-6"
                                                         disabled={isOtpVerifyLoading}
                                                     >
                                                         {isOtpVerifyLoading ? <div className="spinner-border" role="status">
                                                             <span className="visually-hidden">Loading...</span>
-                                                        </div> : 'Submit'}
+                                                        </div> : 'Continue'}
+                                                    </Button>
+                                                    <div className="recieveCode mt-3 d-flex justify-content-center align-items-center">
+                                                        <p className="mb-0">Didn't recieve a code? </p><button className="fw-semibold">Resend Code in (00:30)</button>
+                                                    </div>
+                                                </div>
+                                            </Modal.Body>
+                                        </Modal>
+                                    </div>
+                                    {/*  Modal end*/}
+
+                                    {/* Modal start for Reset Password */}
+                                    <div>
+                                        <Modal show={false} className="modalLogin" onHide={handleClose}>
+                                            <Modal.Header closeButton className="border-modal-login align-items-center pb-2 pt-4  px-4 mx-2">
+                                                <h3 className=" font-22 mb-0 fw-semibold">
+                                                    Reset Password
+                                                </h3>
+                                            </Modal.Header>
+                                            <Modal.Body className="py-0 px-4 mx-2">
+                                                <div className="authentication-txt">
+                                                    <p className="mb-0 font-16">Enter your registered email, we will send you an email with verification code to reset your password.</p>
+                                                </div>
+
+                                                {" "}
+                                                <div className="mail">
+                                                    <label className="font-xxl-20 font-18 mb-2">Enter email</label>
+                                                    <div className="position-relative">
+                                                        <input
+                                                            type="text"
+                                                            name="email"
+                                                            className="form-control py-3"
+                                                            onChange={(e) => {
+                                                                formik.handleChange(e);
+                                                                setEmail1(e.target.value);
+                                                            }}
+                                                            value={formik.values.email}
+                                                            aria-describedby="emailHelp"
+                                                            placeholder="Enter your email"
+                                                        />
+                                                        <img src={UserEmail} alt="user email" />
+                                                    </div>
+                                                </div>
+                                                <div className="border-bottom-modal mb-4 pb-2">
+                                                    <Button
+                                                        type="submit"
+                                                        onClick={() => handleSubmitOtp()}
+                                                        className="btn btn-deepgreen fs-6"
+                                                        disabled={isOtpVerifyLoading}
+                                                    >
+                                                        {isOtpVerifyLoading ? <div className="spinner-border" role="status">
+                                                            <span className="visually-hidden">Loading...</span>
+                                                        </div> : 'Continue'}
                                                     </Button>
                                                 </div>
                                             </Modal.Body>
                                         </Modal>
-                                        {/*  Modal end*/}
                                     </div>
+                                    {/*  Modal ends for Reset Password  */}
+
+                                    {/* Modal start for Verification */}
+                                    <div>
+                                        <Modal show={false} className="modalLogin" onHide={handleClose}>
+                                            <Modal.Header closeButton className="border-modal-login align-items-center pb-2 pt-4  px-4 mx-2">
+                                                <h3 className=" font-22 mb-0 fw-semibold">
+                                                    Verification
+                                                </h3>
+                                            </Modal.Header>
+                                            <Modal.Body className="py-0 px-4 mx-2">
+                                                <div className="authentication-txt">
+                                                    <p className="mb-0 font-16">Enter your 6 digits code that you received on your email.</p>
+                                                </div>
+
+                                                {" "}
+                                                <div className="inputotp">
+                                                    <OtpInput
+                                                        value={otpNumber}
+                                                        numInputs={6}
+                                                        onChange={setOtpNumber}
+                                                        renderInput={(props) => <input {...props} />
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="border-bottom-modal mb-4 pb-2">
+                                                    <Button
+                                                        type="submit"
+                                                        onClick={() => handleSubmitOtp()}
+                                                        className="btn btn-deepgreen fs-6"
+                                                        disabled={isOtpVerifyLoading}
+                                                    >
+                                                        {isOtpVerifyLoading ? <div className="spinner-border" role="status">
+                                                            <span className="visually-hidden">Loading...</span>
+                                                        </div> : 'Continue'}
+                                                    </Button>
+                                                    <div className="recieveCode mt-3 d-flex justify-content-center align-items-center">
+                                                        <p className="mb-0">Didn't recieve a code? </p><button className="fw-semibold">Resend Code</button>
+                                                    </div>
+                                                </div>
+                                            </Modal.Body>
+                                        </Modal>
+                                    </div>
+                                    {/*  Modal ends for Verification  */}
+
+                                    {/* Modal start for New Password */}
+                                    <div>
+                                        <Modal show={false} className="modalLogin" onHide={handleClose}>
+                                            <Modal.Header closeButton className="border-modal-login align-items-center pb-2 pt-4  px-4 mx-2">
+                                                <h3 className=" font-22 mb-0 fw-semibold">
+                                                    New Password
+                                                </h3>
+                                            </Modal.Header>
+                                            <Modal.Body className="py-0 px-4 mx-2">
+                                                <div className="authentication-txt">
+                                                    <p className="mb-0 font-16">Set the new password for your account so you can login and access all features.</p>
+                                                </div>
+
+                                                {" "}
+                                                <div className="mail mb-4">
+                                                    <label className="font-xxl-20 font-18 mb-2">Enter New Password</label>
+                                                    <div className="position-relative">
+                                                        <input
+                                                            type="password"
+                                                            name="password"
+                                                            className="form-control py-3"
+                                                            onChange={(e) => {
+                                                                formik.handleChange(e);
+                                                                setEmail1(e.target.value);
+                                                            }}
+                                                            value={formik.values.password}
+                                                            placeholder="Type Password"
+                                                        />
+                                                        <img src={EyeOpen} alt="eyeopen icon" />
+                                                    </div>
+                                                </div>
+                                                <div className="mail">
+                                                    <label className="font-xxl-20 font-18 mb-2">Confirm Password</label>
+                                                    <div className="position-relative">
+                                                        <input
+                                                            type="password"
+                                                            name="password"
+                                                            className="form-control py-3"
+                                                            onChange={(e) => {
+                                                                formik.handleChange(e);
+                                                                setEmail1(e.target.value);
+                                                            }}
+                                                            value={formik.values.password}
+                                                            placeholder="Retype Password"
+                                                        />
+                                                        <img src={EyeClosed} alt="eyeclosed icon" />
+                                                    </div>
+                                                </div>
+                                                <div className="border-bottom-modal mb-4 pb-2">
+                                                    <Button
+                                                        type="submit"
+                                                        onClick={() => handleSubmitOtp()}
+                                                        className="btn btn-deepgreen fs-6"
+                                                        disabled={isOtpVerifyLoading}
+                                                    >
+                                                        {isOtpVerifyLoading ? <div className="spinner-border" role="status">
+                                                            <span className="visually-hidden">Loading...</span>
+                                                        </div> : 'Update Password'}
+                                                    </Button>
+                                                </div>
+                                            </Modal.Body>
+                                        </Modal>
+                                    </div>
+                                    {/*  Modal ends for New Password  */}
+
+                                    {/* Modal start for Successful verification */}
+                                    <div>
+                                        <Modal show={false} className="modalLogin" onHide={handleClose}>
+                                            <Modal.Header closeButton className="border-modal-login align-items-center pb-2 pt-4 px-4 mx-2"></Modal.Header>
+                                            <Modal.Body className="py-0 px-4 mx-2">
+                                                <div className="authentication-txt text-center">
+                                                    <img src={Successful} alt="successful" className="mb-4" />
+                                                    <h4 className="mb-3 font-24 fw-semibold">Congratulations</h4>
+                                                    <p className="font-16 mb-0">Your password has been reset successfully</p>
+                                                </div>
+                                                {" "}
+
+                                                <div className="border-bottom-modal mb-4 pb-2">
+                                                    <Button
+                                                        type="submit"
+                                                        onClick={() => handleSubmitOtp()}
+                                                        className="btn btn-deepgreen fs-6"
+                                                        disabled={isOtpVerifyLoading}
+                                                    >
+                                                        {isOtpVerifyLoading ? <div className="spinner-border" role="status">
+                                                            <span className="visually-hidden">Loading...</span>
+                                                        </div> : 'Continue'}
+                                                    </Button>
+
+                                                </div>
+                                            </Modal.Body>
+                                        </Modal>
+                                    </div>
+                                    {/*  Modal ends for successful Verification  */}
                                 </form>
                             </div>
                         </div>

@@ -1,0 +1,34 @@
+@import "../config/variable";
+
+
+.region-screen{
+    .region-screen-wraper{
+        .region-heading{
+            background-color: $gray-200;
+        }
+        .region-section{
+            background: $white;
+            border-radius: 8px;
+            .mainGrayCards{
+                .regionWiseTxt{
+                    
+                }
+            }
+        }
+    }
+}
+
+
+
+.highcharts-point.highcharts-negative {
+    clip-path: inset(0px round 5px 5px 0px 0px);
+    -webkit-clip-path: inset(0px round 5px 5px 0px 0px);
+}
+.highcharts-point{
+    clip-path: inset(0% 0% -6px 0% round 6px);
+    -webkit-clip-path: inset(0% 0% -6px 0% round 6px);
+}
+.highcharts-axis-labels.highcharts-xaxis-labels text{
+    font-weight: 600 !important;
+    fill: #000 !important;
+}

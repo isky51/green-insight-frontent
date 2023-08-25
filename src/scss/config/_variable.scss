@@ -33,6 +33,7 @@ $secondary:     #5CB9BF !default;
 $success:       #42D494 !default;
 $warning:       #FFC107 !default;
 $danger:        #EB445A !default;
+$info:          #F7F7F9 !default;
 $light:         #F9F9F9 !default;
 $dark:          #181A1C !default;
 
@@ -76,7 +77,7 @@ $orange:  #D8856B !default;
 $yellow:  #FFCB77 !default;
 $green:   #5F9A80 !default;
 $seagreen:   #156064 !default;
-$lightgreen:   #C1D3C0 !default;
+$lightgreen:  #C1D3C0 !default;
 
 
 $colors: (
@@ -100,5 +101,25 @@ $md: 768px;
 $lg: 992px;
 $xl: 1200px;
 $xxl: 1367px;
+
+
+$font-size-base:              12px !default;
+$h1-font-size:                28px !default;
+$h2-font-size:                $font-size-base * 2 !default;
+$h3-font-size:                $font-size-base * 1.75 !default;
+$h4-font-size:                $font-size-base * 1.5 !default;
+$h5-font-size:                $font-size-base * 1.25 !default;
+$h6-font-size:                $font-size-base !default;
+// scss-docs-end font-variables
+
+// scss-docs-start font-sizes
+$font-sizes: (
+  1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+  5: $h5-font-size,
+  6: $h6-font-size
+) !default;
 
 
