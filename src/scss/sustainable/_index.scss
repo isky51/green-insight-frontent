@@ -4,11 +4,6 @@
     .substain-screen-wraper{
         .substain-heading{
             background-color: $gray-200;
-            .select-box{
-                .form-select{
-                    width: 152px;
-                }
-            }
         }
         .substain-section{
             background: $white;
@@ -32,6 +27,21 @@
                     font-size: 12px;
                     border-radius: 4px;
                 }
+            }
+            .co-txt{
+                h4{
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+                padding-top: 10px;
+                
+            }
+            .topSpace{
+                min-height: 34px;
+            }
+            h4{
+                font-size: 16px;
+                font-weight: 400;
             }
         }
     }
