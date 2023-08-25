@@ -19,6 +19,7 @@ import Form from "react-bootstrap/Form";
 import ChartHighChart from "../../constant/highchart/chartHighChart";
 import { lineChart } from "../../constant/highchart/lineChart";
 import { pieChart } from "../../constant/highchart/pieChart";
+import { verticalColumnChart } from "../../constant/highchart/verticalColumnChart";
 
 /**
  *
@@ -416,9 +417,26 @@ const SustainView = () => {
                           </div>
                         </div>
                       ) : (
-                        ""
+                      
+                        emissionIntensityDetails?.data?.length > 0 &&
+                        //  <ChartHighChart 
+                        //   isLoading={isLoading} 
+                        //   reloadData={relaodData} 
+                        //   chart={2} 
+                        //   options={emissionIntensityDetails?.data} 
+                        //   revenueType={revenueType} />
+
+                          <ChartHighChart
+                          options={verticalColumnChart(
+                            {
+                              isLoading:isLoading,
+                              options:emissionIntensityDetails?.data,
+                              chart:2
+                             
+                            }
+                          )}
+                        />
                       )
-                      //requried : emissionIntensityDetails?.data?.length > 0 && <ChartsHigh isLoading={isLoading} reloadData={relaodData} chart={2} options={emissionIntensityDetails?.data} revenueType={revenueType} />
                     }
                     {/* Bar element graph plot is here */}
                     {Math.round(
@@ -540,21 +558,21 @@ const SustainView = () => {
                       </div>
                     ) : (
                       graphRegionChart?.data && (
-                         <ChartHighChart
-                          options={lineChart(
-                            regionEmission?.data ? regionEmission?.data : []
+                        <ChartHighChart
+                          options={verticalColumnChart(
+                            {
+                              isLoading:isLoadingGraphRegionEmission,
+                              options:graphRegionChart?.data?.filter(
+                                    (i:any) =>
+                                      i.name !== "company_level" &&
+                                      i.name !== "target_level"
+                                  ),
+                              chart:4
+                             
+                            }
                           )}
                         />
-                        // <ChartsHigh
-                        //   isLoading={isLoadingGraphRegionEmission}
-                        //   reloadData={relaodData}
-                        //   options={graphRegionChart?.data?.filter(
-                        //     (i) =>
-                        //       i.name !== "company_level" &&
-                        //       i.name !== "target_level"
-                        //   )}
-                        //   chart={4}
-                        // />
+                       
                       )
                     )}
                   </div>
@@ -612,12 +630,23 @@ const SustainView = () => {
                   <Row className="align-items-center">
                     <Col xl="3" lg="6">
                       <div>
-                        {/* required {projectCountData?.data &&
+                         {projectCountData?.data &&
                                                     <Link to="/projects">
-                                                        <ChartsHigh isLoading={isLoading} reloadData={relaodData} chart={3} pieChartCount={Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")} />
+                                                      <ChartHighChart
+                                                        options={verticalColumnChart(
+                                                          {
+                                                            isLoading:isLoading,
+                                                            chart:3,
+                                                            pieChartCount:Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")
+                                                          
+                                                          }
+                                                        )}
+                                                      />
+                                                        {/* <ChartsHigh isLoading={isLoading} reloadData={relaodData} chart={3} pieChartCount={Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")} /> */}
                                                     </Link>
 
-                                                } */}
+                                                }
+                        
                         {/* <PieChart /> */}
                       </div>
                     </Col>
