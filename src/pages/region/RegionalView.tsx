@@ -3,7 +3,7 @@ import RegionalController from "./RegionalController";
 import "../../scss/regional/regional.scss";
 import Back from "../../assets/images/common/back.svg";
 import Form from "react-bootstrap/Form";
-import { FormGroup, Row, Col, Input, Table } from "reactstrap";
+import { FormGroup, Row, Col, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import DateTimeShow from "../../component/DateTimeShow";
 import ExportButton from "../../component/export-button";
@@ -15,7 +15,6 @@ import {
 } from "../../constant";
 import ChartHighChart from "../../constant/highchart/chartHighChart";
 import { columnChart } from "../../constant/highchart/columnChart";
-// import ChartsHigh from "../../component/ChartsHigh";
 
 /**
  *
@@ -183,13 +182,6 @@ const RegionalView = () => {
                             {regionGraphDetails?.data?.unit})
                           </h6>
                         )}
-                        {/* <div className="region-namevalues">
-                          {regionPageArr?.map(i => (
-                            <h6 className="region-name">
-                              {i?.name}
-                            </h6>
-                          ))}
-                        </div> */}
                         <div className="avg-img region-avg-img">
                           {
                             regionGraphDetailsLoading ? (
@@ -202,7 +194,7 @@ const RegionalView = () => {
                                 </div>
                               </div>
                             ) : (
-                              // regionPageArr?.length > 0 && (
+                              regionPageArr?.length > 0 && (
                               <ChartHighChart
                                 options={columnChart(
                                   regionGraphDetails?.data?.unit,
@@ -210,7 +202,7 @@ const RegionalView = () => {
                                 )}
                               />
                             )
-                            // )
+                            )
                           }
                         </div>
                       </div>
@@ -249,89 +241,6 @@ const RegionalView = () => {
                           </h6>
                         </div>
                       </div>
-                      {/* <Table responsive className="mt-3 mb-0 vendor-table facility-table">
-                        <thead>
-                          <tr>
-                            <th>
-                              <div className="d-flex align-items-center">
-                                Regions
-
-                              </div>
-                            </th>
-
-                            <th>
-                              <div className="d-flex align-items-center text-capitalize pointer" onClick={() => handleChangeOrder("intensity")}>
-                                Emissions intensity
-                                <span ><img className="pointer" src={sortIcon("intensity", col_name, order)} alt="ico" /></span>
-
-
-                              </div>
-                              <h6>
-                                gCO2e/Ton-Mile
-                                <br /> of freight
-                              </h6>
-                            </th>
-                            <th className="pointer" onClick={() => handleChangeOrder("shipments")}>
-                              Total Shipments
-                              <span ><img className="pointer" src={sortIcon("shipments", col_name, order)} alt="ico" /></span>
-                            </th>
-                            <th className="pointer" onClick={() => handleChangeOrder("emission")}>
-                              Total Emissions
-                              <span ><img className="pointer" src={sortIcon("emission", col_name, order)} alt="ico" /></span>
-
-                              <h6>tCo2e</h6>
-                            </th>
-
-                           
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody className=" text-left ">
-                          {regionTableDetails?.data?.map((x) => (
-                            <tr key={x?.["Region.name"]}>
-                              <td>{x?.["Region.name"]}</td>
-
-                              <td>
-                                <div className="d-flex align-items-center">
-                                  <div
-                                    className="red-div me-2"
-                                    style={{
-                                      backgroundColor: x?.intensity?.color,
-                                    }}
-                                  ></div>
-                                  {Number.parseFloat(
-                                    x?.intensity?.value
-                                  )?.toLocaleString("en-US", {
-                                    minimumFractionDigits: 1,
-                                  })}
-                                </div>
-                              </td>
-                              <td>
-                              {x?.shipments?.toLocaleString("en-US")}
-                              </td>
-                              <td>
-                                <div className="d-flex align-items-center">
-                                  <div
-                                    className="red-div me-2"
-                                    style={{
-                                      backgroundColor: x?.cost?.color,
-                                    }}
-                                  ></div>
-                                  {Number.parseFloat(
-                                    x?.cost?.value
-                                  )?.toLocaleString("en-US", {
-                                    minimumFractionDigits: 2,
-                                  })}
-                                </div>
-                              </td>
-                             
-                              <td>
-                                <Link to={`/region-overview/${x?.["Region.name"]}`}>More</Link>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </Table> */}
                       <div className="static-table staticui mt-4">
                         <div className="tWrap">
                           <div className="tWrap__head">
@@ -408,8 +317,6 @@ const RegionalView = () => {
                                     </span>
                                     <h6 className="fs-10">tCo2e</h6>
                                   </th>
-
-                                  {/* <th></th> */}
                                 </tr>
                               </thead>
                             </table>
