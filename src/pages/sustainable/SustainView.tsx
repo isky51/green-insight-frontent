@@ -83,6 +83,7 @@ const SustainView = () => {
                                                 id="exampleSelect"
                                                 name="select"
                                                 type="select"
+                                                className="regionDropdown"
                                                 onChange={(e) => {
                                                     setRelaodData(false)
                                                     setRegionsLevel(e.target.value)
@@ -100,12 +101,12 @@ const SustainView = () => {
                                             </Input>
                                         </FormGroup>
                                     </Col>
-                                    <Col lg="3" md="12">
+                                    {/* <Col lg="3" md="12">
                                         <div className="d-flex justify-content-end">
                                             <ExportButton />
                                         </div>
 
-                                    </Col>
+                                    </Col> */}
                                 </Row>
                             </Col>
                         </Row>
@@ -115,7 +116,7 @@ const SustainView = () => {
                             <Row>
                                 <Col lg="12" md="12">
                                     <div className="subs-inner-heading py-4 pb-4">
-                                        <h2 className="fw-medium pb-4 mb-0 font-24">
+                                        <h2 className="fw-medium borderBottom pb-3 mb-2 font-24">
                                             Sustainability Tracker
                                         </h2>
                                         {/* new-ui */}
@@ -202,7 +203,7 @@ const SustainView = () => {
                                 </Col>
                             </Row>
                         </div>
-                        <div>
+                        <div className="pb-4">
                             <Row className="g-3">
                                 <Col lg="6">
                                     <div className="mainGrayCards p-3 h-100 slider-icons position-relative">
@@ -336,13 +337,13 @@ const SustainView = () => {
                                         {/* Bar element graph plot is here */}
                                         {Math.round(((emissionIntensityDetails?.data?.[0]?.max - emissionIntensityDetails?.data?.[0]?.industrialAverage) / emissionIntensityDetails?.data?.[0]?.max) * 100).toFixed(2) ? <div className={`model-overview-down px-3 py-2 ${emissionIntensityDetailsIsLoading ? 'model-overview-up' : ''}`}>
                                             <div>
-                                                <h6 className=" mb-0 d-flex fs-6">
+                                                <h6 className=" mb-0 d-flex">
                                                     <span className="pe-2"><img src={Down} alt="ico" /></span>Your emissions intensity per {revenueType === 0 ? "revenue dollar" : "Ton-Mile"} is {Math.round(((emissionIntensityDetails?.data?.[0]?.max - emissionIntensityDetails?.data?.[0]?.industrialAverage) / emissionIntensityDetails?.data?.[0]?.max) * 100) + "%"} higher than industry average
                                                 </h6>
                                             </div>
                                         </div> : <div className="model-overview-down px-3 py-2 bottom-card">
                                             <div>
-                                                <h6 className="mb-0 d-flex fs-6">
+                                                <h6 className="mb-0 d-flex">
                                                     <span className="pe-2"><img src={Up} alt="ico" /></span>Your emissions intensity per {revenueType === 0 ? "revenue dollar" : "Ton-Mile"} is {Math.round(((emissionIntensityDetails?.data?.[0]?.max - emissionIntensityDetails?.data?.[0]?.industrialAverage) / emissionIntensityDetails?.data?.[0]?.max) * 100) + "%"} lower than industry average
                                                 </h6>
                                             </div>
@@ -350,12 +351,12 @@ const SustainView = () => {
                                     </div>
                                 </Col>
                             </Row>
-                            <div className="data-sources  pt-2 pb-4">
+                            <div className="data-sources pt-2">
                                 <a target="_blank" rel="noreferrer" href="https://smartfreightcentre.org/en/about-sfc/about-us/" className="d-flex align-items-center"><span className="glec-txt me-1">GLEC</span>See data sources and methodologies</a>
                             </div>
                         </div>
 
-                        <div className="">
+                        <div className="pb-4">
                             <Row>
                                 <Col lg="12">
                                     <div className="mainGrayCards p-3 h-100 position-relative">
@@ -374,7 +375,7 @@ const SustainView = () => {
                                                         id="exampleSelect"
                                                         name="select"
                                                         type="select"
-                                                        className="ms-2"
+                                                        className="ms-2 regionDropdown"
                                                         value={regionsIntensity}
                                                         onChange={(e) => {
                                                             setRelaodData(false)
@@ -393,7 +394,7 @@ const SustainView = () => {
                                                 </FormGroup>
                                             </div>
                                         </div>
-                                        {isLoadingGraphRegionEmission ? <div className="graph-loader d-flex justify-content-center">
+                                        {isLoadingGraphRegionEmission ? <div className="graph-loader pb-4 d-flex justify-content-center">
 
                                             <div className="spinner-border position-absolute spinner-ui" role="status">
                                                 <span className="visually-hidden"></span>
@@ -405,10 +406,11 @@ const SustainView = () => {
                                     </div>
                                 </Col>
                             </Row>
+                            <div className="data-sources pt-2">
+                                <a target="_blank" rel="noreferrer" href="https://smartfreightcentre.org/en/about-sfc/about-us/" className="d-flex align-items-center"><span className="glec-txt me-1">GLEC</span>See data sources and methodologies</a>
+                            </div>
                         </div>
-                        <div className="data-sources  pt-2 pb-4">
-                            <a target="_blank" rel="noreferrer" href="https://smartfreightcentre.org/en/about-sfc/about-us/" className="d-flex align-items-center"><span className="glec-txt me-1">GLEC</span>See data sources and methodologies</a>
-                        </div>
+
                         <div className="project-overview mainGrayCards p-3 h-100 position-relative">
                             <Row>
                                 <Col lg="12">
@@ -456,7 +458,9 @@ const SustainView = () => {
                                         </Col>
                                         <Col xl="3" lg="6">
                                             <div className="ps-4 ps-lg-0">
-                                                <div className="co-txt d-flex align-items-center pt-2">
+                                                <div className="topSpace"></div>
+                                                <div className="co-txt d-flex align-items-center">
+
                                                     <div className="lightgreen-div me-3">
                                                     </div>
                                                     <h4 className="mb-0">Completed</h4>
@@ -470,7 +474,7 @@ const SustainView = () => {
                                         </Col>
                                         <Col xl="3" lg="6">
                                             <div className="track-btn-green px-3 px-xl-0  ps-4 ps-lg-0">
-                                                <Button color="primary" className="px-5 py-0 mb-3">
+                                                <Button color="primary" className="px-5 py-1 mb-3">
                                                     On track
                                                 </Button>
                                                 <div className="co-txt d-flex align-items-center">
@@ -487,7 +491,7 @@ const SustainView = () => {
                                         </Col>
                                         <Col xl="3" lg="6">
                                             <div className="track-btn-orange ps-4 ps-lg-0">
-                                                <Button color="primary" className="px-5 py-0 mb-3">
+                                                <Button color="primary" className="px-5 py-1 mb-3">
                                                     Action needed
                                                 </Button>
                                                 <div className="co-txt d-flex align-items-center">
@@ -506,15 +510,11 @@ const SustainView = () => {
                                 </Col>
                             </Row>
                         </div>
-                        <div>
-                            <div className="data-sources  pt-2">
-                                <a target="_blank" rel="noreferrer" href="https://smartfreightcentre.org/en/about-sfc/about-us/" className="d-flex align-items-center"><span className="glec-txt me-1">GLEC</span>See data sources and methodologies</a>
-                            </div>
+                        <div className="data-sources pt-2">
+                            <a target="_blank" rel="noreferrer" href="https://smartfreightcentre.org/en/about-sfc/about-us/" className="d-flex align-items-center"><span className="glec-txt me-1">GLEC</span>See data sources and methodologies</a>
                         </div>
                     </div>
                 </div>
-
-
             </section>
         </>
     )

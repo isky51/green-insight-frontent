@@ -32,10 +32,10 @@
         }
 
         h3 {
-            font-size: 24px;
+            font-size: 20px;
 
             @media (max-width: $xxl) {
-                font-size: 20px;
+                font-size: 18px;
             }
         }
 
@@ -48,7 +48,7 @@
 
 // mainGrayCards
 .mainGrayCards {
-    background: $gray-100;
+    background: $info;
     border-radius: 8px;
 
     .left-arrow-slider {
@@ -78,7 +78,7 @@
     }
 
     h3 {
-        font-size: 24px;
+        font-size: 20px;
     }
     span {
         font-size: 12px;
@@ -89,18 +89,25 @@
         border-radius: 4px;
         border: 1px solid $primary;
         font-size: 14px;
+        &:hover{
+            background: $primary;
+            border-radius: 4px;
+            border: 1px solid $primary;
+        }
     }
     .select-box{
         .perTonDropdown{
-            width: 156px;
+            min-width: 156px;
         }
     }
     .model-overview-down {
-        background: $gray-300 ;
+        background: $gray-200;
         border-left: 10px solid $orange;
         color: $orange;
         font-size: 14px;
         min-height: 50px;
+        display: flex;
+        align-items: center;
     }
     .model-overview-up{
         background: $lightgreen ;

@@ -19,7 +19,7 @@ $prefix: '';
 // GENERATE FONTS FOR ALL SIZES 
 @for $font from 1 to $range {
     .#{$prefix}font-#{$font} {
-        font-size: 1px * $font;
+        font-size: 1px * $font !important;
     }
 }
 
@@ -27,7 +27,7 @@ $prefix: '';
 @media(min-width:$sm) {
     @for $font from 1 to $range {
         .#{$prefix}font-sm-#{$font} {
-            font-size: 1px * $font;
+            font-size: 1px * $font !important;
         }
     }
 }
@@ -36,7 +36,7 @@ $prefix: '';
 @media(min-width:$md) {
     @for $font from 1 to $range {
         .#{$prefix}font-md-#{$font} {
-            font-size: 1px * $font;
+            font-size: 1px * $font !important;
         }
     }
 }
@@ -45,7 +45,7 @@ $prefix: '';
 @media(min-width:$lg) {
     @for $font from 1 to $range {
         .#{$prefix}font-lg-#{$font} {
-            font-size: 1px * $font;
+            font-size: 1px * $font !important;
         }
     }
 }
@@ -54,7 +54,7 @@ $prefix: '';
 @media(min-width:$xl) {
     @for $font from 1 to $range {
         .#{$prefix}font-xl-#{$font} {
-            font-size: 1px * $font;
+            font-size: 1px * $font !important;
         }
     }
 }
@@ -63,7 +63,7 @@ $prefix: '';
 @media(min-width:$xxl) {
     @for $font from 1 to $range {
         .#{$prefix}font-xxl-#{$font} {
-            font-size: 1px * $font;
+            font-size: 1px * $font !important;
         }
     }
 }
@@ -72,7 +72,7 @@ $prefix: '';
 @media(min-width:1921px) {
     @for $font from 1 to $range {
         .#{$prefix}font-xxxl-#{$font} {
-            font-size: 1px * $font;
+            font-size: 1px * $font !important;
         }
     }
 }
