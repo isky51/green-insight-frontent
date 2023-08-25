@@ -1,27 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-
 // import "../regional/regional.scss";
 // import "../vendor/vendor.scss";
 // import Pagination from "../lanes/pagination/Pagination";
-// import {
-//   yearList,
-//   pageSizeList,
-//   sortIcon,
-//   getQuarters,
-//   getQuarterName,
-//   getRegionName,
-//   capitalizeText,
-// } from "../../constant/index";
-// import {
-//   vendorGraphData,
-//   vendorTableData,
-// } from "../../component/store/vendor/vendorDetailsSlice";
-// import { useDispatch, useSelector } from "react-redux";
 // import BubbleHighChart from "../../component/BubbleHighChart";
-// import {  } from regionShow"../../component/store/auth/graph/graphDetailsSlice";
-// import DateTimeShow from "../../component/main/DateTimeShow";
-// import { setHeaderName } from "../../component/store/auth/authDataSlice";
-// import { useAuth } from "../../routes/ProtectedRoute";
 import { useNavigate, Link } from "react-router-dom";
 import DateTimeShow from "../../component/DateTimeShow";
 import { useAuth } from "../../auth/ProtectedRoute";
@@ -44,18 +25,7 @@ const VendorViewController = () => {
 
   const [regionalLevel, setRegionsLevel] = useState(id ? id : "");
   const [yearlyData, setYearlyData] = useState(currentYear);
-
   const [quarterDetails, setQuarterDetails] = useState(1);
-
-  //   const { isLoading, vendorTableDetails, vendorGraphDetails } = useSelector(
-  //     (state) => state.vendor
-  //   );
-  const { regions, emissionDates } = useAppSelector(
-    (state) => state.commonData
-  );
-  const { vendorTableDetails, isLoading } = useAppSelector(
-    (state) => state.carrier
-  );
   const [currentPage, setCurrentPage] = useState(1);
   const [relaodData, setRelaodData] = useState(true);
   const [searchCarrier, setSearchCarrier] = useState("");
@@ -64,6 +34,13 @@ const VendorViewController = () => {
   const [pageSize, setPageSize] = useState(20);
   const [regionName, setRegionName] = useState("");
   const [values, setValues] = React.useState([60, 390]);
+
+  const { regions, emissionDates } = useAppSelector(
+    (state) => state.commonData
+  );
+  const { vendorTableDetails, isLoading, vendorGraphDetails } = useAppSelector(
+    (state) => state.carrier
+  );
 
   useEffect(() => {
     if (regionalLevel) {
@@ -93,6 +70,7 @@ const VendorViewController = () => {
     }
   };
   const fetchGraphData = (search = "") => {
+    console.log("check test");
     if (searchCarrier.length >= 3 || searchCarrier.length === 0) {
       const payloadData = {
         region_id: regionalLevel,
@@ -109,9 +87,8 @@ const VendorViewController = () => {
       dispatch(vendorGraphData(payloadData));
     }
   };
-
   const handleSearchCarrier = async (e: any) => {
-    await setSearchCarrier(e.target.value);
+    setSearchCarrier(e.target.value);
     if (e.target.value.length >= 3 || e.target.value.length === 0) {
       setCurrentPage(1);
     }
@@ -170,6 +147,7 @@ const VendorViewController = () => {
     setCurrentPage(1);
     setRelaodData(false);
   };
+  console.log(vendorGraphDetails, "vendorGraphDetails");
   return {
     fetchTableData,
     regionalLevel,
@@ -195,6 +173,7 @@ const VendorViewController = () => {
     vendorTableDetails,
     navigate,
     isLoading,
+    vendorGraphDetails,
   };
 };
 export default VendorViewController;

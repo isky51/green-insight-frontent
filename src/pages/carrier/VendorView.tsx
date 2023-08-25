@@ -18,6 +18,8 @@ import {
 import { Range, getTrackBackground } from "react-range";
 import VendorViewController from "./VendorViewController";
 import TitleComponent from "../../component/tittle";
+import ChartHighChart from "../../constant/highchart/chartHighChart";
+import bubbleChart from "../../constant/highchart/bubbleChart";
 
 export default function CarrierVendorView() {
   const {
@@ -43,6 +45,7 @@ export default function CarrierVendorView() {
     order,
     emissionDates,
     vendorTableDetails,
+    vendorGraphDetails,
     navigate,
     isLoading,
   } = VendorViewController();
@@ -50,6 +53,10 @@ export default function CarrierVendorView() {
   const MIN = 60;
   const MAX = 390;
   const rtl = false;
+  console.log(
+    vendorGraphDetails?.data?.responseData,
+    "vendorGraphDetails?.data?.responseData"
+  );
   return (
     <>
       <TitleComponent title={"Segmentation By Carrier"} />
@@ -290,6 +297,7 @@ export default function CarrierVendorView() {
                         </div>
                       </div>
                     </div>
+
                     {/* <BubbleHighChart
                           relaodData={relaodData}
                           chart={"vendor"}
@@ -299,6 +307,16 @@ export default function CarrierVendorView() {
                               : []
                           }
                         /> */}
+
+                    {vendorGraphDetails?.data && (
+                      <ChartHighChart
+                        options={bubbleChart(
+                          vendorGraphDetails?.data
+                            ? vendorGraphDetails?.data?.responseData
+                            : []
+                        )}
+                      />
+                    )}
                   </div>
                 </Col>
               </Row>
