@@ -25,15 +25,7 @@ const VendorViewController = () => {
 
   const [regionalLevel, setRegionsLevel] = useState(id ? id : "");
   const [yearlyData, setYearlyData] = useState(currentYear);
-
   const [quarterDetails, setQuarterDetails] = useState(1);
-
-  const { regions, emissionDates } = useAppSelector(
-    (state) => state.commonData
-  );
-  const { vendorTableDetails, isLoading } = useAppSelector(
-    (state) => state.carrier
-  );
   const [currentPage, setCurrentPage] = useState(1);
   const [relaodData, setRelaodData] = useState(true);
   const [searchCarrier, setSearchCarrier] = useState("");
@@ -42,6 +34,13 @@ const VendorViewController = () => {
   const [pageSize, setPageSize] = useState(20);
   const [regionName, setRegionName] = useState("");
   const [values, setValues] = React.useState([60, 390]);
+
+  const { regions, emissionDates } = useAppSelector(
+    (state) => state.commonData
+  );
+  const { vendorTableDetails, isLoading, vendorGraphDetails } = useAppSelector(
+    (state) => state.carrier
+  );
 
   useEffect(() => {
     if (regionalLevel) {
@@ -71,6 +70,7 @@ const VendorViewController = () => {
     }
   };
   const fetchGraphData = (search = "") => {
+    console.log("check test");
     if (searchCarrier.length >= 3 || searchCarrier.length === 0) {
       const payloadData = {
         region_id: regionalLevel,
@@ -147,6 +147,7 @@ const VendorViewController = () => {
     setCurrentPage(1);
     setRelaodData(false);
   };
+  console.log(vendorGraphDetails, "vendorGraphDetails");
   return {
     fetchTableData,
     regionalLevel,
@@ -172,6 +173,7 @@ const VendorViewController = () => {
     vendorTableDetails,
     navigate,
     isLoading,
+    vendorGraphDetails,
   };
 };
 export default VendorViewController;
