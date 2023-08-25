@@ -34,13 +34,16 @@ const ProtectedRoute = () => {
     const isAuth = useAuth().loggedIn;
     return isAuth ? <>
         <section className="insight_top_wrapper">
-            <div className="main-section position-relative">
-                <section className="obfuscationDashboard">
-                    <SidebarLayout />
+            <div className="mainDashboard position-relative">
+                <SidebarLayout />
+                <div className="DashboardWrapper">
                     <HeaderLayout />
-                    <Outlet />
-                </section>
-
+                    <div className="obfuscationDashboard">
+                        <div className="container-fluid">
+                            <Outlet />
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </> : <Navigate to="/" />;

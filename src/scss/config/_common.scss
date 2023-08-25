@@ -3,4 +3,55 @@
 .spinner-border {
     --bs-spinner-border-width: 0.15em;
     --bs-spinner-animation-speed: 0.95s;
+    --bs-spinner-width: 1.5rem;
+    --bs-spinner-height: 1.5rem;
+}
+.DashboardWrapper{
+    width: calc(100% - 278px);
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+// date time show css
+.lates-update{
+    p{
+        span{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid $black;
+        }
+    }
+}
+// glec text 
+.data-sources{
+    display: inline-block;
+    a{
+        color: $dark;
+    }
+    .glec-txt{
+        font-size: 9px;
+        color: $white;
+        background-color: $primary;
+        padding: 4px;
+        text-decoration: underline;
+    }
+}
+// colored divs
+.lightgreen-div {
+    width: 15px;
+    height: 15px;
+    background-color: $lightgreen;
+}
+.green-div{
+    width: 15px;
+    height: 15px;
+    background-color: $green;
+}
+.orange-div{
+    width: 15px;
+    height: 15px;
+    background-color: $orange;
 }

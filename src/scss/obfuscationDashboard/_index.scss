@@ -1,26 +1,15 @@
 @import "../config/variable.scss";
 
+
 .obfuscationDashboard {
-
-    // top heading css
-    .topHeading {
-        h1 {
-            color: $white;
-            font-weight: 500;
-        }
-
-        background: $primary;
-
-        img {
-            width: 20px;
-        }
-
-        .logoutBtn {
-            white-space: nowrap;
-        }
-    }
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+    margin-top: 81px;
 
     .obfuscationDashboardWrapper {
+        .accordion-button:hover {
+            z-index: 0;
+        }
 
         // database dropdown css
         .databaseDropdown {
@@ -145,10 +134,6 @@
             }
         }
 
-    }
-
-    .cursor {
-        cursor: pointer;
     }
 }
 
