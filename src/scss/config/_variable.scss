@@ -1,30 +1,96 @@
-$deepgreen: #215154 !default;
-$secondarygreen: #5F9A80 !default;
-$lightOrange: #d8856b !default;
-$orange:   #d8856b!default;
-$lightGreen: #c1d3c0 !default;
-$cyan: #efede9 !default;
-$white: #ffffff !default;
-$black: #000000 !default;
-$gray-100: #dcdcdc !default;
-$gray-200: #464a4b !default;
-$gray-300: #CACACA !default;
-$gray-400: #EBEBF1 !default;
+// $deepgreen: #215154 !default;
+// $secondarygreen: #5F9A80 !default;
+// $lightOrange: #d8856b !default;
+// $orange:   #d8856b!default;
+// $lightGreen: #c1d3c0 !default;
+// $cyan: #efede9 !default;
+// $white: #ffffff !default;
+// $black: #000000 !default;
+// $gray-100: #dcdcdc !default;
+// $gray-200: #464a4b !default;
+// $gray-300: #CACACA !default;
+// $gray-400: #EBEBF1 !default;
+// $gray-900: #181A1C !default;
+// $gray-800: #1F1F1F !default;
+
+
+
+
+// $primary: $deepgreen !default;
+// $secondary: $secondarygreen !default;
+// $warning: $lightOrange !default;
+// $success: $lightGreen !default;
+// $danger: $orange   !default;
+// $info: $cyan !default;
+// $light: $gray-100 !default;
+// $dark: $gray-900 !default;
+
+
+
+
+$primary:       #215154 !default;
+$secondary:     #5CB9BF !default;
+$success:       #42D494 !default;
+$warning:       #FFC107 !default;
+$danger:        #EB445A !default;
+$light:         #F9F9F9 !default;
+$dark:          #181A1C !default;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+) !default;
+
+$white:    #ffffff !default;
+$gray-100: #F9F9F9 !default;
+$gray-200: #EBEBF1 !default;
+$gray-300: #E2E2E2 !default;
+$gray-400: #DCDCDC !default;
+$gray-500: #CACACA !default;
+$gray-600: #929597 !default;
+$gray-700: #464A4B !default;
+$gray-800: #2F3436 !default;
 $gray-900: #181A1C !default;
-$gray-800: #1F1F1F !default;
+$black:    #000000 !default;
+
+$grays: (
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900
+) !default;
+
+$blue:    #367C90 !default;
+$red:     #E00000 !default;
+$orange:  #D8856B !default;
+$yellow:  #FFCB77 !default;
+$green:   #5F9A80 !default;
+$seagreen:   #156064 !default;
+$lightgreen:   #C1D3C0 !default;
+
+
+$colors: (
+    "blue":       $blue,
+    "red":        $red,
+    "orange":     $orange,
+    "yellow":     $yellow,
+    "green":      $green,
+    "seagreen":      $seagreen,
+    "lightgreen":      $lightgreen,
+    "black":      $black,
+  "white":      $white,
+) !default;
 $deepgreengradient: linear-gradient(180deg, #215154 0%, #2B8489 100%) !default;
-
-
-// scss-docs-start theme-color-variables
-$primary: $deepgreen !default;
-$secondary: $secondarygreen !default;
-$warning: $lightOrange !default;
-$success: $lightGreen !default;
-$danger: $orange   !default;
-$info: $cyan !default;
-$light: $gray-100 !default;
-$dark: $gray-900 !default;
-
 // fontFamily
 $fontPoppins: 'Poppins', sans-serif;
 

@@ -1,0 +1,203 @@
+@import "../config/variable.scss";
+
+.mainsidebar {
+    background: $primary;
+    border-radius: 0 40px 40px 0;
+    height: 100vh;
+    left: 0;
+    width: 278px;
+
+    .greensightLogo {
+        width: 80px;
+
+        @media (max-width: $xxl) {
+            width: 55px;
+        }
+    }
+
+    .sidebarnav-wrapper {
+        @media (max-width: $xxl) {
+            max-height: 509px;
+            overflow-y: auto;
+            padding-top: 31px;
+            overflow-x: hidden;
+        }
+    }
+
+
+    .accordion {
+        --bs-accordion-bg: $primary;
+
+        .nav {
+            .accordion-item {
+                border: none;
+                border-radius: 0px;
+
+                .accordion-header {
+                    padding: 15px 16px 15px 32px;
+
+                    .accordion-button {
+                        background: $primary;
+                        border: 1px solid $primary;
+                        color: $white;
+                        border-radius: 0px 19px 19px 0px;
+                        box-shadow: none;
+                        padding: 0;
+
+                        &:not(.collapsed)::after {
+                            background-image: url('../../assets/images/sidebar/upWhiteAccordianArrow.svg');
+                        }
+
+                        &::after {
+                            background-image: url('../../assets/images/sidebar/upWhiteAccordianArrow.svg');
+                        }
+                    }
+
+                    z-index: 2;
+                    position: relative;
+
+                    .navitemtxtWrapper {
+                        .navText {
+                            font-weight: 400;
+                        }
+                    }
+                }
+
+                // navbar active nav css accordian starts
+                .activebar.accordion-header {
+                    .accordion-button {
+                        background: $white;
+                        border: 1px solid $white;
+                        color: $white;
+                        border-radius: 0px 19px 19px 0px;
+                        box-shadow: none;
+                        padding: 0;
+
+                        &:not(.collapsed)::after {
+                            background-image: url('../../assets/images/sidebar/upWhiteAccordianArrow.svg');
+                            filter: invert(0%) sepia(3%) saturate(7500%) hue-rotate(217deg) brightness(0%) contrast(100%);
+                        }
+
+                        &::after {
+                            background-image: url('../../assets/images/sidebar/upWhiteAccordianArrow.svg');
+                            filter: invert(0%) sepia(3%) saturate(7500%) hue-rotate(217deg) brightness(0%) contrast(100%);
+                        }
+                    }
+                }
+
+                // navbar active nav css accordian ends
+
+                .accordion-button.collapsed {
+                    margin-bottom: 10px;
+                }
+
+                .accordion-collapse {
+                    border-radius: 0px;
+
+                    .accordion-body {
+                        background: $primary;
+                        color: $white;
+                        padding-top: 0px;
+                        padding-bottom: 0px;
+                    }
+                }
+            }
+
+            .newaccordian {
+                .accordion-item {
+                    .accordion-header {
+                        .accordion-button {
+                            border: none;
+                        }
+
+                        .accordion-button.collapsed {
+                            margin-bottom: 0px;
+                        }
+
+                        &:after {
+                            position: absolute;
+                            left: 200px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .nav-item {
+            .nav-link {
+                padding: 15px 16px 15px 32px;
+
+                .navitemtxtWrapper {
+                    .navText {
+                        color: $white;
+                        font-weight: 400;
+                    }
+
+                    z-index: 2;
+                    position: relative;
+                }
+            }
+        }
+
+        // navbar active nav css starts
+        .activebar {
+            margin-bottom: 10px;
+
+            &:before {
+                content: '';
+                background: url('../../assets/images/sidebar/sidebarbg_Bar.svg');
+                width: 100%;
+                height: 121px;
+                position: absolute;
+                background-repeat: no-repeat;
+                left: 16.5px;
+                top: -39px;
+            }
+
+            .navitemtxtWrapper {
+                .navText {
+                    color: $black !important;
+                    font-weight: 400;
+                }
+
+                img {
+                    filter: invert(0%) sepia(3%) saturate(7500%) hue-rotate(217deg) brightness(0%) contrast(100%);
+                }
+
+                position: relative;
+
+            }
+        }
+
+        // navbar active nav css ends
+
+    }
+
+}
+
+// scrollbar css
+/* width */
+.mainsidebar ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+/* Track */
+.mainsidebar ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px $primary;
+    border-radius: 10px;
+    height: 8px;
+}
+
+/* Handle */
+.mainsidebar ::-webkit-scrollbar-thumb {
+    background: $green;
+    height: 8px;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+.mainsidebar::-webkit-scrollbar-thumb:hover {
+    background: $green;
+    height: 8px;
+}

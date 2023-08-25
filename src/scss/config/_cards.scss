@@ -1,0 +1,113 @@
+@import "./variable.scss";
+
+// top primary cards
+.primaryCard {
+    background-color: $primary;
+    border-radius: 8px;
+    margin-top: 10px;
+
+    .primaryCardInnerWprpper {
+        color: $white;
+
+        .co-txt {
+            color: $white;
+
+            .green-div {
+                background: $lightgreen;
+                width: 20px;
+                height: 20px;
+                border-radius: 4px;
+            }
+
+            .orange-div {
+                background: $orange;
+                width: 20px;
+                height: 20px;
+                border-radius: 4px;
+            }
+        }
+
+        h6 {
+            font-size: 14px;
+        }
+
+        h3 {
+            font-size: 24px;
+
+            @media (max-width: $xxl) {
+                font-size: 20px;
+            }
+        }
+
+        .by-date {
+            font-size: 14px;
+            color: $gray-200;
+        }
+    }
+}
+
+// mainGrayCards
+.mainGrayCards {
+    background: $gray-100;
+    border-radius: 8px;
+
+    .left-arrow-slider {
+        position: absolute;
+        left: 0px;
+        top: 50%;
+
+        button {
+            background: transparent;
+            border: none;
+        }
+    }
+
+    .right-arrow-slider {
+        position: absolute;
+        right: 0px;
+        top: 50%;
+
+        button {
+            background: transparent;
+            border: none;
+        }
+    }
+
+    h6 {
+        font-size: 14px;
+    }
+
+    h3 {
+        font-size: 24px;
+    }
+    span {
+        font-size: 12px;
+    }
+
+    button {
+        background: $primary;
+        border-radius: 4px;
+        border: 1px solid $primary;
+        font-size: 14px;
+    }
+    .select-box{
+        .perTonDropdown{
+            width: 156px;
+        }
+    }
+    .model-overview-down {
+        background: $gray-300 ;
+        border-left: 10px solid $orange;
+        color: $orange;
+        font-size: 14px;
+        min-height: 50px;
+    }
+    .model-overview-up{
+        background: $lightgreen ;
+        border-left: 10px solid $primary;
+        color: $primary;
+        font-size: 14px;
+        min-height: 50px;
+    }
+
+}

@@ -41,7 +41,7 @@ const DashboardView = () => {
       <div className="container-fluid" data-testid="dashboard">
         <Row>
           <Col lg="10" className="mx-auto">
-            <div className='obfuscationDashboardWrapper px-md-4 px-0'>
+            <div className='obfuscationDashboardWrapper bg-white px-md-4 px-0'>
 
               {/* database dropdown starts*/}
               <div className='databaseDropdown my-4' data-testid="select_database">

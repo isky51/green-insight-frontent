@@ -1,0 +1,38 @@
+@import "../config/variable.scss";
+
+.substain-screen{
+    .substain-screen-wraper{
+        .substain-heading{
+            background-color: $gray-200;
+            .select-box{
+                .form-select{
+                    width: 152px;
+                }
+            }
+        }
+        .substain-section{
+            background: $white;
+            border-radius: 8px;
+        }
+        .project-overview {
+            .track-btn-green{
+                button{
+                    width: 217px;
+                    background-color: $green;
+                    border: $green;
+                    font-size: 12px;
+                    border-radius: 4px;
+                }
+            }
+            .track-btn-orange{
+                button{
+                    width: 217px;
+                    background-color: $orange;
+                    border: $orange;
+                    font-size: 12px;
+                    border-radius: 4px;
+                }
+            }
+        }
+    }
+}

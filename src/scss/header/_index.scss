@@ -1,0 +1,152 @@
+@import "../config/variable.scss";
+
+.mainDashboard {
+    display: flex;
+    // top heading css
+    .topHeading {
+        display: none!important;
+        h1 {
+            color: $white;
+            font-weight: 500;
+        }
+
+        background: $primary;
+
+        img {
+            width: 20px;
+        }
+
+        .logoutBtn {
+            white-space: nowrap;
+        }
+    }
+
+    .dashboard_Header {
+        padding: 24px;
+        position: fixed;
+        width: calc(100% - 278px);
+        background-color: $gray-200;
+        z-index: 4;
+
+        .searchIcon {
+            position: absolute;
+            top: 17px;
+            left: 15px;
+            width: 20px;
+        }
+
+        .badge-btn {
+            border: 1px solid $green;
+            padding: 10px;
+
+            span {
+                background-color: $green;
+            }
+        }
+
+        .userHead_details {
+            position: relative;
+
+            p {
+                color: $gray-600;
+            }
+
+            .settingProfile_dropdown {
+                width: 175px;
+                min-height: 100px;
+                background-color: $white;
+                border-radius: 8px;
+                position: absolute;
+                right: 0px;
+                top: 57px;
+                box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.10);
+                padding: 12px;
+
+                .btn-deepgreen {
+                    font-size: 14px !important;
+
+                    &:hover {
+                        background-color: $primary;
+                        color: $white;
+                    }
+                }
+                .btn-gray{
+                    background-color: $light;
+                }
+
+                button {
+                    img {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+        }
+
+        .toogleSwitch {
+            .toggle {
+                width: 145px !important;
+                height: 44px !important;
+                border-radius: 36px;
+            }
+
+            .toggle.btn {
+                .toggle-group {
+                    top: 3px;
+
+                    .toggle-handle {
+                        height: 26px;
+                        margin-top: 5px;
+                        border-radius: 76px;
+                        margin-left: 43px;
+                    }
+                }
+            }
+
+            .toggle>.toggle-group>.toggle-on,
+            .toggle-off {
+                font-size: 14px;
+                top: 2px;
+            }
+
+            .toggle.btn.btn-primary {
+                background-color: $primary !important;
+                border: 1px solid $primary;
+
+                .toggle-group {
+                    .btn-primary {
+                        background-color: $primary !important;
+                    }
+
+                    .toggle-handle {
+                        height: 26px;
+                        margin-top: 5px;
+                        border-radius: 76px;
+                        margin-right: 43px;
+                        margin-left: 0px;
+                    }
+                }
+            }
+
+        }
+
+        .searchBar {
+            .form-control {
+                width: 400px;
+                padding: 14px 10px 14px 51px;
+
+                @media (max-width: $xxl) {
+                    width: 294px;
+                }
+
+                &:focus {
+                    color: var(--bs-body-color);
+                    background-color: var(--bs-body-bg);
+                    border-color: $gray-600;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+
+}
