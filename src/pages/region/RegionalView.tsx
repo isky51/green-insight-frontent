@@ -173,13 +173,13 @@ const RegionalView = () => {
                           </div>
                             : (
                               regionPageArr?.length > 0 && (
-                                <ChartHighChart
-                                  options={columnChart(
-                                    regionGraphDetails?.data?.unit,
-                                    regionPageArr
-                                  )}
-                                />
-                              )
+                              <ChartHighChart
+                                options={columnChart(
+                                  regionGraphDetails?.data?.unit,
+                                  regionPageArr
+                                )}
+                              />
+                            )
                             )
                         }
                       </div>
