@@ -54,7 +54,7 @@ const LoginView: React.FC = () => {
                                         style={{ background: "transparent" }}
                                     />
                                     <h4 className="login-heading font-xxl-70 font-xl-45 font-45 fw-bold mb-0">
-                                       GeenSight
+                                       GreenSight
                                     </h4>
                                 </div>
                             </div>
