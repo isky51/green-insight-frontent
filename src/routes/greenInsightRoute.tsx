@@ -11,6 +11,7 @@ import RegionOverview from "../pages/regionOverview/RegionOverview";
 import SustainView from "../pages/sustainable/SustainView";
 import CarrierVendorView from "../pages/carrier/VendorView";
 import RegionalLevelView from "../pages/regionalLevel/RegionalLevelView";
+import VendorOverview from "../pages/carrier/VendorOverviewView";
 
 /**
  * Component that defines all the routes for the website
@@ -63,6 +64,7 @@ const GreenInsightRoute = () => {
           <Route path="/sustainable" element={<SustainView />} />
 
           <Route path="/carrier" element={<CarrierVendorView />} />
+          <Route path="/carrier-overview/:id" element={<VendorOverview/>} />
         </Route>
 
         {/* ErrorPage route */}
