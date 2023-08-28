@@ -3,7 +3,7 @@ import { useAuth } from "../../auth/ProtectedRoute";
 import Search from "../../assets/images/common/searchcarrier.svg";
 
 import { FormGroup, Row, Col, Input } from "reactstrap";
-import {Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   capitalizeText,
   getQuarterName,
@@ -70,166 +70,166 @@ export default function CarrierVendorView() {
               </div>
             </div>
             <div className="d-flex align-items-center justify-content-between">
-                <FormGroup className="select-box d-flex">
-                  {useAuth().userdata?.role === 0 && (
-                    <Input
-                      id="exampleSelect"
-                      name="select"
-                      type="select"
-                      className="mt-2 regionDropdown"
-                      value={regionalLevel}
-                      onChange={(e) => {
-                        setCurrentPage(1);
-                        setRegoinDetail(e.target.value);
-                        if (e.target.value === "") {
-                          localStorage.removeItem("regionalLevel");
-                        } else {
-                          localStorage.setItem(
-                            "regionalLevel",
-                            e.target.value
-                          );
-                        }
+              <FormGroup className="select-box d-flex">
+                {useAuth().userdata?.role === 0 && (
+                  <Input
+                    id="exampleSelect"
+                    name="select"
+                    type="select"
+                    className="mt-2 regionDropdown"
+                    value={regionalLevel}
+                    onChange={(e) => {
+                      setCurrentPage(1);
+                      setRegoinDetail(e.target.value);
+                      if (e.target.value === "") {
+                        localStorage.removeItem("regionalLevel");
+                      } else {
+                        localStorage.setItem(
+                          "regionalLevel",
+                          e.target.value
+                        );
+                      }
+                    }}
+                  >
+                    <option value="">All Regions</option>
+                    {regions?.data?.length !== 0 &&
+                      regions?.data?.regions.map(
+                        (x: any, index: number) => (
+                          <option value={x.id} key={x.id}>
+                            {x.name}{" "}
+                          </option>
+                        )
+                      )}
+                  </Input>
+                )}
+
+                <Input
+                  id="exampleSelect"
+                  name="select"
+                  type="select"
+                  className=" mt-2"
+                  value={yearlyData}
+                  onChange={(e) => {
+                    handleChangeYear(e);
+                  }}
+                >
+                  {yearList(emissionDates?.data?.emission_dates).map(
+                    (x, index) => (
+                      <option key={index} value={x}>
+                        {x}
+                      </option>
+                    )
+                  )}
+                </Input>
+                <Input
+                  id="exampleSelect"
+                  name="select"
+                  type="select"
+                  className="mx-2 mt-2 quater-dropdown"
+                  value={quarterDetails}
+                  onChange={(e) => handleQuarterChange(e)}
+                >
+                  {getQuarters(yearlyData).map((i) => (
+                    <option value={i?.value}>{i?.name}</option>
+                  ))}
+                </Input>
+              </FormGroup>
+              <div className="d-flex align-items-center me-4">
+                <h6 className="mb-0 ms-0 ms-lg-4 ps-3 color-primary fs-14 fw-semibold me-4">
+                  Emissions Intensity Range Selector
+                </h6>
+                <Range
+                  values={values}
+                  step={STEP}
+                  min={MIN}
+                  max={MAX}
+                  rtl={rtl}
+                  onChange={(values) => handleChangeRange(values)}
+                  onFinalChange={() => {
+                    fetchTableData();
+                    fetchGraphData();
+                  }}
+                  renderTrack={({ props, children }) => (
+                    <div
+                      onMouseDown={props.onMouseDown}
+                      onTouchStart={props.onTouchStart}
+                      style={{
+                        ...props.style,
+                        height: "36px",
+                        display: "flex",
+                        width: "350px",
+                        maxWidth: "350px",
                       }}
                     >
-                      <option value="">All Regions</option>
-                      {regions?.data?.length !== 0 &&
-                        regions?.data?.regions.map(
-                          (x: any, index: number) => (
-                            <option value={x.id} key={x.id}>
-                              {x.name}{" "}
-                            </option>
-                          )
-                        )}
-                    </Input>
-                  )}
-
-                  <Input
-                    id="exampleSelect"
-                    name="select"
-                    type="select"
-                    className=" mt-2"
-                    value={yearlyData}
-                    onChange={(e) => {
-                      handleChangeYear(e);
-                    }}
-                  >
-                    {yearList(emissionDates?.data?.emission_dates).map(
-                      (x, index) => (
-                        <option key={index} value={x}>
-                          {x}
-                        </option>
-                      )
-                    )}
-                  </Input>
-                  <Input
-                    id="exampleSelect"
-                    name="select"
-                    type="select"
-                    className="mx-2 mt-2 quater-dropdown"
-                    value={quarterDetails}
-                    onChange={(e) => handleQuarterChange(e)}
-                  >
-                    {getQuarters(yearlyData).map((i) => (
-                      <option value={i?.value}>{i?.name}</option>
-                    ))}
-                  </Input>
-                </FormGroup>
-                <div className="d-flex align-items-center me-4">
-                  <h6 className="mb-0 ms-0 ms-lg-4 ps-3 color-primary fs-14 fw-semibold me-4">
-                    Emissions Intensity Range Selector
-                  </h6>
-                  <Range
-                    values={values}
-                    step={STEP}
-                    min={MIN}
-                    max={MAX}
-                    rtl={rtl}
-                    onChange={(values) => handleChangeRange(values)}
-                    onFinalChange={() => {
-                      fetchTableData();
-                      fetchGraphData();
-                    }}
-                    renderTrack={({ props, children }) => (
                       <div
-                        onMouseDown={props.onMouseDown}
-                        onTouchStart={props.onTouchStart}
+                        ref={props.ref}
                         style={{
-                          ...props.style,
-                          height: "36px",
-                          display: "flex",
-                          width: "350px",
-                          maxWidth: "350px",
+                          height: "8px",
+                          width: "100%",
+                          borderRadius: "4px",
+                          background: getTrackBackground({
+                            values,
+                            colors: ["#ccc", "#d8856b", "#ccc"],
+                            min: MIN,
+                            max: MAX,
+                            rtl,
+                          }),
+                          alignSelf: "center",
                         }}
                       >
-                        <div
-                          ref={props.ref}
-                          style={{
-                            height: "8px",
-                            width: "100%",
-                            borderRadius: "4px",
-                            background: getTrackBackground({
-                              values,
-                              colors: ["#ccc", "#d8856b", "#ccc"],
-                              min: MIN,
-                              max: MAX,
-                              rtl,
-                            }),
-                            alignSelf: "center",
-                          }}
-                        >
-                          {children}
-                        </div>
+                        {children}
                       </div>
-                    )}
-                    renderThumb={({ index, props, isDragged }) => (
+                    </div>
+                  )}
+                  renderThumb={({ index, props, isDragged }) => (
+                    <div
+                      {...props}
+                      style={{
+                        ...props.style,
+                        height: "35px",
+                        width: "35px",
+                        borderRadius: "50px",
+                        backgroundColor: "#215154",
+                        border: "transparent",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <div
-                        {...props}
                         style={{
-                          ...props.style,
-                          height: "35px",
-                          width: "35px",
-                          borderRadius: "50px",
-                          backgroundColor: "#215154",
-                          border: "transparent",
+                          position: "absolute",
+                          top: "0px",
+                          color: "#fff",
+                          fontWeight: "bold",
+                          fontSize: "12px",
+                          fontFamily:
+                            "Arial,Helvetica Neue,Helvetica,sans-serif",
+                          padding: "4px",
+                          height: "40px",
+                          width: "40px",
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
+                          borderRadius: "50px",
+                          backgroundColor: "#215154",
                         }}
                       >
-                        <div
-                          style={{
-                            position: "absolute",
-                            top: "0px",
-                            color: "#fff",
-                            fontWeight: "bold",
-                            fontSize: "12px",
-                            fontFamily:
-                              "Arial,Helvetica Neue,Helvetica,sans-serif",
-                            padding: "4px",
-                            height: "40px",
-                            width: "40px",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            borderRadius: "50px",
-                            backgroundColor: "#215154",
-                          }}
-                        >
-                          {values[index].toFixed(1)}
-                        </div>
-                        <div
-                          style={{
-                            height: "8px",
-                            width: "5px",
-                            backgroundColor: isDragged
-                              ? "#215154"
-                              : "#CCC",
-                          }}
-                        />
+                        {values[index].toFixed(1)}
                       </div>
-                    )}
-                  />
-                </div>
+                      <div
+                        style={{
+                          height: "8px",
+                          width: "5px",
+                          backgroundColor: isDragged
+                            ? "#215154"
+                            : "#CCC",
+                        }}
+                      />
+                    </div>
+                  )}
+                />
+              </div>
             </div>
 
           </div>
@@ -456,11 +456,13 @@ export default function CarrierVendorView() {
                           <table>
                             <tbody>
                               {isLoading ? (
-                                <div
-                                  className="spinner-border  spinner-ui"
-                                  role="status"
-                                >
-                                  <span className="visually-hidden"></span>
+                                <div className="d-flex justify-content-center my-5">
+                                  <div
+                                    className="spinner-border  spinner-ui"
+                                    role="status"
+                                  >
+                                    <span className="visually-hidden"></span>
+                                  </div>
                                 </div>
                               ) : vendorTableDetails?.data?.responseData
                                 .length > 0 ? (
@@ -472,7 +474,7 @@ export default function CarrierVendorView() {
                                           `/carrier-overview/${xx?.["carrier"]}`
                                         )
                                       }
-                                      className="m-cursor"
+                                      className=""
                                     >
                                       <td>
                                         <div className="d-flex align-items-center text-capitalize">

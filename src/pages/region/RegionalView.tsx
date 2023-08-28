@@ -240,7 +240,7 @@ const RegionalView = () => {
                           <table>
                             <tbody className=" text-left ">
                               {regionTableDetails?.data?.map((row: any) => (
-                                <tr onClick={() => navigate(`/region-overview/${row?.["Region.name"]}`)} key={row?.["Region.name"]} className="m-cursor">
+                                <tr onClick={() => navigate(`/region-overview/${row?.["Region.name"]}`)} key={row?.["Region.name"]} className="">
                                   <td>{row?.["Region.name"]}</td>
 
                                   <td>

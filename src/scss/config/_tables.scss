@@ -65,6 +65,9 @@
     .tWrap__body {
         overflow-y: scroll;
         max-height: 500px;
+        tr{
+            cursor: pointer;
+        }
 
         @media (max-width: 1200px) {
             max-width: 1200px;

@@ -124,27 +124,27 @@
         }
 
         .nav-item {
-            .nav-link {
+            a {
+                text-decoration: none;
+            }
+
+            .navitemtxtWrapper {
                 padding: 15px 16px 15px 32px;
-                a{
-                    text-decoration: none;
+
+                .navText {
+                    color: $white;
+                    font-weight: 400;
                 }
 
-                .navitemtxtWrapper {
-                    .navText {
-                        color: $white;
-                        font-weight: 400;
-                    }
-
-                    z-index: 2;
-                    position: relative;
-                }
+                z-index: 2;
+                position: relative;
             }
         }
 
         // navbar active nav css starts
         .activebar {
             margin-bottom: 10px;
+            margin-top: 16px;
 
             &:before {
                 content: '';
@@ -176,6 +176,62 @@
 
     }
 
+}
+
+// closed sidebar css
+.mainsidebar.closedSidebar {
+    width: 126px;
+
+    .sidebarnav-wrapper {
+        .accordion {
+            .nav {
+                .accordion-item {
+                    .accordion-header {
+                        .accordion-button {
+                            .navitemtxtWrapper {
+                                .navText {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                    .accordion-body{
+                        .nav{
+                            .nav-item{
+                                .navitemtxtWrapper{
+                                    padding: 11px 16px 11px 21px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .nav-item {
+                    a {
+                        .navitemtxtWrapper {
+                            .navText {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .activebar {
+                &:before {
+                    content: "";
+                    width: 79%;
+                    height: 48px;
+                    position: absolute;
+                    background: $white;
+                    background-repeat: no-repeat;
+                    left: 16.5px;
+                    top: -1px;
+                    border-radius: 8px;
+                }
+            }
+        }
+    }
 }
 
 // scrollbar css

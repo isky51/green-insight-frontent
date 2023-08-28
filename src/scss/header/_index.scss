@@ -20,14 +20,15 @@
             white-space: nowrap;
         }
     }
-
+    .mainsidebar.closedSidebar + .DashboardWrapper .dashboard_Header{
+        width: calc(100% - 126px);
+    }
     .dashboard_Header {
+        width: calc(100% - 278px);
         padding: 24px;
         position: fixed;
-        width: calc(100% - 278px);
         background-color: $gray-200;
         z-index: 4;
-
         .searchIcon {
             position: absolute;
             top: 17px;
@@ -149,5 +150,4 @@
             }
         }
     }
-
 }

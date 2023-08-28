@@ -60,32 +60,25 @@ const RegionOverview = () => {
       <section className="regionOverview-screen py-4 px-2">
         <div className="regionOverview-screen-wraper">
           <div className="regionOverview-heading">
-            <Row>
-              <Col lg="12">
-                <div className="regional-heading pb-3">
-                  <div className="d-sm-flex justify-content-end align-items-center">
-                   
-                    <div>
-                      <div className="lates-update">
-                        <DateTimeShow />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="">
-                    <div className="heading pt-3">
-                      <h2 className="mb-0 fs-4 fw-semibold">{params?.regionId} Region Overview</h2>
-                    </div>
-                    {emissionDates && <div className="lates-update "><p className="d-flex align-items-center mb-0 justify-content-start">Data available from {moment.utc(emissionDates?.data?.emission_dates?.start_date).format("DD MMMM YYYY")} to {moment.utc(emissionDates?.data?.emission_dates?.end_date).format("DD MMMM YYYY")}</p></div>}
-                  </div>
+            <div className="regional-heading mb-4 pb-3">
+              <div className="d-sm-flex justify-content-end align-items-center">
+                <div className="lates-update">
+                  <DateTimeShow />
                 </div>
-              </Col>
-            </Row>
+              </div>
+              <div className="">
+                <div className="heading">
+                  <h2 className="mb-0 fs-4 fw-semibold">{params?.regionId} Region Overview</h2>
+                </div>
+                {emissionDates && <div className="lates-update "><p className="d-flex align-items-center mb-0 justify-content-start">Data available from {moment.utc(emissionDates?.data?.emission_dates?.start_date).format("DD MMMM YYYY")} to {moment.utc(emissionDates?.data?.emission_dates?.end_date).format("DD MMMM YYYY")}</p></div>}
+              </div>
+            </div>
           </div>
-          <div className="regionOverview-section pb-5 px-3">
+          <div className="regionOverview-section pb-3 px-3">
             <Row className="g-3">
 
               <Col lg="12">
-                <div className="lane-data p-4 mb-3">
+                <div className="topBarOverview p-4">
                   <div>
                     <h6 className="datafrom-txt mb-2">
                       Summary of {`${params?.regionId} Region`} from {getQuarterYear(emissionDates?.data?.emission_dates?.start_date)} to {getQuarterYear(emissionDates?.data?.emission_dates?.end_date)}
@@ -94,7 +87,7 @@ const RegionOverview = () => {
                   <Row>
                     <Col lg="4" md="6">
                       <div className="emission mt-3">
-                        <h4 className="emi-txt fs-5 mb-2">
+                        <h4 className="emi-txt font-20 mb-3">
                           Project Manager
                         </h4>
 
@@ -118,49 +111,47 @@ const RegionOverview = () => {
                     <Col lg="8" md="6">
                       <div className="lane-data-wrapper d-lg-flex mt-3">
                         <div className="emission pe-lg-5 mb-3">
-                          <h4 className="emi-txt mb-0 fs-5">
+                          <h4 className="emi-txt mb-0 font-20 ">
                             Emissions Intensity
                           </h4>
-                          <h6>
+                          <h6 className="fw-light font-12">
                             gCO2e/Ton-Mile of freight
                           </h6>
                           <div className="d-flex align-items-center pt-lg-3">
                             <div className="orange-div">
                             </div>
-                            <h3 className="fw-bold mb-0 ps-2">
+                            <h3 className="font-16 mb-0 ps-2">
                               {getRegionOverviewDetailData?.data?.carrierDto[0]?.intensity?.toLocaleString("en-US", { minimumFractionDigits: 1 })}
-
                             </h3>
                           </div>
 
                         </div>
                         <div className="emission px-lg-5 mb-3">
-                          <h4 className="emi-txt mb-0 fs-5">
+                          <h4 className="emi-txt mb-0 font-20">
                             Total Emissions
 
                           </h4>
-                          <h6>
+                          <h6 className="fw-light font-12">
                             tCO2e
                           </h6>
                           <div className="d-flex align-items-center pt-lg-3">
                             <div className="green-div">
                             </div>
-                            <h3 className="fw-bold mb-0 ps-2">
+                            <h3 className="font-16 mb-0 ps-2">
                               {getRegionOverviewDetailData?.data?.carrierDto[0]?.emissions?.toFixed(2)?.toLocaleString("en-US", { minimumFractionDigits: 2 })}
-
                             </h3>
                           </div>
 
                         </div>
                         <div className="emission ps-lg-5 mb-3">
-                          <h4 className="emi-txt mb-0 fs-5">
+                          <h4 className="emi-txt mb-0 font-20">
                             Total Shipments
                           </h4>
                           <h6 className="invisible">tCO2e</h6>
                           <div className="d-flex align-items-center pt-lg-3">
-                            <div className="grey-div round-2">
+                            <div className="gray-div round-2">
                             </div>
-                            <h3 className="fw-bold mb-0 ps-2">
+                            <h3 className="font-16 mb-0 ps-2">
                               {getRegionOverviewDetailData?.data?.carrierDto[0]?.shipment_count?.toLocaleString("en-US")}
                             </h3>
                           </div>
@@ -309,7 +300,7 @@ const RegionOverview = () => {
                           id="exampleSelect"
                           name="select"
                           type="select"
-                          className="ms-2 my-2 my-md-0 w-auto"
+                          className="ms-2 my-2 my-md-0 w-auto font-14"
 
                         >
                           <option>Volume</option>
@@ -320,7 +311,7 @@ const RegionOverview = () => {
                           id="exampleSelect"
                           name="select"
                           type="select"
-                          className="ms-2 yearDropdown"
+                          className="ms-2 yearDropdown font-14"
                           value={yearlyData}
                           onChange={(e) => {
                             setRelaodData(false)

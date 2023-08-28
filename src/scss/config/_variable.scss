@@ -57,6 +57,7 @@ $gray-600: #929597 !default;
 $gray-700: #464A4B !default;
 $gray-800: #2F3436 !default;
 $gray-900: #181A1C !default;
+$gray-1000: #EFEDE9 !default;
 $black:    #000000 !default;
 
 $grays: (
@@ -68,7 +69,8 @@ $grays: (
   "600": $gray-600,
   "700": $gray-700,
   "800": $gray-800,
-  "900": $gray-900
+  "900": $gray-900,
+  "1000": $gray-1000
 ) !default;
 
 $blue:    #367C90 !default;
