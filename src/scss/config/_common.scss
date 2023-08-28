@@ -70,6 +70,18 @@
     background-color: $orange;
     border-radius: 4px;
 }
+.white-div {
+    width: 15px;
+    height: 15px;
+    background-color: $gray-300;
+    border-radius: 4px;
+}
+.gray-div{
+    width: 15px;
+    height: 15px;
+    background-color: $gray-700;
+    border-radius: 50%;
+}
 
 // select box font size
 .select-box {
@@ -113,4 +125,15 @@
             border-color: $primary;
         }
     }
+}
+.highcharts-background{
+    fill: $info;
+}
+.backBtn{
+    background-color: $primary;
+    color: $white;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 10px 32px;
+    border-radius: 4px;
 }

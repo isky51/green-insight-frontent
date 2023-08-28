@@ -1,38 +1,35 @@
 @import "./variable.scss";
 
 .static-table {
+
     table {
         border-collapse: collapse;
         table-layout: fixed;
         width: 100%;
         background-color: rgba(237, 237, 246, .1);
+
     }
 
     th,
     td {
-        border-bottom: 1px solid #c1d3c0;
+        border-bottom: 1px solid $lightgreen;
         padding: 16px 0px;
         text-align: left;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         font-size: 14px;
-        color: #464a4b;
+        color: $gray-700;
     }
 
     th:last-child,
     td:last-child {
         width: 60px;
-
-        a {
-            color: #585858;
-        }
     }
 
     th {
 
         font-size: 12px;
-        color: #215154;
         vertical-align: baseline;
     }
 
@@ -79,30 +76,5 @@
         }
     }
 }
-.static-table.staticui{
-    th {
-        @media (max-width:1300px){
-            font-size: 10px;
-        }
-    }
-    td{
-        @media (max-width:1300px){
-            font-size: 12px;
-        }
-    }
-    th:last-child,
-    td:last-child {
-      width: auto;
-      
-    }
-    .fs-10{
-        @media (max-width:1300px){
-            font-size: 9px;
-        }
-    }
-    span{
-        img{
-            width: 18px;
-        }
-    }
-}
+
+

@@ -19,6 +19,7 @@ import Form from "react-bootstrap/Form";
 import ChartHighChart from "../../constant/highchart/chartHighChart";
 import { lineChart } from "../../constant/highchart/lineChart";
 import { pieChart } from "../../constant/highchart/pieChart";
+import { verticalColumnChart } from "../../constant/highchart/verticalColumnChart";
 
 /**
  *
@@ -240,28 +241,28 @@ const SustainView = () => {
                             emissionDates?.data?.emission_dates?.start_date
                           ).format("YYYY")
                         ) && (
-                        <button
-                          onClick={() => {
-                            setRelaodData(false);
-                            setYearlyData1(
-                              (prev: any) => Number.parseInt(prev) - 1
-                            );
-                          }}
-                        >
-                          <svg
-                            width="11"
-                            height="20"
-                            viewBox="0 0 11 20"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
+                          <button
+                            onClick={() => {
+                              setRelaodData(false);
+                              setYearlyData1(
+                                (prev: any) => Number.parseInt(prev) - 1
+                              );
+                            }}
                           >
-                            <path
-                              d="M-1.07292e-06 9.99996C-1.07015e-06 10.2325 0.0888614 10.4652 0.266361 10.6427L9.35726 19.7336C9.71248 20.0888 10.2877 20.0888 10.6427 19.7336C10.9977 19.3784 10.9979 18.8031 10.6427 18.4481L2.19454 9.99996L10.6427 1.55179C10.9979 1.19656 10.9979 0.621334 10.6427 0.266335C10.2875 -0.088665 9.71226 -0.088892 9.35726 0.266335L0.266361 9.35723C0.0888613 9.53473 -1.0757e-06 9.76746 -1.07292e-06 9.99996Z"
-                              fill="#5f9a80"
-                            />
-                          </svg>
-                        </button>
-                      )}
+                            <svg
+                              width="11"
+                              height="20"
+                              viewBox="0 0 11 20"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M-1.07292e-06 9.99996C-1.07015e-06 10.2325 0.0888614 10.4652 0.266361 10.6427L9.35726 19.7336C9.71248 20.0888 10.2877 20.0888 10.6427 19.7336C10.9977 19.3784 10.9979 18.8031 10.6427 18.4481L2.19454 9.99996L10.6427 1.55179C10.9979 1.19656 10.9979 0.621334 10.6427 0.266335C10.2875 -0.088665 9.71226 -0.088892 9.35726 0.266335L0.266361 9.35723C0.0888613 9.53473 -1.0757e-06 9.76746 -1.07292e-06 9.99996Z"
+                                fill="#5f9a80"
+                              />
+                            </svg>
+                          </button>
+                        )}
                     </div>
                     <div className="right-arrow-slider">
                       {yearlyData1 < 2023 && (
@@ -343,11 +344,11 @@ const SustainView = () => {
 
                         // />
                         <ChartHighChart
-                          options={pieChart(
+                          options={lineChart(
                             {
-                              isLoading:isLoading,
-                              options:regionEmission?.data,
-                              chart:1
+                              isLoading: isLoading,
+                              options: regionEmission?.data,
+                              chart: 1
                             }
                           )}
                         />
@@ -416,9 +417,20 @@ const SustainView = () => {
                           </div>
                         </div>
                       ) : (
-                        ""
+
+                        emissionIntensityDetails?.data?.length > 0 &&
+
+                        <ChartHighChart
+                          options={verticalColumnChart(
+                            {
+                              isLoading: isLoading,
+                              options: emissionIntensityDetails?.data,
+                              chart: 2
+
+                            }
+                          )}
+                        />
                       )
-                      //requried : emissionIntensityDetails?.data?.length > 0 && <ChartsHigh isLoading={isLoading} reloadData={relaodData} chart={2} options={emissionIntensityDetails?.data} revenueType={revenueType} />
                     }
                     {/* Bar element graph plot is here */}
                     {Math.round(
@@ -426,14 +438,13 @@ const SustainView = () => {
                         emissionIntensityDetails?.data?.[0]
                           ?.industrialAverage) /
                         emissionIntensityDetails?.data?.[0]?.max) *
-                        100
+                      100
                     ).toFixed(2) ? (
                       <div
-                        className={`model-overview-down px-3 py-2 ${
-                          emissionIntensityDetailsIsLoading
+                        className={`model-overview-down px-3 py-2 ${emissionIntensityDetailsIsLoading
                             ? "model-overview-up"
                             : ""
-                        }`}
+                          }`}
                       >
                         <div>
                           <h6 className=" mb-0 d-flex fs-6">
@@ -448,7 +459,7 @@ const SustainView = () => {
                                 emissionIntensityDetails?.data?.[0]
                                   ?.industrialAverage) /
                                 emissionIntensityDetails?.data?.[0]?.max) *
-                                100
+                              100
                             ) + "%"}{" "}
                             higher than industry average
                           </h6>
@@ -469,7 +480,7 @@ const SustainView = () => {
                                 emissionIntensityDetails?.data?.[0]
                                   ?.industrialAverage) /
                                 emissionIntensityDetails?.data?.[0]?.max) *
-                                100
+                              100
                             ) + "%"}{" "}
                             lower than industry average
                           </h6>
@@ -491,7 +502,6 @@ const SustainView = () => {
                 </a>
               </div>
             </div>
-
             <div className="">
               <Row>
                 <Col lg="12">
@@ -518,7 +528,6 @@ const SustainView = () => {
                             }}
                           >
                             <option value="">All Regions</option>
-
                             {regions?.data?.length !== 0 &&
                               regions?.data?.regions.map((x: any) => (
                                 <option value={x.id} key={x.id}>
@@ -540,21 +549,19 @@ const SustainView = () => {
                       </div>
                     ) : (
                       graphRegionChart?.data && (
-                         <ChartHighChart
-                          options={lineChart(
-                            regionEmission?.data ? regionEmission?.data : []
+                        <ChartHighChart
+                          options={verticalColumnChart(
+                            {
+                              isLoading: isLoadingGraphRegionEmission,
+                              options: graphRegionChart?.data?.filter(
+                                (i: any) =>
+                                  i.name !== "company_level" &&
+                                  i.name !== "target_level"
+                              ),
+                              chart: 4
+                            }
                           )}
                         />
-                        // <ChartsHigh
-                        //   isLoading={isLoadingGraphRegionEmission}
-                        //   reloadData={relaodData}
-                        //   options={graphRegionChart?.data?.filter(
-                        //     (i) =>
-                        //       i.name !== "company_level" &&
-                        //       i.name !== "target_level"
-                        //   )}
-                        //   chart={4}
-                        // />
                       )
                     )}
                   </div>
@@ -612,12 +619,18 @@ const SustainView = () => {
                   <Row className="align-items-center">
                     <Col xl="3" lg="6">
                       <div>
-                        {/* required {projectCountData?.data &&
-                                                    <Link to="/projects">
-                                                        <ChartsHigh isLoading={isLoading} reloadData={relaodData} chart={3} pieChartCount={Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")} />
-                                                    </Link>
-
-                                                } */}
+                        {projectCountData?.data &&
+                          <Link to="/projects">
+                            <ChartHighChart
+                              options={pieChart(
+                                {
+                                  chart: "piechart",
+                                  pieChartCount: Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")
+                                }
+                              )}
+                            />
+                          </Link>
+                        }
                         {/* <PieChart /> */}
                       </div>
                     </Col>
