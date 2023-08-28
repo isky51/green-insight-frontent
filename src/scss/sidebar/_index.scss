@@ -63,27 +63,27 @@
                     }
                 }
 
-                // // navbar active nav css accordian starts
-                // .activebar.accordion-header {
-                //     .accordion-button {
-                //         background: $white;
-                //         border: 1px solid $white;
-                //         color: $white;
-                //         border-radius: 0px 19px 19px 0px;
-                //         box-shadow: none;
-                //         padding: 0;
+                // navbar active nav css accordian starts
+                .activebar.accordion-header {
+                    .accordion-button {
+                        background: transparent;
+                        border: 1px solid transparent;
+                        color: $white;
+                        border-radius: 0px 19px 19px 0px;
+                        box-shadow: none;
+                        padding: 0;
 
-                //         &:not(.collapsed)::after {
-                //             background-image: url('../../assets/images/sidebar/upWhiteAccordianArrow.svg');
-                //             filter: invert(0%) sepia(3%) saturate(7500%) hue-rotate(217deg) brightness(0%) contrast(100%);
-                //         }
+                        &:not(.collapsed)::after {
+                            background-image: url('../../assets/images/sidebar/upWhiteAccordianArrow.svg');
+                            filter: invert(0%) sepia(3%) saturate(7500%) hue-rotate(217deg) brightness(0%) contrast(100%);
+                        }
 
-                //         &::after {
-                //             background-image: url('../../assets/images/sidebar/upWhiteAccordianArrow.svg');
-                //             filter: invert(0%) sepia(3%) saturate(7500%) hue-rotate(217deg) brightness(0%) contrast(100%);
-                //         }
-                //     }
-                // }
+                        &::after {
+                            background-image: url('../../assets/images/sidebar/upWhiteAccordianArrow.svg');
+                            filter: invert(0%) sepia(3%) saturate(7500%) hue-rotate(217deg) brightness(0%) contrast(100%);
+                        }
+                    }
+                }
 
                 // navbar active nav css accordian ends
 
@@ -124,55 +124,114 @@
         }
 
         .nav-item {
-            .nav-link {
+            a {
+                text-decoration: none;
+            }
+
+            .navitemtxtWrapper {
                 padding: 15px 16px 15px 32px;
 
-                .navitemtxtWrapper {
-                    .navText {
-                        color: $white;
-                        font-weight: 400;
-                    }
-
-                    z-index: 2;
-                    position: relative;
+                .navText {
+                    color: $white;
+                    font-weight: 400;
                 }
+
+                z-index: 2;
+                position: relative;
             }
         }
 
         // navbar active nav css starts
-        // .activebar {
-        //     margin-bottom: 10px;
+        .activebar {
+            margin-bottom: 10px;
+            margin-top: 16px;
 
-        //     &:before {
-        //         content: '';
-        //         background: url('../../assets/images/sidebar/sidebarbg_Bar.svg');
-        //         width: 100%;
-        //         height: 121px;
-        //         position: absolute;
-        //         background-repeat: no-repeat;
-        //         left: 16.5px;
-        //         top: -39px;
-        //     }
+            &:before {
+                content: '';
+                background: url('../../assets/images/sidebar/sidebarbg_Bar.svg');
+                width: 100%;
+                height: 121px;
+                position: absolute;
+                background-repeat: no-repeat;
+                left: 16.5px;
+                top: -39px;
+            }
 
-        //     .navitemtxtWrapper {
-        //         .navText {
-        //             color: $black !important;
-        //             font-weight: 400;
-        //         }
+            .navitemtxtWrapper {
+                .navText {
+                    color: $black !important;
+                    font-weight: 400;
+                }
 
-        //         img {
-        //             filter: invert(0%) sepia(3%) saturate(7500%) hue-rotate(217deg) brightness(0%) contrast(100%);
-        //         }
+                img {
+                    filter: invert(0%) sepia(3%) saturate(7500%) hue-rotate(217deg) brightness(0%) contrast(100%);
+                }
 
-        //         position: relative;
+                position: relative;
 
-        //     }
-        // }
+            }
+        }
 
         // navbar active nav css ends
 
     }
 
+}
+
+// closed sidebar css
+.mainsidebar.closedSidebar {
+    width: 126px;
+
+    .sidebarnav-wrapper {
+        .accordion {
+            .nav {
+                .accordion-item {
+                    .accordion-header {
+                        .accordion-button {
+                            .navitemtxtWrapper {
+                                .navText {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                    .accordion-body{
+                        .nav{
+                            .nav-item{
+                                .navitemtxtWrapper{
+                                    padding: 11px 16px 11px 21px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .nav-item {
+                    a {
+                        .navitemtxtWrapper {
+                            .navText {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .activebar {
+                &:before {
+                    content: "";
+                    width: 79%;
+                    height: 48px;
+                    position: absolute;
+                    background: $white;
+                    background-repeat: no-repeat;
+                    left: 16.5px;
+                    top: -1px;
+                    border-radius: 8px;
+                }
+            }
+        }
+    }
 }
 
 // scrollbar css

@@ -80,6 +80,7 @@
     h3 {
         font-size: 20px;
     }
+
     span {
         font-size: 12px;
     }
@@ -89,17 +90,20 @@
         border-radius: 4px;
         border: 1px solid $primary;
         font-size: 14px;
-        &:hover{
+
+        &:hover {
             background: $primary;
             border-radius: 4px;
             border: 1px solid $primary;
         }
     }
-    .select-box{
-        .perTonDropdown{
+
+    .select-box {
+        .perTonDropdown {
             min-width: 156px;
         }
     }
+
     .model-overview-down {
         background: $gray-200;
         border-left: 10px solid $orange;
@@ -109,7 +113,8 @@
         display: flex;
         align-items: center;
     }
-    .model-overview-up{
+
+    .model-overview-up {
         background: $lightgreen ;
         border-left: 10px solid $primary;
         color: $primary;
@@ -117,4 +122,26 @@
         min-height: 50px;
     }
 
+}
+
+//top bar overview screen cards 
+
+.topBarOverview {
+    background: $gray-200;
+    border-radius: 8px;
+
+    .datafrom-txt {
+        font-size: 12px;
+    }
+
+    .emission {
+        .manager-img-default {
+            img {
+                width: 50px;
+            }
+        }
+        h6{
+            font-size: 14px;
+        }
+    }
 }

@@ -1,302 +1,114 @@
-// @import "../../config/variable.scss";
-// $theme-colors: (
-//   "primary":    $primary,
-//   "secondary":  $secondary,
-//   "success":    $success,
-//   "info":       $info,
-//   "warning":    $warning,
-//   "danger":     $danger,
-//   "light":      $light,
-//   "dark":       $dark
-// ) !default;
-// our main colors used in project
-$green:    #215154!default;
-$amazon:   #215154 !default;
-$orange:   #d8856b!default;
-$yellow:   #c1d3c0 !default;
-$cyan:     #efede9 !default;
-$white:    #ffffff !default;
-$black:    #000000 !default;
-$gray-100: #dcdcdc !default;
-$gray-200: #464a4b !default;
-$gray-900: #181a1c !default;
+@import "../config/variable";
 
 
-// scss-docs-start theme-color-variables
-$primary:       $green    !default;
-$secondary:     $orange   !default;
-$warning:       $yellow   !default;
-$success:       $amazon   !default;
-$danger:        $orange   !default;
-$info:          $cyan     !default;
-$light:         $gray-100 !default;
-$dark:          $gray-900 !default;
-
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
-);
-
-.regional-level {
-    .model-overview-down {
-        background-color: $info;
-        border-left: 10px solid $danger;
-        height: 50px;
-        @media (max-width:576px){
-            height: 80px;
-        }
-
-        h6 {
-            font-size: 14px;
-            color: $danger;
-            font-weight: 400;
-
-            span {
-                img {
-                    width: 18px;
-                }
-            }
-        }
-    }
-
-    .opacity-1 {
-        opacity: 0.1;
-    }
-
-    .fs-14s {
-        font-size: 14px !important;
-    }
-
-    .green-data-progress {
-        .progress {
-            .progress-bar {
-                background-color: $success;
-            }
-        }
-    }
-
-    .project-outer {
-        .projects {
-            h3 {
-                font-size: 30px;
-                color: $dark;
-                text-align: center;
-
-                span {
-                    font-size: 14px;
-                    font-weight: 400;
-                }
-            }
-
-            top: 0;
-            right: calc(100% - 138px);
-            bottom: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    }
-
-    .id-data {
-        background-color: $info;
-        border-radius: 21px 21px 0 0;
-    }
-
-    .delay-project {
-        h4 {
-            font-size: 22px;
-            color: $primary;
-        }
-
-        a {
-            font-size: 14px;
-            color: $primary;
-        }
-
-        .delay-txt {
-            span {
-                background-color: $info;
-                width: 20px;
-                display: flex;
-                height: 20px;
-                justify-content: center;
-                align-items: center;
-                font-size: 12px;
-                border-radius: 50%;
-            }
-        }
-    }
-
-    .alternative-fuel {
-        border: 1px solid $warning;
-    }
-
-    .pacific-overview {
-        h2 {
-            font-size: 26px;
-            color: $primary;
-        }
-    }
-
-    .track-btn {
-        button {
-            font-size: 12px;
-            border-radius: 0;
-            min-width: 113px;
-            background-color: $success;
-            border: $primary;
-        }
-    }
-
-    .track-btn-lightgreen {
-        button {
-            font-size: 12px;
-            border-radius: 0;
-            min-width: 113px;
-            background-color: #5f9a80;
-            border: #5f9a80;
-        }
-    }
-
-    .track-btn-red {
-        button {
-            background-color: $danger;
-            border: $danger;
-            min-width: 113px;
-            font-size: 12px;
-            border-radius: 0;
-        }
-    }
-
-    .inner-data-region {
-        .id-data {
-            h6 {
-                font-size: 12px;
-                color: $dark;
-            }
-
-            h4 {
-                font-size: 20px;
-            }
-
-            h5 {
-                font-size: 14px;
-            }
-        }
-    }
-.regional-dropdown{
-    width: 83px !important;
-}
-    .progress {
-        --bs-progress-height: 0.7rem;
-        --bs-progress-font-size: 0.75rem;
-        --bs-progress-bg: #fff;
-        --bs-progress-border-radius: 0.375rem;
-        --bs-progress-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
-        --bs-progress-bar-bg: #d8856b;
-        display: flex;
-        height: var(--bs-progress-height);
-        overflow: hidden;
-        font-size: var(--bs-progress-font-size);
-        background-color: var(--bs-progress-bg);
-        border-radius: var(--bs-progress-border-radius);
-    }
-
-    .co-txt h4,
-    .co-txt h5 {
-        font-size: 16px;
-        color: $primary;
-        font-weight: 600 !important;
-    }
-
-    .popup-dots-wrap {
-        .popup-data {
-            .delete-icon {
-                img {
-                    width: 16px;
-                }
-            }
-
-            position: absolute;
-            background-color: $white;
-            box-shadow: 7px 5px 18px rgb(0 0 0 / 12%);
+.regional-screen {
+    .regional-screen-wraper {
+        .regional-heading {
+            background-color: $gray-200;
             border-radius: 8px;
-            max-width: 200px;
-            width: 200px;
-            top: 0px;
-            left: 11px;
         }
-    }
 
-    .x-axis-hide {
+        .regional-section {
+            background: $white;
+            border-radius: 8px;
 
-        div {
-            div {
-                svg {
-                    g {
+            .mainGrayCards {
+                .regionWiseTxt {
+                    h6 {
+                        font-size: 14px;
 
-                        &.highcharts-yaxis-labels {
-                            display: none !important;
+                        span {
+                            font-size: 14px;
                         }
                     }
                 }
             }
         }
+
+        .track-btn-green {
+            button {
+                width: 217px;
+                background-color: $green;
+                border: $green;
+                font-size: 12px;
+                border-radius: 4px;
+            }
+        }
+
+        .track-btn-orange {
+            button {
+                width: 217px;
+                background-color: $orange;
+                border: $orange;
+                font-size: 12px;
+                border-radius: 4px;
+            }
+        }
+
+        .co-txt {
+            h4 {
+                font-size: 20px;
+                font-weight: 600;
+            }
+
+            padding-top: 10px;
+
+        }
+
+        .topSpace {
+            min-height: 34px;
+        }
+
+        h4 {
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+
     }
+
 }
 
 .modal-dialog.data-tile-screen {
+    align-items: center;
+    display: flex;
+    height: auto;
+    justify-content: center;
+    margin: 42px auto;
     max-width: 90%;
+    pointer-events: none;
     position: relative;
     width: auto;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 42px auto;
-    pointer-events: none;
-}
-.regional-wrapper .red-div {
-    width: 14px;
-    height: 14px;
-    background-color: #d8856b;
-    border-radius: 2px;
-}
-
-.data-tile-screen {
-    .modal-content{
-        border-radius: 4px;
-        .modal-header{
-            .modal-title{
-                h2{
-                    font-size: 26px;
-                    color: $primary;
-                    font-weight: 600;
+    .modal-body{
+        .card-border{
+            border: 1px solid $gray-600;
+            .form-check{
+                .form-check-input{
+                    border: 1px solid $gray-600;
+                    &:checked{
+                        background-color: $primary;
+                    }
+                    &:focus{
+                        box-shadow: none;
+                    }
                 }
-            }
-        }
-        .modal-body{
-            .card-border{
-                border: 1px solid #c1d3c0;
-                .card-wrapper-txt{
-                    height: 130px;
-                }
-                h6{
-                    color: $primary;
-                }
-                p{
-                    color: $primary;
-                }
-            }
-        }
-        .modal-footer{
-            button{
-                background-color: $primary;
             }
         }
     }
+
+}
+
+.progress {
+    --bs-progress-height: 0.7rem;
+    --bs-progress-font-size: 0.75rem;
+    --bs-progress-bg: #fff;
+    --bs-progress-border-radius: 0.375rem;
+    --bs-progress-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+    --bs-progress-bar-bg: #d8856b;
+    display: flex;
+    height: var(--bs-progress-height);
+    overflow: hidden;
+    font-size: var(--bs-progress-font-size);
+    background-color: var(--bs-progress-bg);
+    border-radius: var(--bs-progress-border-radius);
 }

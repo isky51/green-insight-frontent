@@ -1,12 +1,8 @@
-// import "../substainable/substainable.scss";
 import "../../scss/regionalLevel/_index.scss";
 import ArrowDown from "../../assets/images/common/arrow-down.svg";
-import ExportButton from "../../component/export-button";
-import Export from "../../assets/images/common/export.svg";
 import Up from "../../assets/images/common/up.svg";
 import Down from "../../assets/images/common/down.svg";
 import Garrow from "../../assets/images/common/g-arrow.svg";
-import Delete from "../../assets/images/common/delete.svg";
 import Plus from "../../assets/images/regional/plus.svg";
 import AvgLanes from "../../assets/images/regional/avg-lanes.png";
 import AvgCarrier from "../../assets/images/regional/avg-carriers.png";
@@ -19,14 +15,12 @@ import {
   Input,
   Modal, ModalHeader, ModalBody, ModalFooter
 } from "reactstrap";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
-// import ChartsHigh from "../../component/ChartsHigh";
-// import BubbleHighChart from "../../component/BubbleHighChart";
+
 import {
   yearList, getQuarters,
   getQuarterName,
-  getGraphDataHorizontal,
   getRegionName,
   isCompanyEnable,
   getCompanyName
@@ -91,7 +85,7 @@ const RegionalLevelView = () => {
     isLane,
     isCarrier,
     isFacility,
-    modal, setModal,
+    modal,
     toggle,
     setIsRegionState,
     setIsLaneState,
@@ -102,216 +96,195 @@ const RegionalLevelView = () => {
     setChecked,
     checked
   } = RegionalLevelController()
-console.log(isRegionState,"isRegionStateisRegionState")
+  console.log(isRegionState, "isRegionStateisRegionState")
 
   return (
     <>
-      <section className="insight_top_wrapper">
-        <section className="substain-screen regional-level pb-4 vendor-wrapper regional-wrapper  regional-overview-wrapper lane-wrapper">
-          <div className="container-fluid">
-            <div className="substain-screen-wraper">
-              <div className="substain-heading">
-                <Row>
-                  <Col lg="12" md="12">
-                    <Row className="substain-h-wrapper pe-3 pb-0 ps-0">
-                      <Col lg="9">
-                        <div className="lates-update">
-                          <h1 className="mb-0 fs-3">
-                            Transportation Emissions Dashboard
-                          </h1>
-                        </div>
-                      </Col>
-                      <Col lg="3" md="12" className="p-0">
-                        <div className="lates-update">
-                          <DateTimeShow />
-                        </div>
-                        <div></div>
-                      </Col>
-                    </Row>
-                    <Row className=" p-3 ps-0 substain-h-wrapper align-items-center">
-                      <Col lg="9" md="12">
-                        <FormGroup className="select-box d-flex">
-                          {useAuth().userdata?.role === 0 && (
-                            <Input
-                              id="exampleSelect"
-                              name="select"
-                              type="select"
-                              className="ms-2"
-                              value={regionsLevel}
-                              onChange={(e) => {
-                                setRegionsLevel(e.target.value)
-                                setRelaodData(false);
-                                if (e.target.value === "") {
-                                  localStorage.removeItem("regionalLevel")
-                                }
-                                else {
-                                  localStorage.setItem("regionalLevel", e.target.value)
-                                }
-                              }}
-                            >
-                              <option value=""> All Regions</option>
-                              {
-                                regions?.data?.regions.map((x: any) => (
-                                  <option value={x.id} key={x.id}>
-                                    {x.name}
-                                  </option>
-                                ))}
-                            </Input>
-                          )}
-                          <Input
-                            id="exampleSelect"
-                            name="select"
-                            type="select"
-                            className="ms-2 my-2 my-md-0 regional-dropdown"
-                            value={yearlyData}
-                            onChange={(e) => {
-                              setYearlyData(e.target.value);
-                              setYearlyData1(e.target.value)
-                              setQuarterDetails(1)
-                              setQuartelyData(1)
-                              setRelaodData(false);
-                            }}
-                          >
 
-                            {yearList(emissionDates?.data?.emission_dates).map((x, index) => (
-                              <option key={index} value={x}>
-                                {x}
-                              </option>
-                            ))}
-                          </Input>
-                          <Input
-                            id="exampleSelect"
-                            name="select"
-                            type="select"
-                            className="ms-2 quater-dropdown"
-                            value={quarterDetails}
-                            onChange={(e) => {
-                              setQuarterDetails(e.target.value);
-                              setQuartelyData(e.target.value)
-                              setRelaodData(false);
-                            }}
-                          >
-                            {getQuarters(yearlyData).map(i => (
-                              <option value={i?.value}>{i?.name}</option>
-                            ))}
-                          </Input>
-                        </FormGroup>
-                      </Col>
-                      <Col lg="3" md="12">
-                        <ExportButton />
-                      </Col>
-                    </Row>
-                  </Col>
-                </Row>
-              </div>
-              {/* substainability tracker */}
-              <div>
-                <Row>
-                  <Col lg="12" md="12">
-                    <div className="subs-inner-heading py-3">
-                      <h2 className="fw-semibold mb-4">Sustainability Tracker</h2>
-                      <Row>
-
-                        <Col lg="3">
-                          <div className="tracker-data p-3 tracker-card h-100 ">
-                            <div className="tracker-inner">
-                              <div className="mt-3">
-                                <div className="d-xl-flex justify-content-between">
-                                  <div>
-                                    <div className="co-txt d-flex arrow-down align-items-center mb-3">
-                                      <div className="green-div me-2">
-                                      </div>
-                                      <h4 className="mb-0">
-                                        <span> <img src={ArrowDown} alt="ico" /></span>
-                                        22.5%
-                                      </h4>
-                                    </div>
-                                    <h6>
-                                      {getCompanyName(dataCheck?.userdata)}
-                                    </h6>
-                                    <h3>Emissions Reduction Target</h3>
-                                    <div className="by-date">
-                                      <p className="mb-0">By {new Date().getFullYear()}</p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg="3" className=" mt-3 mt-lg-0">
-                          <div className="tracker-data p-3 tracker-card h-100">
-                            <div className="tracker-inner">
-                              <div className="mt-3">
-                                <div className="co-txt d-flex align-items-center mb-3">
-                                  <div className="green-div me-2"></div>
-                                  <div className="co-txt d-flex arrow-down align-items-center">
-                                    <h4 className="mb-0"> <span> <img src={ArrowDown} alt="ico" /></span>4%</h4>
-                                  </div>
-                                </div>
-                                <h6>{regionName} Region</h6>
-                                <h3>Emissions Reduction Target</h3>
-                                <div className="by-date">
-                                  <p className="mb-0">By Q{Math.floor((new Date().getMonth() + 3) / 3)} {new Date().getFullYear()}</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg="3" className=" mt-3 mt-lg-0">
-                          <div className="tracker-data p-3 tracker-card h-100">
-                            <div className="tracker-inner">
-                              <div className="mt-3">
-                                <div className="">
-                                  <div className="co-txt d-flex align-items-center mb-3">
-                                    <div className="green-div me-2"></div>
-                                    <h4 className="mb-0">{Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")}
-                                    </h4>
-                                  </div>
-                                  <h6>{regionName} Region</h6>
-                                  <h3 className="min-height48">Projects in Progress</h3>
-                                  <div className="by-date">
-                                    <p className="mb-0">In Q{Math.floor((new Date().getMonth() + 3) / 3)} {new Date().getFullYear()}</p>
-                                  </div>
-
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </Col>
-                        <Col lg="3" className=" mt-3 mt-lg-0">
-                          <div className="tracker-data p-3 tracker-card h-100">
-                            <div className="tracker-inner">
-                              <div className="mt-3">
-
-                                <div className="">
-                                  <div className="co-txt d-flex align-items-center mb-3">
-                                    <div className="red-div me-2"></div>
-
-                                    <h4 className="mb-0">2%</h4>
-                                  </div>
-                                  <h6>{regionName} Region</h6>
-                                  <h3 className="">Gap to Target</h3>
-                                  <div className="by-date company-commit">
-                                    <p className="mb-0"> Reduction needed between now and Q{Math.floor((new Date().getMonth() + 3) / 3)} {new Date().getFullYear()}
-                                    </p>
-                                    <a target="_blank" rel="noreferrer" href="https://corporate.lowes.com/our-responsibilities/corporate-responsibility-reports-policies" className="text-decoration-underline text-white"> See company commitment</a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </Col>
-                      </Row>
-
+      <section className="regional-screen py-4 px-2">
+        <div className="regional-screen-wraper">
+          <div className="regional-heading">
+            <Row>
+              <Col lg="12" md="12">
+                <Row className="substain-h-wrapper pe-3 pb-0 ps-0">
+                  <Col lg="9">
+                    <div className="lates-update">
+                      <h1 className="mb-0 fs-3">
+                        Transportation Emissions Dashboard
+                      </h1>
                     </div>
                   </Col>
+                  <Col lg="3" md="12" className="p-0">
+                    <div className="lates-update">
+                      <DateTimeShow />
+                    </div>
+                    <div></div>
+                  </Col>
                 </Row>
-              </div>
-              <div className="">
-                <Row>
-                  <Col lg="6" className="h-100">
-                    <div className="h-100 inner-data-region slider-icons position-relative px-3">
+                <Row className=" p-3 ps-0 align-items-center">
+                  <Col lg="9" md="12">
+                    <FormGroup className="select-box d-flex">
+                      {useAuth().userdata?.role === 0 && (
+                        <Input
+                          id="exampleSelect"
+                          name="select"
+                          type="select"
+                          className="ms-2"
+                          value={regionsLevel}
+                          onChange={(e) => {
+                            setRegionsLevel(e.target.value)
+                            setRelaodData(false);
+                            if (e.target.value === "") {
+                              localStorage.removeItem("regionalLevel")
+                            }
+                            else {
+                              localStorage.setItem("regionalLevel", e.target.value)
+                            }
+                          }}
+                        >
+                          <option value=""> All Regions</option>
+                          {
+                            regions?.data?.regions.map((x: any) => (
+                              <option value={x.id} key={x.id}>
+                                {x.name}
+                              </option>
+                            ))}
+                        </Input>
+                      )}
+                      <Input
+                        id="exampleSelect"
+                        name="select"
+                        type="select"
+                        className="ms-2 my-2 my-md-0 regional-dropdown"
+                        value={yearlyData}
+                        onChange={(e) => {
+                          setYearlyData(e.target.value);
+                          setYearlyData1(e.target.value)
+                          setQuarterDetails(1)
+                          setQuartelyData(1)
+                          setRelaodData(false);
+                        }}
+                      >
+
+                        {yearList(emissionDates?.data?.emission_dates).map((x, index) => (
+                          <option key={index} value={x}>
+                            {x}
+                          </option>
+                        ))}
+                      </Input>
+                      <Input
+                        id="exampleSelect"
+                        name="select"
+                        type="select"
+                        className="ms-2 quater-dropdown"
+                        value={quarterDetails}
+                        onChange={(e) => {
+                          setQuarterDetails(e.target.value);
+                          setQuartelyData(e.target.value)
+                          setRelaodData(false);
+                        }}
+                      >
+                        {getQuarters(yearlyData).map(i => (
+                          <option value={i?.value}>{i?.name}</option>
+                        ))}
+                      </Input>
+                    </FormGroup>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+
+           
+            <div className="regional-section pb-5 px-3">
+              <Row>
+                <Col lg="12" md="12">
+                  <div className="subs-inner-heading py-4 pb-4">
+                    <h2 className="fw-medium pb-4 mb-0 font-24">Sustainability Tracker</h2>
+                    <Row className="g-3">
+                      <Col lg="3">
+                        <div className="primaryCard p-4 h-100">
+                          <div className="primaryCardInnerWprpper">
+                            <div className="co-txt d-flex align-items-center mb-3">
+                              <div className="green-div me-2">
+                              </div>
+                              <h4 className="mb-0">
+                                <span> <img src={ArrowDown} alt="ico" /></span>
+                                22.5%
+                              </h4>
+                            </div>
+                            <h6 className="font-14">
+                              {getCompanyName(dataCheck?.userdata)}
+                            </h6>
+                            <h3>Emissions Reduction Target</h3>
+                            <div className="by-date mt-2">
+                              <p className="mb-0">By {new Date().getFullYear()}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </Col>
+                      <Col lg="3">
+                        <div className="primaryCard p-4 h-100">
+                          <div className="primaryCardInnerWprpper">
+                            <div className="co-txt d-flex align-items-center mb-3">
+                              <div className="green-div me-2"></div>
+
+                              <h4 className="mb-0"> <span> <img src={ArrowDown} alt="ico" /></span>4%</h4>
+
+                            </div>
+                            <h6>{regionName} Region</h6>
+                            <h3>Emissions Reduction Target</h3>
+                            <div className="by-date">
+                              <p className="mb-0">By Q{Math.floor((new Date().getMonth() + 3) / 3)} {new Date().getFullYear()}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </Col>
+                      <Col lg="3">
+                        <div className="primaryCard p-4 h-100">
+                          <div className="primaryCardInnerWprpper">
+                            <div className="co-txt d-flex align-items-center mb-3">
+                              <div className="green-div me-2"></div>
+                              <h4 className="mb-0">{Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")}
+                              </h4>
+                            </div>
+                            <h6>{regionName} Region</h6>
+                            <h3 className="min-height48">Projects in Progress</h3>
+                            <div className="by-date">
+                              <p className="mb-0">In Q{Math.floor((new Date().getMonth() + 3) / 3)} {new Date().getFullYear()}</p>
+                            </div>
+
+                          </div>
+                        </div>
+                      </Col>
+                      <Col lg="3">
+                        <div className="primaryCard p-4 h-100">
+                          <div className="primaryCardInnerWprpper">
+
+                            <div className="co-txt d-flex align-items-center mb-3">
+                              <div className="orange-div me-2"></div>
+
+                              <h4 className="mb-0">2%</h4>
+                            </div>
+                            <h6>{regionName} Region</h6>
+                            <h3 className="">Gap to Target</h3>
+                            <div className="by-date company-commit">
+                              <p className="mb-0"> Reduction needed between now and Q{Math.floor((new Date().getMonth() + 3) / 3)} {new Date().getFullYear()}
+                              </p>
+                              <a target="_blank" rel="noreferrer" href="https://corporate.lowes.com/our-responsibilities/corporate-responsibility-reports-policies" className="text-decoration-underline text-white"> See company commitment</a>
+                            </div>
+
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
+
+                  </div>
+                </Col>
+              </Row>
+              <div>
+                <Row className="g-3">
+                  <Col lg="6">
+                    <div className="mainGrayCards p-3 h-100 slider-icons position-relative">
                       <div className="left-arrow-slider">
                         {+yearlyData1 > Number.parseInt(moment(emissionDates?.data?.emission_dates?.start_date).format("YYYY")) && <button onClick={() => {
                           setRelaodData(false)
@@ -332,64 +305,64 @@ console.log(isRegionState,"isRegionStateisRegionState")
                           </svg>
                         </button>}
                       </div>
-                      <div className=" p-3 px-0">
-                        <div className="emi-inten">
-                          <h6 className="mb-0 fw-bold">{regionName} Region for {regionLevelGlideData?.data?.year.join(" - ")}</h6>
-                          <div className="d-flex align-items-center justify-content-between">
-                            <h4 className="fw-semibold mb-0">
-                              Reduction Glide Path <span className="fs-12 color-primary fw-light ">({!checkedEmissionsReductionGlide ? 'gCO2e' : 'tCO2e'})</span>
-                            </h4>
-                            <Button
-                              color="primary"
-                              className="px-4 py-0"
-                            >
-                              On track
-                            </Button>
-                          </div>
-                          <div className="d-flex align-items-center">
-                            <h6 className="mb-0 fw-semibold fs-14">
-                              Emissions Intensity
-                            </h6>
-                            <div className="toggle-switch">
-                              <Form>
-                                <Form.Check
-                                  type="switch"
-                                  id="custom-switch"
-                                  label="Total Emissions"
-                                  className="fw-semibold mb-0"
-                                  checked={checkedEmissionsReductionGlide}
-                                  onChange={() =>
-                                    setCheckedEmissionsReductionGlide(
-                                      !checkedEmissionsReductionGlide
-                                    )
-                                  }
-                                />
-                              </Form>
-                            </div>
+
+                      <div className="emi-inten">
+                        <h6 className="mb-0 fw-bold">{regionName} Region for {regionLevelGlideData?.data?.year.join(" - ")}</h6>
+                        <div className="d-flex align-items-center justify-content-between">
+                          <h3 className="fw-semibold mb-2">
+                            Reduction Glide Path <span className="fs-12 color-primary fw-light ">({!checkedEmissionsReductionGlide ? 'gCO2e' : 'tCO2e'})</span>
+                          </h3>
+                          <Button
+                            color="primary"
+                            className="px-4 py-0"
+                          >
+                            On track
+                          </Button>
+                        </div>
+                        <div className="d-flex align-items-center">
+                          <h6 className="mb-0 fw-semibold fs-14">
+                            Emissions Intensity
+                          </h6>
+                          <div className="toggle-switch mt-1">
+                            <Form>
+                              <Form.Check
+                                type="switch"
+                                id="custom-switch"
+                                label="Total Emissions"
+                                className="fw-semibold mb-0"
+                                checked={checkedEmissionsReductionGlide}
+                                onChange={() =>
+                                  setCheckedEmissionsReductionGlide(
+                                    !checkedEmissionsReductionGlide
+                                  )
+                                }
+                              />
+                            </Form>
                           </div>
                         </div>
-                        {/* maps */}
                       </div>
-                      {isLoadingRegionLevelGlidePath ? <div className="graph-loader">
+                      {/* maps */}
+
+                      {isLoadingRegionLevelGlidePath ? <div className="graph-loader d-flex justify-content-center my-5">
 
                         <div className="spinner-border position-absolute spinner-ui" role="status">
                           <span className="visually-hidden"></span>
                         </div>
-                      </div> : 
-                       <ChartHighChart
-                       options={lineChart({
-                           chart: "emissionReduction",
-                           options: regionLevelGlideData.data || {},
-                           regionName: regionName,
-                           maxRegionsValue:Math.max(...regionLevelGlideData?.data?.region_level || [1]) * 1.10,
-                           reloadData:false
-                         }
-                       )}
-                   />
+                      </div> :
+                        <ChartHighChart
+                          options={lineChart({
+                            chart: "emissionReduction",
+                            options: regionLevelGlideData.data || {},
+                            regionName: regionName,
+                            maxRegionsValue: Math.max(...regionLevelGlideData?.data?.region_level || [1]) * 1.10,
+                            reloadData: false
+                          }
+                          )}
+                        />
                       }
                       <div className="d-lg-flex quartely-wrapper  p-3">
                         <div className="quartely px-2">
-                          <h4 className="mb-3 fs-14s">
+                          <h4 className="mb-3 font-14">
                             Quarterly emissions reduction goal
                           </h4>
                           <div>
@@ -402,7 +375,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                           </div>
                         </div>
                         <div className="quartely px-2">
-                          <h4 className="mb-3 fs-14s">
+                          <h4 className="mb-3 font-14">
                             Achieved reduction for this quarter
                           </h4>
                           <div>
@@ -415,7 +388,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                           </div>
                         </div>
                         <div className="quartely px-2">
-                          <h4 className="mb-3 fs-14s">
+                          <h4 className="mb-3 font-14">
                             Time left to reach this quarter's target
                           </h4>
                           <div>
@@ -427,8 +400,8 @@ console.log(isRegionState,"isRegionStateisRegionState")
                       </div>
                     </div>
                   </Col>
-                  <Col lg="6" className="mt-lg-0 mt-3">
-                    <div className="maps-subs p-3 h-100">
+                  <Col lg="6">
+                    <div className="mainGrayCards p-3 h-100 slider-icons position-relative">
                       <h6 className="fw-bold mb-0">Projects of {getRegionName(regionName, regionsLevel, true)} for {getQuarterName(quartelyData, yearlyData)} {yearlyData}</h6>
                       <h3 className="mb-0 fw-semibold">Projects Overview</h3>
                       <Row className="align-items-center">
@@ -437,12 +410,12 @@ console.log(isRegionState,"isRegionStateisRegionState")
 
                             {pieChartCount !== null && <>
                               <Link to="/projects">
-                                 <ChartHighChart options={
+                                <ChartHighChart options={
                                   pieChart({
-                                    reloadData:relaodData, chart:"piechart", pieChartCount:Number.parseInt(pieChartCount).toLocaleString("en-US") 
+                                    reloadData: relaodData, chart: "piechart", pieChartCount: Number.parseInt(pieChartCount).toLocaleString("en-US")
                                   })
-                                 } 
-                                  /> 
+                                }
+                                />
                               </Link>
                             </>
                             }
@@ -450,12 +423,11 @@ console.log(isRegionState,"isRegionStateisRegionState")
                           </div>
                         </Col>
                         <Col lg="12">
-
                           <div className="mb-4 mt-4">
                             <div className="overview-txt mb-4">
                               <div className="co-txt d-md-flex align-items-center justify-content-between">
                                 <div className="d-flex">
-                                  <div className="green-div me-3"></div>
+                                  <div className="lightgreen-div me-3"></div>
                                   <h4 className="mb-0">Completed</h4>
                                 </div>
 
@@ -463,19 +435,19 @@ console.log(isRegionState,"isRegionStateisRegionState")
                               </div>
                             </div>
                             <div >
-                              <Row>
+                              <Row className="align-items-center">
                                 <Col lg="4">
                                   <div className="overview-txt track-btn-lightgreen mb-4">
                                     <div className="co-txt">
                                       <div className="d-flex align-items-center">
-                                        <div className="secondarygreen-div me-3"></div>
+                                        <div className="green-div me-3"></div>
                                         <h4 className="mb-0">In-progress</h4>
                                       </div>
                                     </div>
                                   </div>
                                 </Col>
                                 <Col lg="4">
-                                  <div className="overview-txt track-btn-lightgreen mb-4">
+                                  <div className="overview-txt track-btn-green mb-4">
                                     <div className="co-txt d-flex justify-content-center">
                                       <Button color="primary" className=" py-0">
                                         On track
@@ -485,24 +457,24 @@ console.log(isRegionState,"isRegionStateisRegionState")
 
                                 </Col>
                                 <Col lg="4">
-                                  <div className="overview-txt track-btn-lightgreen mb-4">
+                                  <div className="overview-txt track-btn-green mb-4">
                                     <div className="co-txt d-flex justify-content-end">
                                       <h5 className="mb-0">{Number.parseInt(projectCountData?.data?.Total || 0).toLocaleString("en-US")}</h5>
                                     </div>
                                   </div>
                                 </Col>
                                 <Col lg="4">
-                                  <div className="overview-txt track-btn-red mb-3">
+                                  <div className="overview-txt mb-3">
                                     <div className="co-txt">
                                       <div className="d-flex align-items-center">
-                                        <div className="red-div me-3"></div>
+                                        <div className="orange-div me-3"></div>
                                         <h4 className="mb-0">In-progress</h4>
                                       </div>
                                     </div>
                                   </div>
                                 </Col>
                                 <Col lg="4">
-                                  <div className="overview-txt track-btn-red mb-3">
+                                  <div className="overview-txt track-btn-orange mb-3">
                                     <div className="co-txt d-flex justify-content-center">
                                       <Button color="primary" className=" py-0">
                                         Action needed
@@ -512,7 +484,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
 
                                 </Col>
                                 <Col lg="4">
-                                  <div className="overview-txt track-btn-red mb-3">
+                                  <div className="overview-txt mb-3">
                                     <div className="co-txt d-flex justify-content-end">
                                       <h5 className="mb-0">0</h5>
                                     </div>
@@ -534,10 +506,10 @@ console.log(isRegionState,"isRegionStateisRegionState")
               </div>
               {/* pacific section */}
               <div className="pacific-overview mt-3">
-                <h2 className="fw-semibold">{regionName} Region Overview</h2>
+                <h2 className="fw-semibold font-24">{regionName} Region Overview</h2>
                 <Row>
                   <Col lg="6">
-                    <div className="h-100 inner-data-region p-3 x-axis-hide opacity-1">
+                    <div className="mainGrayCards p-3 h-100 slider-icons position-relative opacity-25">
                       <div className="emi-inten d-flex justify-content-between">
                         <div>
                           <div className="d-flex text-items-center">
@@ -573,10 +545,10 @@ console.log(isRegionState,"isRegionStateisRegionState")
                       </div>
                       {totalEmissionOverallDetails?.data?.length > 0 && (
                         <ChartHighChart options={verticalColumnChart({
-                           reloadData:relaodData,
-                           chart:"totalEmission",
-                           options:totalEmissionOverallDetails?.data
-                        })}/>
+                          reloadData: relaodData,
+                          chart: "totalEmission",
+                          options: totalEmissionOverallDetails?.data
+                        })} />
                       )}
                       <div>
                         {Math.round(
@@ -634,37 +606,18 @@ console.log(isRegionState,"isRegionStateisRegionState")
                     </div>
                   </Col>
                   <Col lg="6">
-                    <div className="h-100 inner-data-region p-3 x-axis-hide position-relative">
+                    <div className="mainGrayCards p-3 h-100 slider-icons position-relative">
                       <div className="emi-inten d-flex justify-content-between">
                         <div>
                           <div className="d-flex text-align-center">
-                            <div className="popup-dots-wrap position-relative mt-2">
-                              <div className="popup-data px-3 py-3">
-                                <div className="d-flex align-items-center mb-4">
-                                  <h5 className="mb-0">
-                                    <span className="me-2 delete-icon">
-                                      <img src={Delete} alt="icon" />
-                                    </span>
-                                    Delete
-                                  </h5>
-                                </div>
-                                <div className="d-flex align-items-center">
-                                  <h5 className="mb-0">
-                                    <span className="me-2">
-                                      <img src={Export} alt="icon" />
-                                    </span>
-                                    Export
-                                  </h5>
-                                </div>
-                              </div>
-                            </div>
+
                             <div>
                               <h6 className="mb-0 ps-1 fw-bold">Emissions Intensity of {getRegionName(regionName, regionsLevel, true)} for {getQuarterName(quartelyData, yearlyData)} {yearlyData}</h6>
-                              <h4 className="fw-semibold ps-1">
+                              <h3 className="fw-semibold ps-1">
                                 Emissions Intensity   <span className="fs-12">
                                   (gCO2e/Ton-Mile of freight)
                                 </span>
-                              </h4>
+                              </h3>
                             </div>
                           </div>
                         </div>
@@ -686,20 +639,20 @@ console.log(isRegionState,"isRegionStateisRegionState")
                           </Input>
                         </FormGroup>
                       </div>
-                      {regionEmissionIntensityDetailsIsLoading ? <div className="graph-loader">
+                      {regionEmissionIntensityDetailsIsLoading ? <div className="graph-loader d-flex justify-content-center my-5">
                         <div className="spinner-border position-absolute spinner-ui" role="status">
                           <span className="visually-hidden"></span>
                         </div>
-                      </div> : 
-                        regionEmissionIntensityDetails?.data[0]?.dataset?.length> 0 &&
+                      </div> :
+                        regionEmissionIntensityDetails?.data[0]?.dataset?.length > 0 &&
                         <ChartHighChart options={
                           verticalColumnChart({
-                            chart:"emissionIntensity",
-                            options:regionEmissionIntensityDetails?.data,
-                            reloadData:relaodData,
-                            quartelyData:quartelyData
+                            chart: "emissionIntensity",
+                            options: regionEmissionIntensityDetails?.data,
+                            reloadData: relaodData,
+                            quartelyData: quartelyData
                           })
-                        }/>
+                        } />
                       }
                       {!regionEmissionIntensityDetailsIsLoading && regionEmissionIntensityDetails?.data[0]?.dataset?.length === 0 &&
                         <div className="d-flex justify-content-center align-items-center my-5 py-5">
@@ -757,7 +710,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                   {/* Carrier Graph */}
                   {isCarrier && (
                     <Col lg="12" md="12">
-                      <div className=" vendor-emission-graph mt-3 p-3 h-100 x-axis-hide1">
+                      <div className=" mainGrayCards p-2 p-lg-3 p-xl-3 p-xxl-4 h-100">
                         <h6 className="datafrom-txt mb-2">
                           Emissions of {getRegionName(regionName, regionsLevel, true)} Carrier for {getQuarterName(quarterDetails, yearlyData)} {yearlyData}
                         </h6>
@@ -775,7 +728,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                         <div className="emi-inten d-flex justify-content-end pb-4">
                           <div className="ps-4">
                             <div className="d-flex align-items-center mb-1 detractor">
-                              <div className="red-div"></div>
+                              <div className="orange-div"></div>
                               <h6 className="ps-2 mb-0">Highest priority</h6>
                             </div>
                             <div className="d-flex align-items-center detractor mb-1">
@@ -783,31 +736,31 @@ console.log(isRegionState,"isRegionStateisRegionState")
                               <h6 className="ps-2 mb-0">Medium priority</h6>
                             </div>
                             <div className="d-flex align-items-center detractor mb-1">
-                              <div className="darkgreen-div"></div>
+                              <div className="primary-div"></div>
                               <h6 className="ps-2 mb-0">Low priority</h6>
                             </div>
                             <div className="d-flex align-items-center detractor mb-1">
-                              <div className="grey-div"></div>
+                              <div className="gray-div"></div>
                               <h6 className="ps-2 mb-0">Shipment volume</h6>
                             </div>
                           </div>
                         </div>
                         {vendorGraphDetails?.data && (
-                    <ChartHighChart
-                      options={bubbleChart(
-                        vendorGraphDetails?.data
-                          ? vendorGraphDetails?.data?.responseData
-                          : []
-                      )}
-                    />
-                  )}
+                          <ChartHighChart
+                            options={bubbleChart(
+                              vendorGraphDetails?.data
+                                ? vendorGraphDetails?.data?.responseData
+                                : []
+                            )}
+                          />
+                        )}
                       </div>
                     </Col>
                   )}
                   {/* Region Emissions Graph */}
                   {isRegion && (
                     <Col lg="6" className="mt-3">
-                      <div className="inner-data-region region-graph-outer mt-3 h-100">
+                      <div className="mainGrayCards p-2 p-lg-3 p-xl-3 p-xxl-4 h-100">
                         <div className=" p-3">
                           <h6 className="datafrom-txt mb-2">
                             Region-Wise <span>{checkedRegion ? "Total Emissions" : "Emissions Intensity"} for {getQuarterName(quarterDetails, yearlyData)} {yearlyData}</span>
@@ -823,7 +776,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                               <h6 className="mb-0 fw-semibold fs-14">
                                 Emissions Intensity
                               </h6>
-                              <div className="toggle-switch">
+                              <div className="toggle-switch mt-1">
                                 <Form>
                                   <Form.Check
                                     type="switch"
@@ -842,11 +795,11 @@ console.log(isRegionState,"isRegionStateisRegionState")
                             </div>
                             <div className="ps-4">
                               <div className="d-flex align-items-center mb-1 detractor">
-                                <div className="red-div"></div>
+                                <div className="orange-div"></div>
                                 <h6 className="ps-2 mb-0">Detractor</h6>
                               </div>
                               <div className="d-flex align-items-center detractor">
-                                <div className="darkgreen-div"></div>
+                                <div className="primary-div"></div>
                                 <h6 className="ps-2 mb-0">Contributor</h6>
                               </div>
                             </div>
@@ -870,28 +823,17 @@ console.log(isRegionState,"isRegionStateisRegionState")
                                 </div>
                                   : (
                                     regionPageArr?.length > 0 && (
-                                        <ChartHighChart
-                                          options={columnChart({
-                                            chart:"region",
-                                            regionPageArr:regionPageArr,
-                                            reloadData:relaodData,
-                                             unitDto:regionGraphDetails?.data?.unit,
-                                            }
-                                          )}
-                                        />
+                                      <ChartHighChart
+                                        options={columnChart({
+                                          chart: "region",
+                                          regionPageArr: regionPageArr,
+                                          reloadData: relaodData,
+                                          unitDto: regionGraphDetails?.data?.unit,
+                                        }
+                                        )}
+                                      />
                                     )
                                   )
-                                // regionPageArr?.length > 0 && (
-                                //   <ChartsHigh
-                                //     chart={"region"}
-                                //     isLoading={true}
-                                //     regionPageArr={regionPageArr}
-                                //     regionPagecontributor={[]}
-                                //     regionPagedetractor={[]}
-                                //     reloadData={relaodData}
-                                //     unitDto={regionGraphDetails?.data?.unit}
-                                //   />
-                                // )
                               }
                             </div>
                           </div>
@@ -901,8 +843,8 @@ console.log(isRegionState,"isRegionStateisRegionState")
                   )}
                   {isLane && (
                     <Col lg="6" className="mt-3">
-                      <div className="inner-data-region region-graph-outer mt-3 h-100">
-                        <div className=" p-3">
+                      <div className="mainGrayCards p-2 p-lg-3 p-xl-3 p-xxl-4 h-100">
+                        <div className="">
                           <h6 className="datafrom-txt mb-2">{checked ? "Total Emissions" : "Emissions Intensity"} of {getRegionName(regionName, regionsLevel, true)} Lanes for {getQuarterName(quarterDetails, yearlyData)} {yearlyData}</h6>
                           <div className="d-flex justify-content-between">
                             <h3 className="color-primary fw-semibold fs-5">
@@ -915,7 +857,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                               <h6 className="mb-0 fw-semibold fs-14">
                                 Emissions Intensity
                               </h6>
-                              <div className="toggle-switch">
+                              <div className="toggle-switch mt-1">
                                 <Form>
                                   <Form.Check
                                     type="switch"
@@ -930,11 +872,11 @@ console.log(isRegionState,"isRegionStateisRegionState")
                             </div>
                             <div className="ps-4">
                               <div className="d-flex align-items-center mb-1 detractor">
-                                <div className="red-div"></div>
+                                <div className="orange-div"></div>
                                 <h6 className="ps-2 mb-0">Detractor</h6>
                               </div>
                               <div className="d-flex align-items-center detractor">
-                                <div className="darkgreen-div"></div>
+                                <div className="primary-div"></div>
                                 <h6 className="ps-2 mb-0">Contributor</h6>
                               </div>
                             </div>
@@ -958,45 +900,22 @@ console.log(isRegionState,"isRegionStateisRegionState")
                                     <span className="visually-hidden"></span>
                                   </div>
                                 </div>
-                              ) : 
-                               (
+                              ) :
+                                (
                                   lanePageArr?.length > 0 && (
                                     <ChartHighChart options={
                                       columnChart({
-                                        chart:"lane",
-                                        isLoading:true,
-                                        lanePageArr:lanePageArr,
-                                        lanePagecontributor:[],
-                                        lanePagedetractor:[],
-                                        unitDto:regionGraphDetails?.data?.unit
+                                        chart: "lane",
+                                        isLoading: true,
+                                        lanePageArr: lanePageArr,
+                                        lanePagecontributor: [],
+                                        lanePagedetractor: [],
+                                        unitDto: regionGraphDetails?.data?.unit
                                       })
                                     }
                                     />
                                   )
                                 )
-                              
-                              // (
-                              //   regionPageArr?.length > 0 && (
-                              //     <ChartHighChart
-                              //       options={columnChart(
-                              //         regionGraphDetails?.data?.unit,
-                              //         regionPageArr
-                              //       )}
-                              //     />
-                              //   )
-                              // )
-                                //  (
-                                //   lanePageArr?.length > 0 && (
-                                //     <ChartsHigh
-                                //       chart={"lane"}
-                                //       isLoading={true}
-                                //       lanePageArr={lanePageArr}
-                                //       lanePagecontributor={[]}
-                                //       lanePagedetractor={[]}
-                                //       unitDto={regionGraphDetails?.data?.unit}
-                                //     />
-                                //   )
-                                // )
                               }
                             </div>
                           </div>
@@ -1006,8 +925,8 @@ console.log(isRegionState,"isRegionStateisRegionState")
                   )}
                   {isFacility && (
                     <Col lg="6" className="mt-3">
-                      <div className="inner-data-region region-graph-outer mt-3 h-100">
-                        <div className=" p-3">
+                      <div className="mainGrayCards p-2 p-lg-3 p-xl-3 p-xxl-4 h-100">
+                        <div className="">
                           <h6 className="datafrom-txt mb-2">{checkedFacilityEmissions ? "Total Emissions" : "Emissions Intensity"} of {getRegionName(regionName, regionsLevel, true)} Facilities for {getQuarterName(quarterDetails, yearlyData)} {yearlyData}</h6>
                           <div className="d-flex justify-content-between">
                             <h3 className="color-primary fw-semibold fs-5">
@@ -1020,7 +939,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                               <h6 className="mb-0 fw-semibold fs-14">
                                 Emissions Intensity
                               </h6>
-                              <div className="toggle-switch">
+                              <div className="toggle-switch mt-1">
                                 <Form>
                                   <Form.Check
                                     type="switch"
@@ -1039,11 +958,11 @@ console.log(isRegionState,"isRegionStateisRegionState")
                             </div>
                             <div className="ps-4">
                               <div className="d-flex align-items-center mb-1 detractor">
-                                <div className="red-div"></div>
+                                <div className="orange-div"></div>
                                 <h6 className="ps-2 mb-0">Detractor</h6>
                               </div>
                               <div className="d-flex align-items-center detractor">
-                                <div className="darkgreen-div"></div>
+                                <div className="primary-div"></div>
                                 <h6 className="ps-2 mb-0">Contributor</h6>
                               </div>
                             </div>
@@ -1071,11 +990,11 @@ console.log(isRegionState,"isRegionStateisRegionState")
                                 laneFacilityEmessionArr?.length > 0 && (
                                   <ChartHighChart
                                     options={columnChart({
-                                      chart:"region",
-                                      regionPageArr:laneFacilityEmessionArr,
-                                      reloadData:relaodData,
-                                       unitDto:regionFacilityEmissionDto?.data?.unit,
-                                      }
+                                      chart: "region",
+                                      regionPageArr: laneFacilityEmessionArr,
+                                      reloadData: relaodData,
+                                      unitDto: regionFacilityEmissionDto?.data?.unit,
+                                    }
                                     )}
                                   />
                                 )
@@ -1090,8 +1009,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                 </Row>
                 <div className="add-btn mt-4">
                   <Button
-                    color="primary"
-                    className="px-5 py-2 d-flex align-items-center justify-content-center"
+                    className=" btn-deepgreen px-5 font-14 py-3 px-5 d-flex align-items-center justify-content-center"
                     onClick={() => {
                       setIsRegionState(isRegion)
                       setIsLaneState(isLane)
@@ -1111,10 +1029,10 @@ console.log(isRegionState,"isRegionStateisRegionState")
                     className="data-tile-screen"
                   >
                     <ModalHeader toggle={toggle} className="border-0 align-items-start">
-                      <h2>
+                      <h2 className="font-24">
                         Select and add additional data tiles to your dashboard
                       </h2>
-                      <h6 className="fs-5 mb-0">
+                      <h6 className="font-16 mb-0">
                         These visuals created based on your{" "}
                         <span className="text-decoration-none">
                           profile settings
@@ -1125,7 +1043,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                     <ModalBody>
                       <div>
                         <Row>
-                          {/* {useAuth().userdata?.role === 0 && ( */}
+                          {useAuth().userdata?.role === 0 && (
                             <Col lg="3" md="6" className="mb-3 mb-lg-0">
                               <div className="card-border p-3 h-100">
                                 <div className="card-wrapper-txt">
@@ -1137,7 +1055,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                                       <Input
                                         type="checkbox"
                                         checked={isRegionState}
-                                        onChange={() =>{
+                                        onChange={() => {
                                           console.log("Checking")
                                           setIsRegionState(!isRegionState)
                                         }}
@@ -1161,7 +1079,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                                 </div>
                               </div>
                             </Col>
-                            {/* ) } */}
+                          )}
                           <Col lg={useAuth().userdata?.role === 0 ? '3' : '4'} md="6" className="mb-3 mb-lg-0">
                             <div className="card-border p-3 h-100">
                               <div className="card-wrapper-txt">
@@ -1264,7 +1182,7 @@ console.log(isRegionState,"isRegionStateisRegionState")
                       </div>
                     </ModalBody>
                     <ModalFooter className="d-flex justify-content-end">
-                      <Button
+                      <button
                         onClick={() => {
                           toggle();
                           dispatch(changeRegion(isRegionState))
@@ -1272,19 +1190,21 @@ console.log(isRegionState,"isRegionStateisRegionState")
                           dispatch(changeCarrier(isCarrierState))
                           dispatch(changeFacility(isFacilityState))
                         }}
-                        className="px-5 rounded-0 py-2"
+                        className="px-5 btn-deepgreen font-14 py-2"
                       >
                         Apply
-                      </Button>
+                      </button>
                     </ModalFooter>
                   </Modal>
                 </div>
               </div>
             </div>
+
           </div>
-          <div />
-        </section>
+        </div>
+        <div />
       </section>
+
     </>
   );
 }

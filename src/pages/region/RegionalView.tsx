@@ -1,9 +1,7 @@
 import TitleComponent from "../../component/tittle";
 import RegionalController from './RegionalController';
-import Back from "../../assets/images/common/back.svg";
 import Form from "react-bootstrap/Form";
 import { FormGroup, Row, Col, Input } from "reactstrap";
-import { Link } from "react-router-dom";
 import DateTimeShow from "../../component/DateTimeShow";
 import {
   getQuarterName,
@@ -242,13 +240,13 @@ const RegionalView = () => {
                           <table>
                             <tbody className=" text-left ">
                               {regionTableDetails?.data?.map((row: any) => (
-                                <tr onClick={() => navigate(`/region-overview/${row?.["Region.name"]}`)} key={row?.["Region.name"]} className="m-cursor">
+                                <tr onClick={() => navigate(`/region-overview/${row?.["Region.name"]}`)} key={row?.["Region.name"]} className="">
                                   <td>{row?.["Region.name"]}</td>
 
                                   <td>
                                     <div className="d-flex align-items-center">
                                       <div
-                                        className="red-div me-2"
+                                        className="orange-div me-2"
                                         style={{
                                           backgroundColor: row?.intensity?.color,
                                         }}
@@ -266,7 +264,7 @@ const RegionalView = () => {
                                   <td>
                                     <div className="d-flex align-items-center">
                                       <div
-                                        className="red-div me-2"
+                                        className="orange-div me-2"
                                         style={{
                                           backgroundColor: row?.cost?.color,
                                         }}
