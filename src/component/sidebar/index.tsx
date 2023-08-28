@@ -14,7 +14,9 @@ import usermanagenment from "../../assets/images/sidebar/usermanagenment.svg";
 import carrierComparision from "../../assets/images/sidebar/carrierComparision.svg";
 import segmentationIcon from "../../assets/images/sidebar/segmentationIcon.svg";
 import { Nav, Accordion } from 'react-bootstrap';
+import { useLocation } from "react-router-dom";
 const SidebarLayout = () => {
+    const location = useLocation();
     return (
         <>
             <div className="mainsidebar">
@@ -25,7 +27,7 @@ const SidebarLayout = () => {
                     <Accordion>
                         <Nav className="flex-column">
                             <Nav.Item className="position-relative mb-2">
-                                <Nav.Link className="activebar">
+                                <Nav.Link className={(location.pathname.includes("/regional-level") || location.pathname.includes("/sustainable") ? "activebar" :"")} href="/sustainable">
                                     <div className="d-flex align-items-center gap-3 navitemtxtWrapper ">
                                         <img src={Dashboardicon} alt="dashboard icon" />
                                         <h4 className="mb-0 font-16 navText">Dashboard</h4>
@@ -34,7 +36,7 @@ const SidebarLayout = () => {
                             </Nav.Item>
 
                             <Accordion.Item eventKey="0">
-                                <Accordion.Header>
+                                <Accordion.Header className={(location.pathname.includes("/regional") || location.pathname.includes("/regional-overview") ? "activebar" :"")}>
                                     <div >
                                         <div className="d-flex align-items-center gap-3 navitemtxtWrapper">
                                             <img src={segmentationIcon} alt="segmentationIcon" />
@@ -45,22 +47,30 @@ const SidebarLayout = () => {
                                 <Accordion.Body>
                                     <Nav>
                                         <Nav.Item>
-                                            <Nav.Link className="py-2">
+                                            <Nav.Link className="py-2" href="/regional">
                                                 <div className="d-flex align-items-center gap-3 navitemtxtWrapper">
                                                     <img src={byregion} alt="byregion icon" />
                                                     <h4 className="mb-0 font-16 navText">By Region</h4>
                                                 </div>
                                             </Nav.Link>
                                         </Nav.Item>
-                                        <Nav.Item>
+                                        {/* <Nav.Item>
                                             <Nav.Link className="py-2">
                                                 <div className="d-flex align-items-center gap-3 navitemtxtWrapper">
                                                     <img src={byfacility} alt="byfacility icon" />
                                                     <h4 className="mb-0 font-16 navText">By Facility</h4>
                                                 </div>
                                             </Nav.Link>
-                                        </Nav.Item>
-                                        <Accordion className="newaccordian w-100">
+                                        </Nav.Item> */}
+                                        <Nav.Item>
+                                                    <Nav.Link className="py-2" href="/carrier">
+                                                    <div className="d-flex align-items-center gap-3 navitemtxtWrapper">
+                                                        <img src={bycarrier} alt="bycarrier icon" />
+                                                        <h4 className="mb-0 font-16 navText">By Carrier</h4>
+                                                    </div>
+                                                    </Nav.Link>
+                                                </Nav.Item>
+                                        {/* <Accordion className="newaccordian w-100">
                                             <Accordion.Item eventKey="2">
                                                 <Accordion.Header className="py-2 pe-0">
                                                     <div className="d-flex align-items-center gap-3 navitemtxtWrapper">
@@ -81,20 +91,20 @@ const SidebarLayout = () => {
                                                     </Nav>
                                                 </Accordion.Body>
                                             </Accordion.Item>
-                                        </Accordion>
+                                        </Accordion> */}
                                        
-                                        <Nav.Item>
+                                        {/* <Nav.Item>
                                             <Nav.Link className="py-2">
                                                 <div className="d-flex align-items-center gap-3 navitemtxtWrapper">
                                                     <img src={bylane} alt="bylane icon" />
                                                     <h4 className="mb-0 font-16 navText">By Lane</h4>
                                                 </div>
                                             </Nav.Link>
-                                        </Nav.Item>
+                                        </Nav.Item> */}
                                     </Nav>
                                 </Accordion.Body>
                             </Accordion.Item>
-
+{/* 
                             <Nav.Item className="position-relative mb-2">
                                 <Nav.Link>
                                     <div className="d-flex align-items-center gap-3 navitemtxtWrapper">
@@ -102,7 +112,7 @@ const SidebarLayout = () => {
                                         <h4 className="mb-0 font-16 navText">Deacrb levers</h4>
                                     </div>
                                 </Nav.Link>
-                            </Nav.Item>
+                            </Nav.Item> */}
                             <Nav.Item className="position-relative mb-2">
                                 <Nav.Link>
                                     <div className="d-flex align-items-center gap-3 navitemtxtWrapper">

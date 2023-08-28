@@ -1,5 +1,5 @@
 // import "../substainable/substainable.scss";
-// import "../regional-level/regional-level.scss";
+import "../../scss/regionalLevel/_index.scss";
 import ArrowDown from "../../assets/images/common/arrow-down.svg";
 import ExportButton from "../../component/export-button";
 import Export from "../../assets/images/common/export.svg";
@@ -36,6 +36,12 @@ import moment from "moment";
 import DateTimeShow from "../../component/DateTimeShow";
 import { useAuth } from "../../auth/ProtectedRoute";
 import RegionalLevelController from "./RegionalLevelController";
+import ChartHighChart from "../../constant/highchart/chartHighChart";
+import { pieChart } from "../../constant/highchart/pieChart";
+import { lineChart } from "../../constant/highchart/lineChart";
+import { verticalColumnChart } from "../../constant/highchart/verticalColumnChart";
+import bubbleChart from "../../constant/highchart/bubbleChart";
+import { columnChart } from "../../constant/highchart/columnChart";
 
 const RegionalLevelView = () => {
 
@@ -47,7 +53,10 @@ const RegionalLevelView = () => {
     yearlyData,
     yearlyData1,
     quartelyData,
+    lanePageArr,
+    laneFacilityEmessionArr,
     dispatch,
+    regionPageArr,
     dataCheck,
     projectCountData,
     checkedFacilityEmissions,
@@ -62,6 +71,7 @@ const RegionalLevelView = () => {
     isLaneState,
     isRegionState,
     laneGraphDetails,
+    vendorGraphDetails,
     laneGraphDetailsLoading,
     regionEmissionIntensityDetails,
     totalEmissionOverallDetails,
@@ -92,6 +102,7 @@ const RegionalLevelView = () => {
     setChecked,
     checked
   } = RegionalLevelController()
+console.log(isRegionState,"isRegionStateisRegionState")
 
   return (
     <>
@@ -364,20 +375,18 @@ const RegionalLevelView = () => {
                         <div className="spinner-border position-absolute spinner-ui" role="status">
                           <span className="visually-hidden"></span>
                         </div>
-                      </div> : ""
-                        //  (
-                        //   <RegionLevelHighChart
-                        //     key={1}
-                        //     chart={"emissionReduction"}
-                        //     options={regionLevelGlideData?.data || {}}
-                        //     regionName={regionName}
-                        //     reloadData={false}
-                        //     maxRegionsValue={Math.max(...regionLevelGlideData?.data?.region_level || [1]) * 1.10}
-                        //     unitReduction={!checkedEmissionsReductionGlide}
-                        //   />)
+                      </div> : 
+                       <ChartHighChart
+                       options={lineChart({
+                           chart: "emissionReduction",
+                           options: regionLevelGlideData.data || {},
+                           regionName: regionName,
+                           maxRegionsValue:Math.max(...regionLevelGlideData?.data?.region_level || [1]) * 1.10,
+                           reloadData:false
+                         }
+                       )}
+                   />
                       }
-
-
                       <div className="d-lg-flex quartely-wrapper  p-3">
                         <div className="quartely px-2">
                           <h4 className="mb-3 fs-14s">
@@ -428,8 +437,12 @@ const RegionalLevelView = () => {
 
                             {pieChartCount !== null && <>
                               <Link to="/projects">
-                                {/* <RegionLevelHighChart reloadData={relaodData}
-                                  chart={"piechart"} pieChartCount={Number.parseInt(pieChartCount).toLocaleString("en-US")} /> */}
+                                 <ChartHighChart options={
+                                  pieChart({
+                                    reloadData:relaodData, chart:"piechart", pieChartCount:Number.parseInt(pieChartCount).toLocaleString("en-US") 
+                                  })
+                                 } 
+                                  /> 
                               </Link>
                             </>
                             }
@@ -558,13 +571,13 @@ const RegionalLevelView = () => {
                           </Input>
                         </FormGroup>
                       </div>
-                      {/* {totalEmissionOverallDetails?.data?.length > 0 && (
-                        // <RegionLevelHighChart
-                        //   reloadData={relaodData}
-                        //   chart={"totalEmission"}
-                        //   options={totalEmissionOverallDetails?.data}
-                        // />
-                      )} */}
+                      {totalEmissionOverallDetails?.data?.length > 0 && (
+                        <ChartHighChart options={verticalColumnChart({
+                           reloadData:relaodData,
+                           chart:"totalEmission",
+                           options:totalEmissionOverallDetails?.data
+                        })}/>
+                      )}
                       <div>
                         {Math.round(
                           ((totalEmissionOverallDetails?.data?.[0]
@@ -677,14 +690,16 @@ const RegionalLevelView = () => {
                         <div className="spinner-border position-absolute spinner-ui" role="status">
                           <span className="visually-hidden"></span>
                         </div>
-                      </div> : ""
-                        // regionEmissionIntensityDetails?.data[0]?.dataset?.length> 0 &&
-                        // <RegionLevelHighChart
-                        //   chart={"emissionIntensity"}
-                        //   options={regionEmissionIntensityDetails?.data}
-                        //   reloadData={relaodData}
-                        //   quartelyData={quartelyData}
-                        // />
+                      </div> : 
+                        regionEmissionIntensityDetails?.data[0]?.dataset?.length> 0 &&
+                        <ChartHighChart options={
+                          verticalColumnChart({
+                            chart:"emissionIntensity",
+                            options:regionEmissionIntensityDetails?.data,
+                            reloadData:relaodData,
+                            quartelyData:quartelyData
+                          })
+                        }/>
                       }
                       {!regionEmissionIntensityDetailsIsLoading && regionEmissionIntensityDetails?.data[0]?.dataset?.length === 0 &&
                         <div className="d-flex justify-content-center align-items-center my-5 py-5">
@@ -777,14 +792,15 @@ const RegionalLevelView = () => {
                             </div>
                           </div>
                         </div>
-                        {/* <BubbleHighChart
-                          chart={"vendor"}
-                          options={
-                            vendorGraphDetails?.data
-                              ? vendorGraphDetails?.data?.responseData
-                              : []
-                          }
-                        /> */}
+                        {vendorGraphDetails?.data && (
+                    <ChartHighChart
+                      options={bubbleChart(
+                        vendorGraphDetails?.data
+                          ? vendorGraphDetails?.data?.responseData
+                          : []
+                      )}
+                    />
+                  )}
                       </div>
                     </Col>
                   )}
@@ -852,7 +868,19 @@ const RegionalLevelView = () => {
                                     <span className="visually-hidden"></span>
                                   </div>
                                 </div>
-                                  : ""
+                                  : (
+                                    regionPageArr?.length > 0 && (
+                                        <ChartHighChart
+                                          options={columnChart({
+                                            chart:"region",
+                                            regionPageArr:regionPageArr,
+                                            reloadData:relaodData,
+                                             unitDto:regionGraphDetails?.data?.unit,
+                                            }
+                                          )}
+                                        />
+                                    )
+                                  )
                                 // regionPageArr?.length > 0 && (
                                 //   <ChartsHigh
                                 //     chart={"region"}
@@ -930,7 +958,33 @@ const RegionalLevelView = () => {
                                     <span className="visually-hidden"></span>
                                   </div>
                                 </div>
-                              ) : ""
+                              ) : 
+                               (
+                                  lanePageArr?.length > 0 && (
+                                    <ChartHighChart options={
+                                      columnChart({
+                                        chart:"lane",
+                                        isLoading:true,
+                                        lanePageArr:lanePageArr,
+                                        lanePagecontributor:[],
+                                        lanePagedetractor:[],
+                                        unitDto:regionGraphDetails?.data?.unit
+                                      })
+                                    }
+                                    />
+                                  )
+                                )
+                              
+                              // (
+                              //   regionPageArr?.length > 0 && (
+                              //     <ChartHighChart
+                              //       options={columnChart(
+                              //         regionGraphDetails?.data?.unit,
+                              //         regionPageArr
+                              //       )}
+                              //     />
+                              //   )
+                              // )
                                 //  (
                                 //   lanePageArr?.length > 0 && (
                                 //     <ChartsHigh
@@ -1013,22 +1067,19 @@ const RegionalLevelView = () => {
                                     <span className="visually-hidden"></span>
                                   </div>
                                 </div>
-                              ) : ""
-                                // (
-                                //   laneFacilityEmessionArr?.length > 0 && (
-                                //     <ChartsHigh
-                                //       chart={"region"}
-                                //       isLoading={true}
-                                //       regionPageArr={laneFacilityEmessionArr}
-                                //       lanePagecontributor={[]}
-                                //       lanePagedetractor={[]}
-                                //       reloadData={relaodData}
-                                //       unitDto={
-                                //         regionFacilityEmissionDto?.data?.unit
-                                //       }
-                                //     />
-                                //   )
-                                // )
+                              ) : (
+                                laneFacilityEmessionArr?.length > 0 && (
+                                  <ChartHighChart
+                                    options={columnChart({
+                                      chart:"region",
+                                      regionPageArr:laneFacilityEmessionArr,
+                                      reloadData:relaodData,
+                                       unitDto:regionFacilityEmissionDto?.data?.unit,
+                                      }
+                                    )}
+                                  />
+                                )
+                              )
                               }
                             </div>
                           </div>
@@ -1074,7 +1125,7 @@ const RegionalLevelView = () => {
                     <ModalBody>
                       <div>
                         <Row>
-                          {useAuth().userdata?.role === 0 && (
+                          {/* {useAuth().userdata?.role === 0 && ( */}
                             <Col lg="3" md="6" className="mb-3 mb-lg-0">
                               <div className="card-border p-3 h-100">
                                 <div className="card-wrapper-txt">
@@ -1086,10 +1137,10 @@ const RegionalLevelView = () => {
                                       <Input
                                         type="checkbox"
                                         checked={isRegionState}
-                                        onChange={() =>
+                                        onChange={() =>{
+                                          console.log("Checking")
                                           setIsRegionState(!isRegionState)
-
-                                        }
+                                        }}
                                         className="rounded-0"
                                       />
                                     </FormGroup>
@@ -1109,7 +1160,8 @@ const RegionalLevelView = () => {
                                   />
                                 </div>
                               </div>
-                            </Col>)}
+                            </Col>
+                            {/* ) } */}
                           <Col lg={useAuth().userdata?.role === 0 ? '3' : '4'} md="6" className="mb-3 mb-lg-0">
                             <div className="card-border p-3 h-100">
                               <div className="card-wrapper-txt">

@@ -31,7 +31,8 @@ export const ProtectedRouteCheck = ({ children }: any) => {
 };
 
 const ProtectedRoute = () => {
-    const isAuth = useAuth().loggedIn;
+    let isAuth =  useAuth().loggedIn;
+    isAuth = process.env.REACT_APP_IS_DEV?true : isAuth
     return isAuth ? <>
         <section className="insight_top_wrapper">
             <div className="mainDashboard position-relative">

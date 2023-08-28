@@ -99,8 +99,6 @@ export const graphIntensityData = createAsyncThunk("post/graphIntensityData", as
 })
 export const graphEmissionIntensity = createAsyncThunk("post/emissionIntensity", async (userData:any, thunkApi) => {
     try {
-        
-
         return await sustainServie.postRegionIntensity(userData, getTokenHeader());
     }
     catch (error:any) {

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../auth/ProtectedRoute';
 import { getRegionOverviewDetail, laneGraphData, regionCarrierComparison } from '../../store/lane/laneDetailsSlice';
 import { regionFacilityEmissions } from '../../store/region/regionOverviewSlice';
-import { getGraphDataHorizontal } from '../../constant';
+import { getGraphData, getGraphDataHorizontal } from '../../constant';
 import { regionLevelGlidePath, regionShow } from '../../store/commonData/commonSlice';
 
 
@@ -17,8 +17,8 @@ const RegionOverviewController = () => {
     const currentYear = new Date().getFullYear();
     const [checkedEmissionsReductionGlide, setCheckedEmissionsReductionGlide] = useState(true)
     const [yearlyData, setYearlyData] = useState<string | number>(currentYear);
-    const [regionName, setRegionName] = useState(null)
-    const [relaodData, setRelaodData] = useState(true)
+    const [regionName, setRegionName] = useState<boolean | null>(null)
+    const [reloadData, setRelaodData] = useState(true)
     const [checked, setChecked] = useState(true);
     const [checkedEmissions, setCheckedEmissions] = useState(true);
     const [yearlyData1, setYearlyData1] = useState(2022)
@@ -119,9 +119,9 @@ const RegionOverviewController = () => {
         }
     }, [regionName, dispatch, checkedFacilityEmissions])
 
-    // let lanePageArr = getGraphData(laneGraphDetails);
-    // let laneCarrierArr = getGraphData(regionCarrierComparisonData);
-    // let laneFacilityEmessionArr = getGraphDataHorizontal(regionFacilityEmissionDto);
+    let lanePageArr = getGraphData(laneGraphDetails);
+    let laneCarrierArr = getGraphData(regionCarrierComparisonData);
+    let laneFacilityEmessionArr = getGraphDataHorizontal(regionFacilityEmissionDto);
 
     // Return all the states and functions
     return {
@@ -133,6 +133,8 @@ const RegionOverviewController = () => {
         dataCheck,
         checkedEmissions,
         yearlyData,
+        reloadData,
+        lanePageArr,
         checkedEmissionsReductionGlide,
         getRegionOverviewDetailData,
         regionLevelGlideData,
@@ -142,7 +144,9 @@ const RegionOverviewController = () => {
         regionFacilityEmissionDto,
         laneGraphDetailsLoading,
         laneGraphDetails,
+        laneCarrierArr,
         regionCarrierComparisonLoading,
+        laneFacilityEmessionArr,
         setCheckedEmissionsReductionGlide,
         setYearlyData,
         setCheckedEmissions,

@@ -68,6 +68,7 @@ const RegionalController = () => {
     order,
     col_name,
     checked,
+    relaodData,
     regionTableDetails,
     regionGraphDetails,
     regionGraphDetailsLoading,

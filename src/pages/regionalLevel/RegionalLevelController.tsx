@@ -8,6 +8,7 @@ import { regionGraphData } from '../../store/region/regionSlice';
 import { changeRegion,changeLane,changeCarrier,changeFacility} from'../../store/dashRegion/dashRegionSlice'
 import { laneGraphData } from '../../store/lane/laneDetailsSlice';
 import { vendorGraphData } from '../../store/carrier/vendorSlice';
+import { getGraphData, getGraphDataHorizontal } from '../../constant';
 // Predefined models 
 
 /**
@@ -135,9 +136,9 @@ const RegionalLevelController = () => {
     }, [dispatch, yearlyData1, regionsLevel, checkedEmissionsReductionGlide])
   
   
-    // let regionPageArr = getGraphDataHorizontal(regionGraphDetails);
-    // let lanePageArr = getGraphData(laneGraphDetails);
-    // let laneFacilityEmessionArr = getGraphDataHorizontal(regionFacilityEmissionDto);
+    let regionPageArr = getGraphDataHorizontal(regionGraphDetails);
+    let lanePageArr = getGraphData(laneGraphDetails);
+    let laneFacilityEmessionArr = getGraphDataHorizontal(regionFacilityEmissionDto);
   
     useEffect(() => {
       if (isRegion) {
@@ -220,6 +221,7 @@ const RegionalLevelController = () => {
         setQuarterDetails,
         setQuartelyData,
         regions,
+        vendorGraphDetails,
         regionsLevel,
         regionGraphDetails, regionGraphDetailsLoading ,
         isRegion,
@@ -230,6 +232,7 @@ const RegionalLevelController = () => {
         modal, setModal,
         laneGraphDetails,
         laneGraphDetailsLoading,
+        laneFacilityEmessionArr,
         changeRegion,changeLane,changeCarrier,changeFacility,
         toggle,
         setIsRegionState,
@@ -242,6 +245,8 @@ const RegionalLevelController = () => {
         projectCountData,
         dispatch,
         dataCheck,
+        regionPageArr,
+        lanePageArr,
         checked,
         checkedRegion, setCheckedRegion,
     }

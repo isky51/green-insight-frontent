@@ -17,6 +17,9 @@ import { getQuarterYear, isCompanyEnable, yearList } from "../../constant";
 import TitleComponent from "../../component/tittle";
 import RegionOverviewController from "./RegionOverviewController";
 import { lineChart } from "../../constant/highchart/lineChart";
+import { columnChart } from "../../constant/highchart/columnChart";
+import laneService from "../../store/lane/laneService";
+import { verticalColumnChart } from "../../constant/highchart/verticalColumnChart";
 
 const RegionOverview = () => {
     // Importing all states and functions from Region Overview Controller
@@ -29,6 +32,8 @@ const RegionOverview = () => {
         dataCheck,
         checkedEmissions,
         yearlyData,
+        reloadData,
+        lanePageArr,
         checkedEmissionsReductionGlide,
         getRegionOverviewDetailData,
         regionLevelGlideData,
@@ -38,7 +43,9 @@ const RegionOverview = () => {
         regionFacilityEmissionDto,
         laneGraphDetailsLoading,
         laneGraphDetails,
+        laneCarrierArr,
         regionCarrierComparisonLoading,
+        laneFacilityEmessionArr,
         setCheckedEmissionsReductionGlide,
         setYearlyData,
         setCheckedEmissions,
@@ -242,16 +249,6 @@ const RegionOverview = () => {
                                                   }
                                                 )}
                                             />
-                                            // <RegionLevelHighChart
-                                            //     key={1}
-                                            //     chart={"emissionReduction"}
-                                            //     options={regionLevelGlideData?.data}
-                                            //     regionName={params?.regionId}
-                                            //     reloadData={false}
-                                            //     maxRegionsValue={Math.max(...regionLevelGlideData?.data?.region_level || [1]) * 1.10}
-                                            //     unitReduction={!checkedEmissionsReductionGlide}
-
-                                            // />
                                         }
 
 
@@ -355,24 +352,22 @@ const RegionOverview = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                {
-
-                                                    // (
-                                                    //     <ChartsHigh
-                                                    //         chart={"stackedGraph"}
-                                                    //         isLoading={true}
-                                                    //         options={[{
-                                                    //             name: 'Intermodal',
-                                                    //             data: [15, 30]
-                                                    //         }, {
-                                                    //             name: 'Truck',
-                                                    //             data: [85, 70]
-                                                    //         }]}
-                                                    //         revenueType={1}
-
-                                                    //     />
-                                                    // )
+                                                { <ChartHighChart options={
+                                                            verticalColumnChart({
+                                                                chart:"stackedGraph",
+                                                                isLoading :true,
+                                                                options:[{
+                                                                    name: 'Intermodal',
+                                                                    data: [15, 30]
+                                                                }, {
+                                                                    name: 'Truck',
+                                                                    data: [85, 70]
+                                                                }],
+                                                                revenueType:1
+                                                            })
+                                                        }
+                                                        />
+                                                    
                                                 }
                                             </div>
                                         </div>
@@ -448,19 +443,19 @@ const RegionOverview = () => {
                                                             <div className="spinner-border  spinner-ui" role="status">
                                                                 <span className="visually-hidden"></span>
                                                             </div>
-                                                        </div> : ""
-                                                        // (
-                                                        //     <ChartsHigh
-                                                        //         chart={"lane"}
-                                                        //         isLoading={true}
-                                                        //         lanePageArr={laneCarrierArr}
-                                                        //         lanePagecontributor={[]}
-                                                        //         lanePagedetractor={[]}
-                                                        //         reloadData={relaodData}
-                                                        //         unitDto={regionCarrierComparisonData?.data?.unit}
-
-                                                        //     />
-                                                        // )
+                                                        </div> : 
+                                                         <ChartHighChart options={
+                                                            columnChart({
+                                                              chart:"lane",
+                                                              isLoading:true,
+                                                              lanePageArr:laneCarrierArr,
+                                                              lanePagecontributor:[],
+                                                              lanePagedetractor:[],
+                                                              unitDto:regionCarrierComparisonData?.data?.unit
+                                                            })
+                                                          }
+                                                          />
+                                    
                                                     }
                                                 </div>
                                             </div>
@@ -534,19 +529,18 @@ const RegionOverview = () => {
                                                             <div className="spinner-border  spinner-ui" role="status">
                                                                 <span className="visually-hidden"></span>
                                                             </div>
-                                                        </div> : ""
-                                                        // (
-                                                        //     <ChartsHigh
-                                                        //         chart={"lane"}
-                                                        //         isLoading={true}
-                                                        //         lanePageArr={lanePageArr}
-                                                        //         lanePagecontributor={[]}
-                                                        //         lanePagedetractor={[]}
-                                                        //         reloadData={relaodData}
-                                                        //         unitDto={laneGraphDetails?.data?.unit}
-
-                                                        //     />
-                                                        // )
+                                                        </div> : 
+                                                         <ChartHighChart options={
+                                                            columnChart({
+                                                              chart:"lane",
+                                                              isLoading:true,
+                                                              lanePageArr:lanePageArr,
+                                                              lanePagecontributor:[],
+                                                              lanePagedetractor:[],
+                                                              unitDto:laneGraphDetails?.data?.unit
+                                                            })
+                                                          }
+                                                          />
                                                     }
                                                 </div>
                                             </div>
@@ -559,13 +553,10 @@ const RegionOverview = () => {
                                         <div className="inner-data-region region-graph-outer h-100">
                                             <div className=" p-3 px-3">
                                                 <div className="emi-inten">
-
                                                     <h6 className="datafrom-txt mb-2">
                                                         {checkedFacilityEmissions ? "Total Lane Emissions" : "Lane Emissions Intensity"} of {params?.regionId === "OTHER" ? "OTHER Region" : `${params?.regionId} Region`} from {getQuarterYear(emissionDates?.data?.emission_dates?.start_date)} to {getQuarterYear(emissionDates?.data?.emission_dates?.end_date)}
-
                                                     </h6>
                                                     <h4 className="fw-semibold">Facility Emissions</h4>
-
                                                 </div>
 
                                                 <div className="emi-inten d-flex justify-content-between pb-4">
@@ -583,7 +574,6 @@ const RegionOverview = () => {
                                                                     label="Total Emissions"
                                                                     className="fw-semibold mb-0"
                                                                     checked={checkedFacilityEmissions}
-
                                                                     onChange={() => setCheckedFacilityEmissions(!checkedFacilityEmissions)}
                                                                 />
                                                             </Form>
@@ -611,7 +601,6 @@ const RegionOverview = () => {
                                                         )
                                                     </h6>
                                                     <div className="avg-img">
-
                                                         {
                                                             regionFacilityEmissionIsLoading ?
                                                                 <div className="graph-loader d-flex justify-content-center align-items-center">
@@ -619,19 +608,20 @@ const RegionOverview = () => {
                                                                     <div className="spinner-border  spinner-ui" role="status">
                                                                         <span className="visually-hidden"></span>
                                                                     </div>
-                                                                </div> : ""
-                                                            // (
-                                                            //     <ChartsHigh
-                                                            //         chart={"region"}
-                                                            //         isLoading={true}
-                                                            //         regionPageArr={laneFacilityEmessionArr}
-                                                            //         lanePagecontributor={[]}
-                                                            //         lanePagedetractor={[]}
-                                                            //         reloadData={relaodData}
-                                                            //         unitDto={regionFacilityEmissionDto?.data?.unit}
-
-                                                            //     />
-                                                            // )
+                                                                </div> : 
+                                                            (     <ChartHighChart
+                                                                      options={
+                                                                        columnChart({
+                                                                            chart:"region",
+                                                                            isLoading:true,
+                                                                            regionPageArr:laneFacilityEmessionArr,
+                                                                            lanePagecontributor:[],
+                                                                            lanePagedetractor:[],
+                                                                            reloadData:reloadData,
+                                                                            unitDto:regionFacilityEmissionDto?.data?.unit
+                                                                        })
+                                                                      }/>
+                                                            )
                                                         }
                                                     </div>
                                                 </div>

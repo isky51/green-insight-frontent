@@ -149,7 +149,7 @@ interface DetractorItem {
 type GraphDataItem = ContributorItem | DetractorItem;
 
 // Function to process graph data and return an array of GraphDataItems
-export const getGraphDataHorizontal = (res: { data: { contributor?: ContributorItem[]; detractor?: DetractorItem[] } }, key: string): GraphDataItem[] => {
+export const getGraphDataHorizontal = (res: { data: { contributor?: ContributorItem[]; detractor?: DetractorItem[] } }, key:any=null): GraphDataItem[] => {
     let regionPageArr: GraphDataItem[] = [];
     let regionPageArrMerge: GraphDataItem[] = [];
 
@@ -241,3 +241,86 @@ export const capitalizeText = (str: String) => {
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
 }
+
+interface Contributor {
+    name: string;
+    value: number;
+    color: string;
+  }
+  
+  interface Detractor {
+    name: string;
+    value: number;
+    color: string;
+  }
+  
+  
+  export const getGraphData = (res: { data: { contributor?: Contributor[]; detractor?: Detractor[] } }, key:any = null) => {
+    let regionPageArr: any = [];
+    let regionPageArrMerge:any = [];
+  
+    if (res?.data?.contributor) {
+      regionPageArr = res?.data?.contributor?.filter(i => i?.name !== key)?.map(i => ({
+        ...i,
+        name: i.name,
+        y: i.value,
+        color: i.color,
+        yAxis: 1,
+        dataLabels: [
+          {
+            inside: false,
+            enabled: true,
+            rotation: 0,
+            x: 32,
+            overflow: "none",
+            allowOverlap: false,
+            color: "#212121",
+            align: "center",
+            crop: false,
+            formatter(this:any) {
+                let value:any = (Math.abs(this.y).toFixed(1));
+                let returnValue = value.toLocaleString("en-us",{
+                    minimunFractionDigits:1,
+                })
+              return `+ ${returnValue}`;
+            },
+          },
+        ],
+        type: "column",
+      }));
+    }
+  
+    if (res?.data?.detractor) {
+      regionPageArrMerge = res?.data?.detractor?.filter(i => i?.name !== key)?.map(i => ({
+        ...i,
+        name: i.name,
+        y: -Number(i.value),
+        color: i.color,
+        yAxis: 0,
+        type: "column",
+        dataLabels: [
+          {
+            inside: false,
+            enabled: true,
+            rotation: 0,
+            x: -30,
+            overflow: "none",
+            allowOverlap: false,
+            color: "#212121",
+            align: "center",
+            crop: false,
+            formatter: function (this:any) {
+                let value:any = (Math.abs(this.y).toFixed(1));
+                let returnValue = value.toLocaleString("en-us",{
+                    minimunFractionDigits:1,
+                })
+              return `- ${returnValue}`;
+            },
+          },
+        ],
+      }));
+    }
+  
+    return [...regionPageArr, ...regionPageArrMerge];
+  };
+  

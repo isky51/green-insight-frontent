@@ -27,6 +27,7 @@ const RegionalView = () => {
     emissionDates,
     order,
     col_name,
+    relaodData,
     checked,
     regionTableDetails,
     regionGraphDetails,
@@ -159,9 +160,13 @@ const RegionalView = () => {
                             : (
                               regionPageArr?.length > 0 && (
                                 <ChartHighChart
-                                  options={columnChart(
-                                    regionGraphDetails?.data?.unit,
-                                    regionPageArr
+                                  options={columnChart({
+                                    chart:"region",
+                                    regionPageArr:regionPageArr,
+                                    reloadData:relaodData,
+                                    unitDto:regionGraphDetails?.data?.unit,
+                                  }
+                                   
                                   )}
                                 />
                               )
