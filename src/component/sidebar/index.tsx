@@ -38,7 +38,7 @@ const SidebarLayout = () => {
                             </Nav.Item>
 
                             <Accordion.Item eventKey="0">
-                                <Accordion.Header className={(location.pathname.includes("/regional") || location.pathname.includes("/regional-overview") ? "activebar" : "")}>
+                                <Accordion.Header className={(location.pathname.includes("/regional") || location.pathname.includes("/regional-overview") || location.pathname.includes("/carrier") ? "activebar" : "")}>
                                     <div >
                                         <div className="d-flex align-items-center gap-3 navitemtxtWrapper">
                                             <img src={segmentationIcon} alt="segmentationIcon" />
