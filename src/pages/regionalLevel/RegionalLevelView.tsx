@@ -1,4 +1,3 @@
-// import "../substainable/substainable.scss";
 import "../../scss/regionalLevel/_index.scss";
 import ArrowDown from "../../assets/images/common/arrow-down.svg";
 import Up from "../../assets/images/common/up.svg";
@@ -16,13 +15,12 @@ import {
   Input,
   Modal, ModalHeader, ModalBody, ModalFooter
 } from "reactstrap";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
 
 import {
   yearList, getQuarters,
   getQuarterName,
-  getGraphDataHorizontal,
   getRegionName,
   isCompanyEnable,
   getCompanyName
@@ -87,7 +85,7 @@ const RegionalLevelView = () => {
     isLane,
     isCarrier,
     isFacility,
-    modal, setModal,
+    modal,
     toggle,
     setIsRegionState,
     setIsLaneState,
@@ -836,17 +834,6 @@ const RegionalLevelView = () => {
                                       />
                                     )
                                   )
-                                // regionPageArr?.length > 0 && (
-                                //   <ChartsHigh
-                                //     chart={"region"}
-                                //     isLoading={true}
-                                //     regionPageArr={regionPageArr}
-                                //     regionPagecontributor={[]}
-                                //     regionPagedetractor={[]}
-                                //     reloadData={relaodData}
-                                //     unitDto={regionGraphDetails?.data?.unit}
-                                //   />
-                                // )
                               }
                             </div>
                           </div>
@@ -929,29 +916,6 @@ const RegionalLevelView = () => {
                                     />
                                   )
                                 )
-
-                                // (
-                                //   regionPageArr?.length > 0 && (
-                                //     <ChartHighChart
-                                //       options={columnChart(
-                                //         regionGraphDetails?.data?.unit,
-                                //         regionPageArr
-                                //       )}
-                                //     />
-                                //   )
-                                // )
-                                //  (
-                                //   lanePageArr?.length > 0 && (
-                                //     <ChartsHigh
-                                //       chart={"lane"}
-                                //       isLoading={true}
-                                //       lanePageArr={lanePageArr}
-                                //       lanePagecontributor={[]}
-                                //       lanePagedetractor={[]}
-                                //       unitDto={regionGraphDetails?.data?.unit}
-                                //     />
-                                //   )
-                                // )
                               }
                             </div>
                           </div>

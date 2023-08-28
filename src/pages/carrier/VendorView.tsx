@@ -1,11 +1,9 @@
-import React from "react";
 import DateTimeShow from "../../component/DateTimeShow";
 import { useAuth } from "../../auth/ProtectedRoute";
 import Search from "../../assets/images/common/searchcarrier.svg";
 
 import { FormGroup, Row, Col, Input } from "reactstrap";
-import Back from "../../assets/images/common/back.svg";
-import { useNavigate, Link } from "react-router-dom";
+import {Link } from "react-router-dom";
 import {
   capitalizeText,
   getQuarterName,
