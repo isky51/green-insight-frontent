@@ -78,7 +78,7 @@ export default function CarrierVendorView() {
                       id="exampleSelect"
                       name="select"
                       type="select"
-                      className="mt-2"
+                      className="mt-2 regionDropdown"
                       value={regionalLevel}
                       onChange={(e) => {
                         setCurrentPage(1);
@@ -517,7 +517,7 @@ export default function CarrierVendorView() {
                                       <td>
                                         <div className="d-flex align-items-center">
                                           <div
-                                            className="red-div me-2"
+                                            className="orange-div me-2"
                                             style={{
                                               backgroundColor: xx?.color,
                                             }}

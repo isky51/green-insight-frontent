@@ -154,7 +154,7 @@ export function columnChart(props: any) {
         tooltip: {
             enabled: true,
             formatter(this:any) {
-                return this.y > 0 ? `<b ><span class='text-capitalize'>${this.key} </span> </br> ${this.y?.toFixed(1).toLocaleString("en-US", { minimumFractionDigits: 1 })} ${props?.unitDto || 'g'}</b>` : `<b > <span class='text-capitalize'>${this.key} </span> </br> ${Math.abs(this.series.options?.data[this.point?.index]?.y.round(1))?.toLocaleString("en-US", { minimumFractionDigits: 1 })} ${props?.unitDto || 'g'}</b>`
+                return this.y > 0 ? `<b ><span class='text-capitalize'>${this.key} </span> </br> ${this.y?.toFixed(1).toLocaleString("en-US", { minimumFractionDigits: 1 })} ${props?.unitDto || 'g'}</b>` : `<b > <span class='text-capitalize'>${this.key} </span> </br> ${Math.abs(this.series.options?.data[this.point?.index]?.y.toFixed(1))?.toLocaleString("en-US", { minimumFractionDigits: 1 })} ${props?.unitDto || 'g'}</b>`
             }
         },
         series: [{

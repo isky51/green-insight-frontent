@@ -85,6 +85,7 @@ const SustainView = () => {
                         id="exampleSelect"
                         name="select"
                         type="select"
+                        className="regionDropdown"
                         onChange={(e) => {
                           setRelaodData(false);
                           setRegionsLevel(e.target.value);
@@ -520,7 +521,7 @@ const SustainView = () => {
                             id="exampleSelect"
                             name="select"
                             type="select"
-                            className="ms-2"
+                            className="ms-2 regionDropdown"
                             value={regionsIntensity}
                             onChange={(e) => {
                               setRelaodData(false);

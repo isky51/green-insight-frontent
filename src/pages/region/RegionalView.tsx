@@ -248,7 +248,7 @@ const RegionalView = () => {
                                   <td>
                                     <div className="d-flex align-items-center">
                                       <div
-                                        className="red-div me-2"
+                                        className="orange-div me-2"
                                         style={{
                                           backgroundColor: row?.intensity?.color,
                                         }}
@@ -266,7 +266,7 @@ const RegionalView = () => {
                                   <td>
                                     <div className="d-flex align-items-center">
                                       <div
-                                        className="red-div me-2"
+                                        className="orange-div me-2"
                                         style={{
                                           backgroundColor: row?.cost?.color,
                                         }}
