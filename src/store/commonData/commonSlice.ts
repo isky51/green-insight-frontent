@@ -19,6 +19,7 @@ interface commonState {
     emissionIntensityDetailsIsLoading:boolean;
     isLoadingRegionLevelGlidePath:boolean;
     regionLevelGlideData:any;
+    sideBarStatus:boolean
 }
 
 // Initial state
@@ -33,8 +34,13 @@ const initialState: commonState = {
     emissionIntensityDetails: "",
     emissionIntensityDetailsIsLoading:true,
     isLoadingRegionLevelGlidePath:true,
-    regionLevelGlideData: ""
+    regionLevelGlideData: "",
+    sideBarStatus:true,
 }
+
+export const sideBarToggleStatus = createAsyncThunk("toggle", async (status:boolean) => {
+    return status
+})
 
 // Async Thunk for fetching emission filter dates
 export const getFiltersDate = createAsyncThunk("graph/filters/dates", async (token: string, thunkApi) => {
@@ -111,6 +117,7 @@ export const commonDataReducer = createSlice({
             state.emissionIntensityDetails = "";
             state.isLoadingRegionLevelGlidePath=true;
             state.regionLevelGlideData="";
+            state.sideBarStatus= true;
         },
     },
     extraReducers: (builder) => {
@@ -186,6 +193,9 @@ export const commonDataReducer = createSlice({
                 state.isLoading = true;
                 state.isError = action.payload;
                 state.isSuccess = false;
+            })
+            .addCase(sideBarToggleStatus.fulfilled, (state,action) => {
+                state.sideBarStatus = action.payload;
             })
     }
 })

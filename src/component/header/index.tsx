@@ -13,10 +13,9 @@ import { Form } from "react-bootstrap";
 const HeaderLayout = () => {
     // iporting all states and functions from dashboard controller
     const {
-
         handleLogout,
+        ToggleSidebar
     } = HeaderController()
-
 
     return (
         <>
@@ -38,7 +37,7 @@ const HeaderLayout = () => {
                         
                         <div className="navbar-collapse" id="navbarSupportedContent">
                             <div className='d-flex gap-3 me-auto'>
-                                <img src={headerToogle} alt="header toogle" className='cursor' />
+                                <img src={headerToogle} alt="header toogle" className='cursor' onClick={ToggleSidebar} />
                                 <div className='position-relative'>
                                     <img src={Search} alt="search" className='searchIcon' />
                                     <Form className='searchBar'>
