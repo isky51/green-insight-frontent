@@ -1,0 +1,33 @@
+@import "../config/variable";
+
+
+.regionOverview-screen {
+    .regionOverview-screen-wraper {
+        .regionOverview-heading {
+            background-color: $gray-200;
+            border-radius: 8px;
+        }
+        .regionOverview-section {
+            background: $white;
+            border-radius: 8px;
+
+            .mainGrayCards {
+                .regionWiseTxt {
+                    h6 {
+                        font-size: 14px;
+
+                        span {
+                            font-size: 14px;
+                        }
+                    }
+                }
+                .model-overview{
+                    background-color: $lightgreen;
+                    border-left: 10px solid $primary;
+                    height: 50px;
+                    color: $primary;
+                }
+            }
+        }
+    }
+}

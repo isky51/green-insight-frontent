@@ -196,7 +196,7 @@ const RegionalLevelView = () => {
               </Col>
             </Row>
 
-            {/* substainability tracker */}
+           
             <div className="regional-section pb-5 px-3">
               <Row>
                 <Col lg="12" md="12">
@@ -364,7 +364,7 @@ const RegionalLevelView = () => {
                       }
                       <div className="d-lg-flex quartely-wrapper  p-3">
                         <div className="quartely px-2">
-                          <h4 className="mb-3 fs-14s">
+                          <h4 className="mb-3 font-14">
                             Quarterly emissions reduction goal
                           </h4>
                           <div>
@@ -377,7 +377,7 @@ const RegionalLevelView = () => {
                           </div>
                         </div>
                         <div className="quartely px-2">
-                          <h4 className="mb-3 fs-14s">
+                          <h4 className="mb-3 font-14">
                             Achieved reduction for this quarter
                           </h4>
                           <div>
@@ -390,7 +390,7 @@ const RegionalLevelView = () => {
                           </div>
                         </div>
                         <div className="quartely px-2">
-                          <h4 className="mb-3 fs-14s">
+                          <h4 className="mb-3 font-14">
                             Time left to reach this quarter's target
                           </h4>
                           <div>
