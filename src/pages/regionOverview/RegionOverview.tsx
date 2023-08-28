@@ -18,7 +18,6 @@ import TitleComponent from "../../component/tittle";
 import RegionOverviewController from "./RegionOverviewController";
 import { lineChart } from "../../constant/highchart/lineChart";
 import { columnChart } from "../../constant/highchart/columnChart";
-import laneService from "../../store/lane/laneService";
 import { verticalColumnChart } from "../../constant/highchart/verticalColumnChart";
 
 const RegionOverview = () => {
