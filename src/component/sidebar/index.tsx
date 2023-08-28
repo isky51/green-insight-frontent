@@ -14,9 +14,11 @@ import usermanagenment from "../../assets/images/sidebar/usermanagenment.svg";
 import carrierComparision from "../../assets/images/sidebar/carrierComparision.svg";
 import segmentationIcon from "../../assets/images/sidebar/segmentationIcon.svg";
 import { Nav, Accordion } from 'react-bootstrap';
-import { Link, useLocation, NavLink } from "react-router-dom";
+import { useLocation, NavLink } from "react-router-dom";
+import { useAppSelector } from "../../store/redux.hooks";
 const SidebarLayout = () => {
     const location = useLocation();
+    const {sideBarStatus} = useAppSelector((state)=>state.commonData)
     return (
         <>
             <div className="mainsidebar">
