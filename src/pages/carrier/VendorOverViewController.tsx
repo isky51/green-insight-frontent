@@ -31,7 +31,7 @@ export const VendorOverViewController = () => {
 
   useEffect(() => {
     if (params?.id) {
-      //   dispatch(getCarrierOverviewData(params?.id));
+      dispatch(getCarrierOverviewData(params?.id));
       dispatch(getLaneBreakdown({ id: params?.id, source }));
       return () => {
         source.cancel();

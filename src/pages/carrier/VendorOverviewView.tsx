@@ -28,6 +28,10 @@ import TitleComponent from "../../component/tittle";
 // import { setHeaderName } from "../../component/store/auth/authDataSlice";
 import moment from "moment";
 import ChartHighChart from "../../constant/highchart/chartHighChart";
+import {
+  carrierOverViewColumnGraph,
+  stackedMultiColumnGraph,
+} from "../../constant/highchart/columnChart";
 
 const VendorOverview = () => {
   const {
@@ -37,8 +41,10 @@ const VendorOverview = () => {
     laneBreakdownDetail,
     laneBreakdownDetailLoading,
     checkedDartTransit,
-    setCheckedDartTransit
+    setCheckedDartTransit,
   } = VendorOverViewController();
+
+  console.log(carrierOverviewDetail, "carrierOverviewDetail");
 
   return (
     <>
@@ -227,26 +233,22 @@ const VendorOverview = () => {
                         </div>
                       </div>
                       <div>
-                        {/* <ChartHighChart
-                        {}
-                          carrier_name={
-                            carrierOverviewDetail?.data?.responseData
-                              ?.carrier_name
-                          }
-                          baseLine={
-                            carrierOverviewDetail?.data?.responseData?.baseLine
-                          }
-                          industrialAverage={
-                            carrierOverviewDetail?.data?.responseData
-                              ?.industrialAverage
-                          }
-                          options={
-                            carrierOverviewDetail?.data?.responseData?.data ||
-                            []
-                          }
-                          chart={"carrierOverview"}
-                        /> 
-                          */}
+                        <ChartHighChart
+                          options={carrierOverViewColumnGraph({
+                            carrier_name:
+                              carrierOverviewDetail?.data?.responseData
+                                ?.carrier_name,
+                            baseLine:
+                              carrierOverviewDetail?.data?.responseData
+                                ?.baseLine,
+                            industrialAverage:
+                              carrierOverviewDetail?.data?.responseData
+                                ?.industrialAverage,
+                            options:
+                              carrierOverviewDetail?.data?.responseData?.data ||
+                              [],
+                          })}
+                        />
                       </div>
                       {((carrierOverviewDetail?.data?.responseData?.intensity -
                         carrierOverviewDetail?.data?.responseData?.max) /
@@ -259,11 +261,7 @@ const VendorOverview = () => {
                           <div>
                             <h6 className="mb-0 ">
                               <span className="text-capitalize">
-                                <img
-                                   src={Down}
-                                  alt="ico"
-                                  className="me-2"
-                                />
+                                <img src={Down} alt="ico" className="me-2" />
                                 {
                                   carrierOverviewDetail?.data?.responseData
                                     ?.carrier_name
@@ -297,11 +295,7 @@ const VendorOverview = () => {
                           <div>
                             <h6 className="mb-0 ">
                               <span className="text-capitalize">
-                                <img
-                                   src={Up}
-                                  alt="ico"
-                                  className="me-2"
-                                />
+                                <img src={Up} alt="ico" className="me-2" />
                                 {
                                   carrierOverviewDetail?.data?.responseData
                                     ?.carrier_name
@@ -640,57 +634,58 @@ const VendorOverview = () => {
 
                       <div>
                         <div className="avg-img modalOverviewGraph">
-                          {/* {
-                                                        laneBreakdownDetailLoading ? <div className="graph-loader d-flex justify-content-center align-items-center">
-
-                                                            <div class="spinner-border  spinner-ui" role="status">
-                                                                <span class="visually-hidden"></span>
-                                                            </div>
-                                                        </div> :
-                                                            ( */}
-                          {/* <ChartsHigh
-                            chart={"stackedMultiGraph"}
-                            isLoading={true}
-                            options={
-                              !checkedDartTransit
-                                ? [
-                                    {
-                                      name: "8%",
-                                      data: [80],
-                                      color: "#215154",
-                                      key: 2023,
-                                    },
-                                  ]
-                                : [
-                                    {
-                                      name: "CNG",
-                                      data: [20],
-                                      color: "#215154",
-                                      key: 2023,
-                                    },
-                                    {
-                                      name: "RNG",
-                                      data: [15],
-                                      color: "#367c90",
-                                      key: 2022,
-                                    },
-                                    {
-                                      name: "BEV",
-                                      data: [15],
-                                      color: "#c1d3c0",
-                                      key: 2022,
-                                    },
-                                    {
-                                      name: "HFC",
-                                      data: [15],
-                                      color: "#5f9a80",
-                                      key: 2022,
-                                    },
-                                  ]
-                            }
-                            revenueType={1}
-                          /> */}
-                          {/* )} */}
+                          {laneBreakdownDetailLoading ? (
+                            <div className="graph-loader d-flex justify-content-center align-items-center">
+                              <div
+                                className="spinner-border  spinner-ui"
+                                role="status"
+                              >
+                                <span className="visually-hidden"></span>
+                              </div>
+                            </div>
+                          ) : (
+                            <ChartHighChart
+                              options={stackedMultiColumnGraph({
+                                isLoading: true,
+                                options: !checkedDartTransit
+                                  ? [
+                                      {
+                                        name: "8%",
+                                        data: [80],
+                                        color: "#215154",
+                                        key: 2023,
+                                      },
+                                    ]
+                                  : [
+                                      {
+                                        name: "CNG",
+                                        data: [20],
+                                        color: "#215154",
+                                        key: 2023,
+                                      },
+                                      {
+                                        name: "RNG",
+                                        data: [15],
+                                        color: "#367c90",
+                                        key: 2022,
+                                      },
+                                      {
+                                        name: "BEV",
+                                        data: [15],
+                                        color: "#c1d3c0",
+                                        key: 2022,
+                                      },
+                                      {
+                                        name: "HFC",
+                                        data: [15],
+                                        color: "#5f9a80",
+                                        key: 2022,
+                                      },
+                                    ],
+                                revenueType: 1,
+                              })}
+                            />
+                          )}
                         </div>
                       </div>
                     </div>
@@ -698,10 +693,7 @@ const VendorOverview = () => {
                       <div>
                         <h6 className="mb-0 d-flex">
                           <span className="pe-2">
-                            <img
-                               src={Down}
-                              alt="ico"
-                            />
+                            <img src={Down} alt="ico" />
                           </span>
                           Dart Transit Co. biodiesel mix is 12% lower than
                           best-in-class.
@@ -742,10 +734,7 @@ const VendorOverview = () => {
                                 <div>
                                   <h3 className="d-flex align-items-center">
                                     <span>
-                                      <img
-                                           src={UpArrow}
-                                        alt="ico"
-                                      />
+                                      <img src={UpArrow} alt="ico" />
                                     </span>
                                     8%
                                   </h3>
@@ -764,10 +753,7 @@ const VendorOverview = () => {
                                 <div>
                                   <h3 className="d-flex align-items-center">
                                     <span>
-                                      <img
-                                           src={Garrow}
-                                        alt="ico"
-                                      />
+                                      <img src={Garrow} alt="ico" />
                                     </span>
                                     6%
                                   </h3>
@@ -801,10 +787,7 @@ const VendorOverview = () => {
                                 <div>
                                   <h3 className="d-flex align-items-center">
                                     <span>
-                                      <img
-                                           src={UpArrow}
-                                        alt="ico"
-                                      />
+                                      <img src={UpArrow} alt="ico" />
                                     </span>
                                     8%
                                   </h3>
@@ -823,10 +806,7 @@ const VendorOverview = () => {
                                 <div>
                                   <h3 className="d-flex align-items-center">
                                     <span>
-                                      <img
-                                          src={Garrow}
-                                        alt="ico"
-                                      />
+                                      <img src={Garrow} alt="ico" />
                                     </span>
                                     6%
                                   </h3>

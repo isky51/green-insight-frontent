@@ -62,7 +62,7 @@ export const vendorGraphData = createAsyncThunk("get/vendor/Graph", async (userD
     }
 })
 
-export const getCarrierOverviewData = createAsyncThunk("get/vendor/Graph/Overview", async (userData, thunkApi) => {
+export const getCarrierOverviewData = createAsyncThunk("get/vendor/Graph/Overview", async (userData: any, thunkApi) => {
     try {
 
         return await vendorService.getCarrierOverview(userData, getTokenHeader());
