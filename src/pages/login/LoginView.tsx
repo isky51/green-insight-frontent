@@ -30,7 +30,10 @@ const LoginView: React.FC = () => {
         isOtpVerifyLoading,
         handleRemember,
         rememberMe,
-        setRememberMe
+        setRememberMe,
+        handleResendOTP,
+        isTimerActive,
+        timer
     } = LoginFormController();
     return (
         <>
@@ -175,7 +178,7 @@ const LoginView: React.FC = () => {
                                                         </div> : 'Continue'}
                                                     </Button>
                                                     <div className="recieveCode mt-3 d-flex justify-content-center align-items-center">
-                                                        <p className="mb-0">Didn't recieve a code? </p><button className="fw-semibold">Resend Code in (00:30)</button>
+                                                        <p className="mb-0">Didn't recieve a code? </p><button className="fw-semibold" onClick={handleResendOTP} disabled={isTimerActive} >Resend Code in ({timer})</button>
                                                     </div>
                                                 </div>
                                             </Modal.Body>

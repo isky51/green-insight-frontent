@@ -65,6 +65,21 @@ export const otpPost = createAsyncThunk("post/otp", async (useData: any, thunkAp
     }
 })
 
+export const resendOtpPost = createAsyncThunk("resendPost/otp", async (useData: any, thunkApi: any) => {
+    thunkApi.dispatch(setLoading(true))
+    try {
+        const res = await authService.resendPostOtp(useData);
+        thunkApi.dispatch(setLoading(false))
+        return res
+    }
+    catch (error: any) {
+        const message = error?.response?.data?.message || error.message || error.string();
+        toast.error("Invalid authentication code");
+        thunkApi.dispatch(setLoading(false))
+        return thunkApi.rejectWithValue(message)
+    }
+})
+
 // logout slice
 export const logoutPost = createAsyncThunk("post/logout", async (_, thunkApi) => {
     try {
@@ -129,6 +144,15 @@ export const authDataReducer = createSlice({
             .addCase(otpPost.rejected, (state: any, action: any) => {
                 state.isOtpVerifyLoading = false;
                 state.otpSuccess = false;
+            }).addCase(resendOtpPost.pending, (state) => {
+                state.isOtpVerifyLoading = true;
+                state.otpSuccess = false;
+            })
+            .addCase(resendOtpPost.fulfilled, (state: any, action: any) => {
+                state.isOtpVerifyLoading = false;
+            })
+            .addCase(resendOtpPost.rejected, (state: any, action: any) => {
+                state.isOtpVerifyLoading = false;
             })
 
 
