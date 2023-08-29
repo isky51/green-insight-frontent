@@ -17,9 +17,11 @@ import { Accordion } from 'react-bootstrap';
 import { Nav, NavItem } from 'reactstrap';
 import { useLocation, NavLink} from "react-router-dom";
 import { useAppSelector } from "../../store/redux.hooks";
+import HeaderController from "../header/HeaderController";
 const SidebarLayout = () => {
     const location = useLocation();
     const {sideBarStatus} = useAppSelector((state)=>state.commonData)
+    const {handleLogout} = HeaderController()
     return (
         <>
             <div className={sideBarStatus?"mainsidebar": "mainsidebar closedSidebar"}>
@@ -30,18 +32,16 @@ const SidebarLayout = () => {
                     <Accordion>
                         <Nav className="flex-column">
                             <NavItem className="position-relative mb-2">
-                               
-                                    <NavLink to="/sustainable" className={(location.pathname.includes("/regional-level") || location.pathname.includes("/sustainable") ? "activebar" : "")}>
-                                        <div className="d-flex align-items-center gap-3 navitemtxtWrapper" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                                            <img src={Dashboardicon} alt="dashboard icon" />
-                                            <h4 className="mb-0 font-16 navText">Dashboard</h4>
-                                        </div>
-                                    </NavLink>
-                                
+                                <NavLink to="/sustainable" className={(location.pathname.includes("/regional-level") || location.pathname.includes("/sustainable") ? "activebar" : "")}>
+                                    <div className="d-flex align-items-center gap-3 navitemtxtWrapper" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                                        <img src={Dashboardicon} alt="dashboard icon" />
+                                        <h4 className="mb-0 font-16 navText">Dashboard</h4>
+                                    </div>
+                                </NavLink>
                             </NavItem>
 
                             <Accordion.Item eventKey="0">
-                                <Accordion.Header className={(location.pathname.includes("/regional") || location.pathname.includes("/regional-overview") || location.pathname.includes("/carrier") ? "activebar" : "")}>
+                                <Accordion.Header className={(location.pathname !== "/regional-level" && (location.pathname.includes("/regional") || location.pathname.includes("/region-overview") || location.pathname.includes("/carrier")) ? "activebar" : "")}>
                                     <div >
                                         <div className="d-flex align-items-center gap-3 navitemtxtWrapper" data-toggle="tooltip" data-placement="right" title="Segmentation">
                                             <img src={segmentationIcon} alt="segmentationIcon" />
@@ -165,14 +165,14 @@ const SidebarLayout = () => {
                                 </NavLink>
                             </Nav.Item> */}
 
-                            {/* <Nav.Item>
-                                <NavLink >
-                                    <div className="d-flex align-items-center gap-3 pb-3 navitemtxtWrapper">
+                            <NavItem>
+                                <NavLink to={'/'}>
+                                    <div className="d-flex align-items-center gap-3 pb-3 navitemtxtWrapper" onClick={handleLogout} data-toggle="tooltip" data-placement="right" title="Logout">
                                         <img src={Logouticon} alt="logout icon" />
                                         <h4 className="mb-0 font-16 navText">Logout</h4>
                                     </div>
                                 </NavLink>
-                            </Nav.Item> */}
+                            </NavItem>
                         </Nav>
                     </Accordion>
                 </div>

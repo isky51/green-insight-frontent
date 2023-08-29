@@ -38,7 +38,7 @@ const DashboardView = () => {
       {/* Obfuscation dashboard starts */}
       <TitleComponent title={"Obfuscation"} />
 
-      <div className="container-fluid" data-testid="dashboard">
+      <div className="bg-white" data-testid="dashboard">
         <Row>
           <Col lg="10" className="mx-auto">
             <div className='obfuscationDashboardWrapper bg-white px-md-4 px-0'>

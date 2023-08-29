@@ -109,7 +109,7 @@ const RegionalLevelView = () => {
                 <Row className="substain-h-wrapper pe-3 pb-0 ps-0">
                   <Col lg="9">
                     <div className="lates-update">
-                      <h1 className="mb-0 fs-3">
+                      <h1 className="mb-2 fs-3">
                         Transportation Emissions Dashboard
                       </h1>
                     </div>

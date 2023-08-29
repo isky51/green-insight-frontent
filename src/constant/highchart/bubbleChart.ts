@@ -4,7 +4,7 @@ export default function bubbleChart(props: any) {
     props?.map((x: any) =>
         bubbleArr.push({ color: x.color, name: x.name, x: x.x, y: x.y, z: Number(x.z), fillColor: x.color })
     )
-    const bubbleOption: Highcharts.Options = {
+    const bubbleOption: any = {
         credits: {
             enabled: false
         },
@@ -52,7 +52,7 @@ export default function bubbleChart(props: any) {
                 text: 'gCO2e/Ton-Mile'
             },
             labels: {
-                formatter: function (this: Highcharts.AxisLabelsFormatterContextObject) {
+                formatter: function (this: any) {
                     const valueAsNumber = Number(this.value); // Convert value to a number
 
                     if (valueAsNumber < 1000) {

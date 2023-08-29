@@ -39,7 +39,7 @@ const ProtectedRoute = () => {
                 <SidebarLayout />
                 <div className="DashboardWrapper">
                     <HeaderLayout />
-                    <div className="obfuscationDashboard">
+                    <div className="dashboardScreen">
                         <div className="container-fluid">
                             <Outlet />
                         </div>
