@@ -180,8 +180,10 @@
 
 // closed sidebar css
 .mainsidebar.closedSidebar {
-    width: 126px;
-
+    width: 100px;
+    .greensightLogo{
+        width: 60px;
+    }
     .sidebarnav-wrapper {
         .accordion {
             .nav {

@@ -74,7 +74,7 @@ const SustainView = () => {
                     </div>
                   </Col>
                 </Row>
-                <Row className=" p-3 pt-0 ps-0 align-items-center">
+                <Row className="align-items-center">
                   <Col lg="9" md="12">
                     <FormGroup className="select-box d-flex">
                       <Input
@@ -98,11 +98,7 @@ const SustainView = () => {
                       </Input>
                     </FormGroup>
                   </Col>
-                  <Col lg="3" md="12">
-                    <div className="d-flex justify-content-end">
-                      <ExportButton />
-                    </div>
-                  </Col>
+                  
                 </Row>
               </Col>
             </Row>
@@ -112,7 +108,7 @@ const SustainView = () => {
               <Row>
                 <Col lg="12" md="12">
                   <div className="subs-inner-heading py-4 pb-4">
-                    <h2 className="fw-medium pb-4 mb-0 font-24">
+                    <h2 className="fw-medium mb-2 font-24">
                       Sustainability Tracker
                     </h2>
                     {/* new-ui */}

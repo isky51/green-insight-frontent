@@ -67,6 +67,9 @@
         max-height: 500px;
         tr{
             cursor: pointer;
+            &:hover{
+                background: rgba(193, 211, 192, 0.4);
+            }
         }
 
         @media (max-width: 1200px) {

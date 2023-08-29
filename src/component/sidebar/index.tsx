@@ -32,7 +32,7 @@ const SidebarLayout = () => {
                             <NavItem className="position-relative mb-2">
                                
                                     <NavLink to="/sustainable" className={(location.pathname.includes("/regional-level") || location.pathname.includes("/sustainable") ? "activebar" : "")}>
-                                        <div className="d-flex align-items-center gap-3 navitemtxtWrapper ">
+                                        <div className="d-flex align-items-center gap-3 navitemtxtWrapper" data-toggle="tooltip" data-placement="right" title="Dashboard">
                                             <img src={Dashboardicon} alt="dashboard icon" />
                                             <h4 className="mb-0 font-16 navText">Dashboard</h4>
                                         </div>
@@ -43,7 +43,7 @@ const SidebarLayout = () => {
                             <Accordion.Item eventKey="0">
                                 <Accordion.Header className={(location.pathname.includes("/regional") || location.pathname.includes("/regional-overview") || location.pathname.includes("/carrier") ? "activebar" : "")}>
                                     <div >
-                                        <div className="d-flex align-items-center gap-3 navitemtxtWrapper">
+                                        <div className="d-flex align-items-center gap-3 navitemtxtWrapper" data-toggle="tooltip" data-placement="right" title="Segmentation">
                                             <img src={segmentationIcon} alt="segmentationIcon" />
                                             <h4 className="mb-0 font-16 navText">Segmentation</h4>
                                         </div>
@@ -53,7 +53,7 @@ const SidebarLayout = () => {
                                     <Nav className="d-flex flex-column">
                                         <NavItem>
                                                 <NavLink to="/regional">
-                                                    <div className="d-flex align-items-center gap-3 navitemtxtWrapper">
+                                                    <div className="d-flex align-items-center gap-3 navitemtxtWrapper" data-toggle="tooltip" data-placement="right" title="By Region">
                                                         <img src={byregion} alt="byregion icon" />
                                                         <h4 className="mb-0 font-16 navText">By Region</h4>
                                                     </div>
@@ -69,7 +69,7 @@ const SidebarLayout = () => {
                                         </Nav.Item> */}
                                         <NavItem>
                                                 <NavLink to="/carrier">
-                                                    <div className="d-flex align-items-center gap-3 navitemtxtWrapper">
+                                                    <div className="d-flex align-items-center gap-3 navitemtxtWrapper" data-toggle="tooltip" data-placement="right" title="By Carrier">
                                                         <img src={bycarrier} alt="bycarrier icon" />
                                                         <h4 className="mb-0 font-16 navText">By Carrier</h4>
                                                     </div>

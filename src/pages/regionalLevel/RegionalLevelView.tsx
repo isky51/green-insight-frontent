@@ -121,7 +121,7 @@ const RegionalLevelView = () => {
                     <div></div>
                   </Col>
                 </Row>
-                <Row className=" p-3 ps-0 align-items-center">
+                <Row className="align-items-center">
                   <Col lg="9" md="12">
                     <FormGroup className="select-box d-flex">
                       {useAuth().userdata?.role === 0 && (
@@ -199,7 +199,7 @@ const RegionalLevelView = () => {
               <Row>
                 <Col lg="12" md="12">
                   <div className="subs-inner-heading py-4 pb-4">
-                    <h2 className="fw-medium pb-4 mb-0 font-24">Sustainability Tracker</h2>
+                    <h2 className="fw-medium mb-2 font-24">Sustainability Tracker</h2>
                     <Row className="g-3">
                       <Col lg="3">
                         <div className="primaryCard p-4 h-100">
@@ -507,7 +507,7 @@ const RegionalLevelView = () => {
               {/* pacific section */}
               <div className="pacific-overview mt-3">
                 <h2 className="fw-semibold font-24">{regionName} Region Overview</h2>
-                <Row>
+                <Row className="g-3">
                   <Col lg="6">
                     <div className="mainGrayCards p-3 h-100 slider-icons position-relative opacity-25">
                       <div className="emi-inten d-flex justify-content-between">
@@ -706,7 +706,7 @@ const RegionalLevelView = () => {
                     </div>
                   </Col>
                 </Row>
-                <Row>
+                <Row className="mt-2">
                   {/* Carrier Graph */}
                   {isCarrier && (
                     <Col lg="12" md="12">

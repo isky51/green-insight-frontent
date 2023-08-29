@@ -60,17 +60,18 @@ const RegionOverview = () => {
       <section className="regionOverview-screen py-4 px-2">
         <div className="regionOverview-screen-wraper">
           <div className="regionOverview-heading">
-            <div className="regional-heading mb-4 pb-3">
-              <div className="d-sm-flex justify-content-end align-items-center">
-                <div className="lates-update">
-                  <DateTimeShow />
-                </div>
-              </div>
+            <div className="regional-heading d-flex justify-content-between align-items-center mb-4 pb-2">
+              
               <div className="">
                 <div className="heading">
                   <h2 className="mb-0 fs-4 fw-semibold">{params?.regionId} Region Overview</h2>
                 </div>
                 {emissionDates && <div className="lates-update "><p className="d-flex align-items-center mb-0 justify-content-start">Data available from {moment.utc(emissionDates?.data?.emission_dates?.start_date).format("DD MMMM YYYY")} to {moment.utc(emissionDates?.data?.emission_dates?.end_date).format("DD MMMM YYYY")}</p></div>}
+              </div>
+              <div className="d-sm-flex justify-content-end align-items-center">
+                <div className="lates-update">
+                  <DateTimeShow />
+                </div>
               </div>
             </div>
           </div>

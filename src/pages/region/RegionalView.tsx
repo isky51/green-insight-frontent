@@ -112,7 +112,7 @@ const RegionalView = () => {
                         <h6 className="mb-0 fw-semibold text-capitalize fs-14">
                           Emissions intensity
                         </h6>
-                        <div className="toggle-switch">
+                        <div className="toggle-switch mt-1">
 
                           <Form>
                             <Form.Check

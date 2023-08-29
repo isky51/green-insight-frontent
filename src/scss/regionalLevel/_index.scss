@@ -79,16 +79,22 @@
     pointer-events: none;
     position: relative;
     width: auto;
-    .modal-body{
-        .card-border{
+
+    .modal-body {
+        .card-border {
             border: 1px solid $gray-600;
-            .form-check{
-                .form-check-input{
+
+            .form-check {
+                .form-check-input {
                     border: 1px solid $gray-600;
-                    &:checked{
+                    width: 20px;
+                    height: 20px;
+                    &:checked {
                         background-color: $primary;
+                        border: none;
                     }
-                    &:focus{
+
+                    &:focus {
                         box-shadow: none;
                     }
                 }
