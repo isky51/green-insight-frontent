@@ -23,7 +23,6 @@ import { verticalColumnChart } from "../../constant/highchart/verticalColumnChar
 const SustainView = () => {
   // Importing all states and functions from dashboard controller
   const {
-    regionsLevel,
     setRegionsLevel,
     regionsIntensity,
     setRegionsIntensity,
