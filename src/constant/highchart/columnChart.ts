@@ -11,14 +11,12 @@ export function columnChart(props: any) {
         },
         xAxis: {
             categories: props.regionPageArr?.map((i:any) => `${i?.name} (${i?.y > 0 ? `+ ${i?.y}` : `- ${Math.abs(i?.yValue)}`})`)
-
         },
         plotOptions: {
             column: {
                 pointPadding: 0.2,
                 borderWidth: 0,
             },
-
         },
         yAxis: {
             gridLineColor: 'transparent',
@@ -32,7 +30,6 @@ export function columnChart(props: any) {
                 zIndex: 10
             }],
         },
-
         title: {
             text: ''
         },
@@ -44,7 +41,6 @@ export function columnChart(props: any) {
         },
         tooltip: {
             enabled: true,
-
             formatter(this:any) {
                 return this.y > 0 ? `<b>${this.key} </br> ${this.y} ${props?.unitDto || 'g'}</b>` : `<b>${this.key} </br> ${Math.abs(this.series.options?.data[this.point?.index]?.yValue)} ${props?.unitDto || 'g'}</b>`
             }
@@ -87,7 +83,6 @@ export function columnChart(props: any) {
             '#A47D7C',
             '#B5CA92'
         ],
-
         title: {
             text: ''
         },
@@ -95,49 +90,25 @@ export function columnChart(props: any) {
             text: ''
         },
         xAxis: [
-
             {
-                tickPositions: props.lanePagecontributor,
-
-                color: "#215154",
-
+                lineWidth: 0, 
+                tickLength: 0, 
                 labels: {
-                    align: "left",
-                    x: 40,
-                    enabled: false,
-                    verticalAlign: 'left',
-                    formatter(this:any) {
-                        return this?.chart?.userOptions?.series?.[0]?.data[this.value].y > 0 ? this?.chart?.userOptions?.series?.[0]?.data[this.value].name : ``
-                    }
-                },
-
-            }, {
-
-                tickPositions: props.lanePagedetractor,
-                linkedTo: 0,
-                labels: {
-
-                    enabled: false,
-                    align: "left",
-                    x: -120,
-                    verticalAlign: 'right',
-                    formatter(this:any) {
-                        return this?.chart?.userOptions?.series?.[0]?.data[this.value]?.y < 0 ? this?.chart?.userOptions?.series?.[0]?.data[this.value]?.name : ``
-                    }
-                },
-                opposite: true
-            }],
-
+                    enabled: false
+                  }
+            }
+        ],
         yAxis: [{
             tickPositioner: function (this:any) {
                 let maxDeviation = Math.ceil(Math.max(Math.abs(this.dataMax), Math.abs(this.dataMin)));
                 let halfMaxDeviation = Math.ceil(maxDeviation / 2);
-
                 return [-maxDeviation - 1, -halfMaxDeviation - 1, 0, halfMaxDeviation + 4, maxDeviation + 4];
             },
             gridLineWidth: 0,
             minorGridLineWidth: 0,
-
+            labels: {
+                enabled: false
+              },
             plotLines: [{
                 value: 0,
                 width: 0.5,
@@ -158,7 +129,6 @@ export function columnChart(props: any) {
             }
         },
         series: [{
-
             name: '',
             data: props.lanePageArr ? props.lanePageArr : [['Shanghai', 24]], pointWidth: 17,
             dataLabels: {
@@ -170,13 +140,9 @@ export function columnChart(props: any) {
                 formatter(this:any) {
                     return this.y > 0 ? this.y?.toLocaleString("en-US", { minimumFractionDigits: 1 }) + " g" : Math.abs(this.y)?.toLocaleString("en-US", { minimumFractionDigits: 1 }) + " g"
                 }
-
             }
         }]
     }
-
-
-   
     return props.chart==="region" ? optionRegion : props.chart === "lane" ? optionLane : ""
 }
 
