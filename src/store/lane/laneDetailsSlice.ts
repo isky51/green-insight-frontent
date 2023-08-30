@@ -1,20 +1,20 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
 import laneService from "./laneService";
 import { getTokenHeader } from "../../constant";
 
+// Define the shape of the lane state
 interface LaneState {
     isError: any;
     isSuccess: boolean;
     isLoading: boolean;
     message: string;
     laneTableDetails: any | null;
-    laneGraphDetails:any | null;
+    laneGraphDetails: any | null;
     lowLaneTableDetail: any | null;
     laneGraphDetailsLoading: boolean;
-    regionCarrierComparisonData:any | null;
+    regionCarrierComparisonData: any | null;
     getRegionOverviewDetailData: any | null;
-    getRegionOverviewDetailLoading:boolean;
+    getRegionOverviewDetailLoading: boolean;
     regionCarrierComparisonLoading: boolean;
     laneCarrierEmission: any | null;
     laneCarrierEmissionIsloading: boolean;
@@ -24,105 +24,108 @@ interface LaneState {
     getLaneOverDetailsEmissionLoading: boolean;
 }
 
-const initialState:LaneState = {
+// Initial state
+const initialState: LaneState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
     message: "",
     laneTableDetails: "",
-    laneGraphDetails: "",    
+    laneGraphDetails: "",
     lowLaneTableDetail: "",
     laneGraphDetailsLoading: true,
-    regionCarrierComparisonData: "",    
+    regionCarrierComparisonData: "",
     getRegionOverviewDetailData: "",
     regionCarrierComparisonLoading: true,
-    getRegionOverviewDetailLoading:false,
+    getRegionOverviewDetailLoading: false,
     laneCarrierEmission: null,
     laneCarrierEmissionIsloading: true,
     laneReductionDetailGraphLoading: true,
     laneReductionDetailGraphData: null,
     getLaneOverDetailsEmissionData: null,
-    getLaneOverDetailsEmissionLoading: true
+    getLaneOverDetailsEmissionLoading: true,
 }
-export const laneGraphData = createAsyncThunk('get/lane/graph', async (userData:any, thunkApi) => {
+
+// Async Thunks for lane data operations
+export const laneGraphData = createAsyncThunk('get/lane/graph', async (userData: any, thunkApi) => {
     try {
         return await laneService.laneGraphData(userData, getTokenHeader())
-    } catch (error:any) {
+    } catch (error: any) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message);
     }
 })
 
-export const regionCarrierComparison = createAsyncThunk('get/region/carrier/comparison', async (userData:any, thunkApi) => {
+// Async Thunk to fetch region carrier comparison data
+export const regionCarrierComparison = createAsyncThunk('get/region/carrier/comparison', async (userData: any, thunkApi) => {
     try {
         return await laneService.regionCarrierComparison(userData, getTokenHeader())
-    } catch (error:any) {
+    } catch (error: any) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message);
     }
 })
 
-
-export const getRegionOverviewDetail = createAsyncThunk('get/region/carrier/comparison/detail', async (userData:any, thunkApi) => {
+// Async Thunk to fetch region overview detail data for carrier comparison
+export const getRegionOverviewDetail = createAsyncThunk('get/region/carrier/comparison/detail', async (userData: any, thunkApi) => {
     try {
         return await laneService.getRegionOverviewDetail(userData, getTokenHeader())
-    } catch (error:any) {
+    } catch (error: any) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message);
     }
 })
 
-
+// Async Thunk to fetch lane table data
 export const laneTableData = createAsyncThunk("get/lane/table-Data", async (userData, thunkApi) => {
     try {
         return await laneService.laneTableDataGet(userData, getTokenHeader());
-    } catch (error:any) {
+    } catch (error: any) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message)
     }
 })
 
-//low intensity data filling in table
+// Async Thunk to fill lane table data for low intensity
 export const lowLaneTableData = createAsyncThunk("get/low/lane/table-Data", async (userData, thunkApi) => {
     try {
-     
         return await laneService.lowLaneTableData(userData, getTokenHeader());
-    } catch (error:any) {
+    } catch (error: any) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message)
     }
 })
 
+// Async Thunk to fetch lane carrier emission reduction glide data
 export const laneCarrierEmissionReductionGlide = createAsyncThunk("post/emission/reduction/glide", async (userData, thunkApi) => {
     try {
-
         return await laneService.getLaneReductionDetailGraph(userData, getTokenHeader());
     }
-    catch (error:any) {
+    catch (error: any) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message)
     }
 })
 
+// Async Thunk to fetch lane reduction detail graph data for carrier comparison
 export const laneReductionDetailGraph = createAsyncThunk('get/region/carrier/Reduction/comparison', async (userData, thunkApi) => {
     try {
-        
         return await laneService.getLaneCarrierEmission(userData, getTokenHeader())
-    } catch (error:any) {
+    } catch (error: any) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message);
     }
 })
 
+// Async Thunk to fetch lane overview details emission data for carrier comparison
 export const getLaneOverDetailsEmission = createAsyncThunk('get/region/carrier/overview/detail', async (userData, thunkApi) => {
     try {
         return await laneService.getLaneOverDetailsEmissionApi(userData, getTokenHeader())
-    } catch (error:any) {
+    } catch (error: any) {
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message);
     }
 })
-
 
 
 export const laneDetailsReducer = createSlice({

@@ -17,7 +17,6 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
-
 import {
   yearList, getQuarters,
   getQuarterName,
@@ -25,7 +24,6 @@ import {
   isCompanyEnable,
   getCompanyName
 } from "../../constant/index"
-
 import moment from "moment";
 import DateTimeShow from "../../component/DateTimeShow";
 import { useAuth } from "../../auth/ProtectedRoute";
@@ -37,8 +35,13 @@ import { verticalColumnChart } from "../../constant/highchart/verticalColumnChar
 import bubbleChart from "../../constant/highchart/bubbleChart";
 import { columnChart } from "../../constant/highchart/columnChart";
 
-const RegionalLevelView = () => {
+/**
+ *
+ * @returns RegionalLevel page
+ */
 
+const RegionalLevelView = () => {
+  // Importing all states and functions from Regional Level Controller
   const {
     relaodData,
     regionName,

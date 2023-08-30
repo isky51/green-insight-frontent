@@ -3,43 +3,44 @@ import commonService from "./commonService";
 import { getTokenHeader } from "../../constant";
 
 /**
- * Redux Slice for common functions
+ * Redux Slice for common data and functionality
  */
 
 // Define the shape of the state
 interface commonState {
-    isSuccess:boolean
+    isSuccess: boolean;
     isLoading: boolean;
     message: string;
     emissionDates: any;
-    regions:any;
-    isError:any;
-    projectCountData:any;
-    emissionIntensityDetails:any
-    emissionIntensityDetailsIsLoading:boolean;
-    isLoadingRegionLevelGlidePath:boolean;
-    regionLevelGlideData:any;
-    sideBarStatus:boolean
+    regions: any;
+    isError: any;
+    projectCountData: any;
+    emissionIntensityDetails: any;
+    emissionIntensityDetailsIsLoading: boolean;
+    isLoadingRegionLevelGlidePath: boolean;
+    regionLevelGlideData: any;
+    sideBarStatus: boolean;
 }
 
 // Initial state
 const initialState: commonState = {
-    isSuccess:false,
+    isSuccess: false,
     isLoading: false,
-    isError:"",
+    isError: "",
     message: "",
     emissionDates: null,
-    regions:"",
-    projectCountData:"",
+    regions: "",
+    projectCountData: "",
     emissionIntensityDetails: "",
-    emissionIntensityDetailsIsLoading:true,
-    isLoadingRegionLevelGlidePath:true,
+    emissionIntensityDetailsIsLoading: true,
+    isLoadingRegionLevelGlidePath: true,
     regionLevelGlideData: "",
-    sideBarStatus:true,
+    sideBarStatus: true,
 }
 
-export const sideBarToggleStatus = createAsyncThunk("toggle", async (status:boolean) => {
-    return status
+// Async Thunk to toggle sidebar status
+export const sideBarToggleStatus = createAsyncThunk("toggle", async (status: boolean) => {
+    return status;
 })
 
 // Async Thunk for fetching emission filter dates
@@ -55,48 +56,58 @@ export const getFiltersDate = createAsyncThunk("graph/filters/dates", async (tok
     }
 })
 
+// Async Thunk for posting emission intensity data
 export const graphEmissionIntensity = createAsyncThunk("post/emissionIntensity", async (userData, thunkApi) => {
     try {
+        // Call common service to post emission intensity data
         return await commonService.postRegionIntensity(userData, getTokenHeader());
     }
-    catch (error:any) {
+    catch (error: any) {
+        // Handle errors and reject with error message
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message)
     }
 })
 
+// Async Thunk for fetching regions
 export const regionShow = createAsyncThunk("get/region", async (_, thunkApi) => {
     try {
-      
+        // Call common service to get regions
         return await commonService.getRegions(getTokenHeader());
     }
-    catch (error:any) {
+    catch (error: any) {
+        // Handle errors and reject with error message
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message)
     }
 })
 
-
-export const regionLevelGlidePath = createAsyncThunk("post/glideRegionPath/Details", async (userData:any, thunkApi) => {
+// Async Thunk for posting region level glide path details
+export const regionLevelGlidePath = createAsyncThunk("post/glideRegionPath/Details", async (userData: any, thunkApi) => {
     try {
-
+        // Call common service to post region level glide path details
         return await commonService.postRegionLevelGlidePath(userData, getTokenHeader());
     }
-    catch (error:any) {
+    catch (error: any) {
+        // Handle errors and reject with error message
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message)
     }
 })
 
-export const getProjectCount = createAsyncThunk("get/project/count", async (userData:any, thunkApi) => {
+// Async Thunk for fetching project count
+export const getProjectCount = createAsyncThunk("get/project/count", async (userData: any, thunkApi) => {
     try {
+        // Call common service to get project count
         return await commonService.getProjectCountApi(userData, getTokenHeader());
     }
-    catch (error:any) {
+    catch (error: any) {
+        // Handle errors and reject with error message
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
         return thunkApi.rejectWithValue(message)
     }
 })
+
 
 // Define the common data reducer
 export const commonDataReducer = createSlice({

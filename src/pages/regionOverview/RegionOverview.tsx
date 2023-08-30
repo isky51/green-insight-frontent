@@ -18,6 +18,12 @@ import { lineChart } from "../../constant/highchart/lineChart";
 import { columnChart } from "../../constant/highchart/columnChart";
 import { verticalColumnChart } from "../../constant/highchart/verticalColumnChart";
 
+
+/**
+ *
+ * @returns RegionalOverview page
+ */
+
 const RegionOverview = () => {
   // Importing all states and functions from Region Overview Controller
   const {

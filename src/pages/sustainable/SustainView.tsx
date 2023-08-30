@@ -18,10 +18,10 @@ import { verticalColumnChart } from "../../constant/highchart/verticalColumnChar
 
 /**
  *
- * @returns Dashboard view page
+ * @returns Sustainable view page
  */
 const SustainView = () => {
-  // Importing all states and functions from dashboard controller
+  // Importing all states and functions from sustainable controller
   const {
     setRegionsLevel,
     regionsIntensity,
@@ -42,7 +42,7 @@ const SustainView = () => {
     projectCountData,
     isLoading,
     isLoadingGraphRegionEmission,
-    regionEmissionIsloading,
+    regionEmissionIsLoading,
     emissionIntensityDetailsIsLoading,
     dataCheck,
     checkedEmissionsReductionGlide,
@@ -51,7 +51,7 @@ const SustainView = () => {
   } = SustainController();
   return (
     <>
-      {/* Obfuscation dashboard starts */}
+      {/* Sustainable dashboard starts */}
       <TitleComponent title={"Sustain Dashboard"} />
       <section className="substain-screen py-4 px-2">
         <div className="substain-screen-wraper">
@@ -313,7 +313,7 @@ const SustainView = () => {
                         </div>
                       </div>
                     </div>
-                    {regionEmissionIsloading ? (
+                    {regionEmissionIsLoading ? (
                       <div className="graph-loader d-flex justify-content-center ">
                         <div
                           className="spinner-border position-absolute spinner-ui"

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Fetch base URLs from environment variables
-const baseURL1 = process.env.REACT_APP_BASE_URL1;
+const baseURL = process.env.REACT_APP_BASE_URL1;
 
 /**
  * Common Services
@@ -11,7 +11,7 @@ const baseURL1 = process.env.REACT_APP_BASE_URL1;
 const getFiltersDate = async (token: { headers: { Authorization: string } }) => {
     try {
         const response = await axios.get(
-            baseURL1 + "graph/filters/dates", token
+             baseURL + "graph/filters/dates", token
         );
         return response?.data;
     }
@@ -20,10 +20,11 @@ const getFiltersDate = async (token: { headers: { Authorization: string } }) => 
     }
 }
 
+// Function to post region intensity data
 const postRegionIntensity = async (userData: any, token: { headers: { Authorization: string } }) => {
     try {
         const response = await axios.post(
-            baseURL1 + "get-region-intensity-yearly", userData, token
+             baseURL + "get-region-intensity-yearly", userData, token
         );
         return response?.data;
     }
@@ -33,10 +34,11 @@ const postRegionIntensity = async (userData: any, token: { headers: { Authorizat
     }
 }
 
+// Function to fetch regions
 const getRegions = async (token: { headers: { Authorization: string; }; }) => {
     try {
         const response = await axios.get(
-            baseURL1 + "get-regions",token
+             baseURL + "get-regions",token
         );
         return response?.data;
     } catch (error) {
@@ -45,10 +47,11 @@ const getRegions = async (token: { headers: { Authorization: string; }; }) => {
     }
 };
 
+// Function to post region level glide path data
 const postRegionLevelGlidePath = async (userData: any, token: { headers: { Authorization: string; }; }) => {
     try {
         const response = await axios.post(
-            baseURL1 + "get-region-reduction", userData, token
+             baseURL + "get-region-reduction", userData, token
         );
         return response?.data;
     } catch (error) {
@@ -57,10 +60,11 @@ const postRegionLevelGlidePath = async (userData: any, token: { headers: { Autho
     }
 };
 
+// Function to fetch project count using API
 const getProjectCountApi = async (userData:any,  token: { headers: { Authorization: string }}) => {
     try {
         const response = await axios.post(
-            baseURL1 + "get-project-count", userData, token
+             baseURL + "get-project-count", userData, token
         );
         return response?.data
     }

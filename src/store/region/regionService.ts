@@ -1,8 +1,7 @@
 import axios from "axios";
 
 // Fetch base URLs from environment variables
-export const baseURL = process.env.REACT_APP_BASE_URL;
-export const baseURL1 = process.env.REACT_APP_BASE_URL1;
+export const baseURL = process.env.REACT_APP_BASE_URL1;
 
 /**
  * Regional Services
@@ -12,7 +11,7 @@ export const baseURL1 = process.env.REACT_APP_BASE_URL1;
 const regionTableDataGet = async (userData: any, userToken: { headers: { Authorization: string } }) => {
     try {
         const response = await axios.post(
-            baseURL1 + "get-region-table-data", userData, userToken
+            baseURL + "get-region-table-data", userData, userToken
         );
 
         return response?.data;
@@ -26,7 +25,7 @@ const regionTableDataGet = async (userData: any, userToken: { headers: { Authori
 const regionGraphPost = async (userData: any, userToken: { headers: { Authorization: string } }) => {
     try {
         const response = await axios.post(
-            baseURL1 + "get-region-emission-data", userData, userToken
+            baseURL + "get-region-emission-data", userData, userToken
         );
 
         return response?.data;
@@ -40,7 +39,7 @@ const regionGraphPost = async (userData: any, userToken: { headers: { Authorizat
 const regionQuartelyGet = async (userData: any, userToken: { headers: { Authorization: string } }) => {
     try {
         const response = await axios.post(
-            baseURL1 + "get-region-intensity-quarterly", userData, userToken
+            baseURL + "get-region-intensity-quarterly", userData, userToken
         );
 
         return response?.data;
@@ -54,7 +53,7 @@ const regionQuartelyGet = async (userData: any, userToken: { headers: { Authoriz
 const regionFacilityEmissionApi = async (userData: any, userToken: { headers: { Authorization: string } }) => {
     try {
         const response = await axios.post(
-            baseURL1 + "get-facilities-emission-data", userData, userToken
+            baseURL + "get-facilities-emission-data", userData, userToken
         );
 
         return response?.data;

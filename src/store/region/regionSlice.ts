@@ -7,7 +7,7 @@ import { getTokenHeader } from "../../constant";
  */
 
 // Define the shape of the state
-interface regionState {
+interface RegionState {
     isError: any,
     isSuccess: boolean,
     isLoading: boolean,
@@ -18,7 +18,7 @@ interface regionState {
 }
 
 // Initial state
-const initialState: regionState = {
+const initialState: RegionState = {
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -29,26 +29,42 @@ const initialState: regionState = {
 }
 
 // Async Thunk for fetching region table data
-export const regionTableData = createAsyncThunk("get/region/table-Data", async (userData: any, thunkApi) => {
-    try {
-        return await regionService.regionTableDataGet(userData, getTokenHeader());
+export const regionTableData = createAsyncThunk(
+    "get/region/table-Data",
+    async (userData: any, thunkApi) => {
+        try {
+            return await regionService.regionTableDataGet(
+                userData,
+                getTokenHeader()
+            );
+        } catch (error: any) {
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.string();
+            return thunkApi.rejectWithValue(message);
+        }
     }
-    catch (error: any) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
-    }
-})
+);
 
 // Async Thunk for fetching region graph data
-export const regionGraphData = createAsyncThunk("get/region/Graph", async (userData: any, thunkApi) => {
-    try {
-        return await regionService.regionGraphPost(userData, getTokenHeader());
+export const regionGraphData = createAsyncThunk(
+    "get/region/Graph",
+    async (userData: any, thunkApi) => {
+        try {
+            return await regionService.regionGraphPost(
+                userData,
+                getTokenHeader()
+            );
+        } catch (error: any) {
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.string();
+            return thunkApi.rejectWithValue(message);
+        }
     }
-    catch (error: any) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
-    }
-})
+);
 
 // Define the regional data reducer
 export const regionDataReducer = createSlice({
@@ -69,31 +85,37 @@ export const regionDataReducer = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(regionTableData.pending, (state) => {
+                // Set loading state
                 state.isLoading = true;
                 state.isSuccess = false;
             })
             .addCase(regionTableData.fulfilled, (state, action) => {
+                // Set success state and update regionTableDetails
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.regionTableDetails = action.payload;
             })
             .addCase(regionTableData.rejected, (state, action) => {
+                // Set error state on rejection
                 state.isLoading = true;
                 state.isError = action.payload;
                 state.isSuccess = false;
             })
             .addCase(regionGraphData.pending, (state) => {
+                // Set loading state for graph data
                 state.isLoading = true;
                 state.isSuccess = false;
                 state.regionGraphDetailsLoading = true;
             })
             .addCase(regionGraphData.fulfilled, (state, action) => {
+                // Set success state and update regionGraphDetails
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.regionGraphDetails = action.payload;
                 state.regionGraphDetailsLoading = false;
             })
             .addCase(regionGraphData.rejected, (state, action) => {
+                // Set error state on graph data rejection
                 state.isLoading = true;
                 state.isError = action.payload;
                 state.isSuccess = false;

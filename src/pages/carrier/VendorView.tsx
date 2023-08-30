@@ -1,7 +1,6 @@
 import DateTimeShow from "../../component/DateTimeShow";
 import { useAuth } from "../../auth/ProtectedRoute";
 import Search from "../../assets/images/common/searchcarrier.svg";
-
 import { FormGroup, Row, Col, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import {
@@ -20,7 +19,14 @@ import ChartHighChart from "../../constant/highchart/chartHighChart";
 import bubbleChart from "../../constant/highchart/bubbleChart";
 import Pagination from "../../component/pagination/Pagination";
 
+/**
+ *
+ * @returns Carrier view page
+ */
+
 export default function CarrierVendorView() {
+
+  // Importing all states and functions from Vendor Controller
   const {
     fetchTableData,
     regionalLevel,
@@ -54,7 +60,7 @@ export default function CarrierVendorView() {
   const MIN = 60;
   const MAX = 390;
   const rtl = false;
-  
+
   return (
     <>
       <TitleComponent title={"Segmentation By Carrier"} />

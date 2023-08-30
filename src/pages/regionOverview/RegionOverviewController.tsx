@@ -1,3 +1,4 @@
+// Importing necessary React hooks and functions
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/redux.hooks';
 import { useParams } from 'react-router-dom';
@@ -6,7 +7,6 @@ import { getRegionOverviewDetail, laneGraphData, regionCarrierComparison } from 
 import { regionFacilityEmissions } from '../../store/region/regionOverviewSlice';
 import { getGraphData, getGraphDataHorizontal } from '../../constant';
 import { regionLevelGlidePath, regionShow } from '../../store/commonData/commonSlice';
-
 
 /**
  * A custom hook that contains all the states and functions for the RegionalController
@@ -25,38 +25,43 @@ const RegionOverviewController = () => {
     const [checkedFacilityEmissions, setCheckedFacilityEmissions] = useState(true);
 
     // Get relevant data from Redux store using selector hooks
-    const { regions,emissionDates,isLoadingRegionLevelGlidePath,regionLevelGlideData 
-        } = useAppSelector((state) => state.commonData);
-    const { regionFacilityEmissionDto, regionFacilityEmissionIsLoading } = useAppSelector((state) => state.regionOverview)
+    const { regions, emissionDates, isLoadingRegionLevelGlidePath, regionLevelGlideData } = useAppSelector((state) => state.commonData);
+    const { regionFacilityEmissionDto, regionFacilityEmissionIsLoading } = useAppSelector((state) => state.regionOverview);
     const { laneGraphDetails, laneGraphDetailsLoading, regionCarrierComparisonData, regionCarrierComparisonLoading, getRegionOverviewDetailData } = useAppSelector((state) => state.lane);
 
+    // Custom authentication hook
     const dataCheck = useAuth();
+    
+    // Get the route parameters
     const params = useParams();
     const currentPage = 1
     const pageSize = 10
 
-    // Define dispatch and navigate functions
+    // Define dispatch function from Redux store
     const dispatch = useAppDispatch();
 
     // Fetch data when necessary states change using useEffect
+
+    // Fetch regions when the component mounts
     useEffect(() => {
         dispatch(regionShow())
     }, [dispatch])
 
-
+    // Set regionName when regions data and route parameters change
     useEffect(() => {
         if (regions?.data) {
-            setRegionName(regions?.data?.regions?.filter((i:any) => i?.name === params?.regionId)[0]?.id || 1)
+            setRegionName(regions?.data?.regions?.filter((i: any) => i?.name === params?.regionId)[0]?.id || 1)
         }
     }, [regions, params])
 
-
+    // Fetch region level glide path data
     useEffect(() => {
         if (yearlyData1 && regionName) {
             dispatch(regionLevelGlidePath({ region_id: regionName, company_id: "", year: yearlyData1, toggel_data: checkedEmissionsReductionGlide ? 0 : 1 }))
         }
     }, [dispatch, yearlyData1, regionName, checkedEmissionsReductionGlide])
 
+    // Fetch lane graph data
     useEffect(() => {
         if (regionName) {
             dispatch(
@@ -65,16 +70,13 @@ const RegionOverviewController = () => {
                     page_size: pageSize,
                     region_id: regionName,
                     facility_id: "",
-                    // year: yearlyData,
-                    // quarter: quarterDetails,
                     toggel_data: checked ? 1 : 0,
                 })
             );
-
         }
     }, [dispatch, regionName, checked])
 
-
+    // Fetch region overview detail data
     useEffect(() => {
         if (regionName) {
             dispatch(
@@ -84,40 +86,34 @@ const RegionOverviewController = () => {
                     quarter: ""
                 })
             );
-
         }
     }, [dispatch, regionName])
 
+    // Fetch region carrier comparison data
     useEffect(() => {
         if (regionName) {
-
             dispatch(regionCarrierComparison({
                 page: currentPage,
                 page_size: pageSize,
                 region_id: regionName,
                 facility_id: "",
-                // year: yearlyData,
-                // quarter: quarterDetails,
                 toggel_data: checkedEmissions ? 1 : 0,
             }))
         }
     }, [regionName, dispatch, checkedEmissions])
 
+    // Fetch region facility emissions data
     useEffect(() => {
         if (regionName) {
-
             dispatch(regionFacilityEmissions({
-                // page: currentPage,
-                // page_size: pageSize,
                 region_id: regionName,
                 facility_id: "",
-                // year: yearlyData,
-                // quarter: quarterDetails,
                 toggel_data: checkedFacilityEmissions ? 1 : 0,
             }))
         }
     }, [regionName, dispatch, checkedFacilityEmissions])
 
+    // Get formatted arrays for various graph data
     let lanePageArr = getGraphData(laneGraphDetails);
     let laneCarrierArr = getGraphData(regionCarrierComparisonData);
     let laneFacilityEmessionArr = getGraphDataHorizontal(regionFacilityEmissionDto);
@@ -156,4 +152,5 @@ const RegionOverviewController = () => {
     };
 };
 
+// Exporting the custom hook for use in other components
 export default RegionOverviewController;

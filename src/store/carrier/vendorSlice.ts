@@ -1,28 +1,29 @@
+// Import necessary modules
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
 import vendorService from "./vendorService";
 import { getTokenHeader } from "../../constant";
 
-interface Intialstate {
-    isError: any,
-    isSuccess: Boolean,
-    isLoading: Boolean,
-    isLoadingVendorTableDetails: Boolean,
-    message: String,
-    vendorTableDetails: any,
-    vendorGraphDetails: any,
-    carrierOverviewDetail: any,
-    laneBreakdownDetail: any,
-    laneBreakdownDetailLoading: Boolean,
-    laneCarrierListName: any,
-    laneCarrierListNameLoading: Boolean,
-    getLaneCarrierCompaireDto: any,
-    getLaneCarrierCompaireDtoLoading: Boolean,
-    laneCarrierTableDtoLoading: any,
-    laneCarrierTableDto: any
+// Define the initial state for the reducer
+interface InitialState {
+    isError: any;
+    isSuccess: boolean;
+    isLoading: boolean;
+    isLoadingVendorTableDetails: boolean;
+    message: string;
+    vendorTableDetails: any;
+    vendorGraphDetails: any;
+    carrierOverviewDetail: any;
+    laneBreakdownDetail: any;
+    laneBreakdownDetailLoading: boolean;
+    laneCarrierListName: any;
+    laneCarrierListNameLoading: boolean;
+    getLaneCarrierCompaireDto: any;
+    getLaneCarrierCompaireDtoLoading: boolean;
+    laneCarrierTableDtoLoading: any;
+    laneCarrierTableDto: any;
 }
 
-const initialState: Intialstate = {
+const initialState: InitialState = {
     isError: "",
     isSuccess: false,
     isLoading: false,
@@ -38,88 +39,137 @@ const initialState: Intialstate = {
     getLaneCarrierCompaireDto: null,
     getLaneCarrierCompaireDtoLoading: true,
     laneCarrierTableDtoLoading: false,
-    laneCarrierTableDto: null
-}
+    laneCarrierTableDto: null,
+};
 
-export const vendorTableData = createAsyncThunk("get/vendor/table-Data", async (userData: Object, thunkApi) => {
-    try {
-        return await vendorService.vendorTableDataGet(userData, getTokenHeader());
+// Define async thunks for various API calls
+export const vendorTableData = createAsyncThunk(
+    "get/vendor/table-Data",
+    async (userData: Object, thunkApi) => {
+        try {
+            return await vendorService.vendorTableDataGet(
+                userData,
+                getTokenHeader()
+            );
+        } catch (error: any) {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.string();
+            return thunkApi.rejectWithValue(message);
+        }
     }
-    catch (error: any) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
+);
+
+// Define an async thunk to fetch vendor graph data
+export const vendorGraphData = createAsyncThunk(
+    "get/vendor/Graph",
+    async (userData: Object, thunkApi) => {
+        try {
+            // Call the vendorGraphPost function from vendorService
+            return await vendorService.vendorGraphPost(userData, getTokenHeader());
+        } catch (error: any) {
+            // Handle errors and return a rejected action with an error message
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.string();
+            return thunkApi.rejectWithValue(message);
+        }
     }
-})
+);
 
-export const vendorGraphData = createAsyncThunk("get/vendor/Graph", async (userData: Object, thunkApi) => {
-    try {
-
-        return await vendorService.vendorGraphPost(userData, getTokenHeader());
+// Define an async thunk to fetch carrier overview data for the graph
+export const getCarrierOverviewData = createAsyncThunk(
+    "get/vendor/Graph/Overview",
+    async (userData, thunkApi) => {
+        try {
+            // Call the getCarrierOverview function from vendorService
+            return await vendorService.getCarrierOverview(userData, getTokenHeader());
+        } catch (error: any) {
+            // Handle errors and return a rejected action with an error message
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.string();
+            return thunkApi.rejectWithValue(message);
+        }
     }
-    catch (error: any) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
+);
+
+// Define an async thunk to fetch lane breakdown detail for the graph
+export const getLaneBreakdown = createAsyncThunk(
+    "get/vendor/Graph/detail",
+    async (userData: any, thunkApi) => {
+        try {
+            // Call the getLaneBreakdown function from vendorService with the provided user data
+            return await vendorService.getLaneBreakdown({ id: userData.id }, getTokenHeader());
+        } catch (error: any) {
+            // Handle errors and return a rejected action with an error message
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.string();
+            return thunkApi.rejectWithValue(message);
+        }
     }
-})
+);
 
-export const getCarrierOverviewData = createAsyncThunk("get/vendor/Graph/Overview", async (userData, thunkApi) => {
-    try {
-
-        return await vendorService.getCarrierOverview(userData, getTokenHeader());
+// Define an async thunk to fetch lane carrier list names
+export const getLaneCarrierList = createAsyncThunk(
+    "get/carrier/name/detail",
+    async (userData, thunkApi) => {
+        try {
+            // Call the getLaneCarrierList function from vendorService
+            return await vendorService.getLaneCarrierList(userData, getTokenHeader());
+        } catch (error: any) {
+            // Handle errors and return a rejected action with an error message
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.string();
+            return thunkApi.rejectWithValue(message);
+        }
     }
-    catch (error: any) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
+);
+
+// Define an async thunk to fetch lane carrier comparison data
+export const getLaneCarrierCompaire = createAsyncThunk(
+    "get/carrier/compaire/detail",
+    async (userData, thunkApi) => {
+        try {
+            // Call the getLaneCarrierCompaire function from vendorService
+            return await vendorService.getLaneCarrierCompaire(userData, getTokenHeader());
+        } catch (error: any) {
+            // Handle errors and return a rejected action with an error message
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.string();
+            return thunkApi.rejectWithValue(message);
+        }
     }
-})
+);
 
-export const getLaneBreakdown = createAsyncThunk("get/vendor/Graph/detail", async (userData: any, thunkApi) => {
-    try {
-
-        // let tokenDetails = { headers: { Authorization: `Bearer ${tokenDetails1}` }, cancelToken: userData.source.token }
-        return await vendorService.getLaneBreakdown({ id: userData.id }, getTokenHeader());
+// Define an async thunk to fetch lane carrier table data
+export const laneCarrierTableData = createAsyncThunk(
+    "get/lane/carrier/table-Data",
+    async (userData, thunkApi) => {
+        try {
+            // Call the laneCarrierTableDataApi function from vendorService
+            return await vendorService.laneCarrierTableDataApi(userData, getTokenHeader());
+        } catch (error: any) {
+            // Handle errors and return a rejected action with an error message
+            const message =
+                (error.response && error.response.data && error.response.data.message) ||
+                error.message ||
+                error.string();
+            return thunkApi.rejectWithValue(message);
+        }
     }
-    catch (error: any) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
-    }
-})
-
-
-export const getLaneCarrierList = createAsyncThunk("get/carrier/name/detail", async (userData, thunkApi) => {
-    try {
-
-        return await vendorService.getLaneCarrierList(userData, getTokenHeader());
-    }
-    catch (error: any) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
-    }
-})
-
-export const getLaneCarrierCompaire = createAsyncThunk("get/carrier/compaire/detail", async (userData, thunkApi) => {
-    try {
-        return await vendorService.getLaneCarrierCompaire(userData, getTokenHeader());
-    }
-    catch (error: any) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
-    }
-})
-
-
-export const laneCarrierTableData = createAsyncThunk("get/lane/carrier/table-Data", async (userData, thunkApi) => {
-    try {
-
-        return await vendorService.laneCarrierTableDataApi(userData, getTokenHeader());
-    }
-    catch (error: any) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
-    }
-})
-
-
+);
 
 
 export const carrierDetailsReducer = createSlice({
@@ -208,9 +258,7 @@ export const carrierDetailsReducer = createSlice({
                 state.isError = action.payload;
                 state.isSuccess = false;
                 state.laneBreakdownDetailLoading = false
-
             })
-
             .addCase(getLaneCarrierList.pending, (state) => {
                 state.isLoading = true;
                 state.isSuccess = false;
@@ -229,9 +277,7 @@ export const carrierDetailsReducer = createSlice({
                 state.isError = action.payload;
                 state.isSuccess = false;
                 state.laneCarrierListNameLoading = false
-
             })
-
             .addCase(getLaneCarrierCompaire.pending, (state) => {
                 state.isLoading = true;
                 state.isSuccess = false;
@@ -249,7 +295,6 @@ export const carrierDetailsReducer = createSlice({
                 state.isError = action.payload;
                 state.isSuccess = false;
                 state.getLaneCarrierCompaireDtoLoading = false
-
             })
             .addCase(laneCarrierTableData.pending, (state) => {
                 state.isLoading = true;
@@ -262,14 +307,12 @@ export const carrierDetailsReducer = createSlice({
                 state.isSuccess = true;
                 state.laneCarrierTableDto = action.payload;
                 state.laneCarrierTableDtoLoading = false
-
             })
             .addCase(laneCarrierTableData.rejected, (state, action) => {
                 state.isLoading = true;
                 state.isError = action.payload;
                 state.isSuccess = false;
                 state.laneCarrierTableDtoLoading = false
-
             })
 
 
