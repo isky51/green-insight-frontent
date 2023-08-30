@@ -39,6 +39,19 @@ const authPostOtp = async (userData: any) => {
     }
 }
 
+const resendPostOtp = async (userData: any) => {
+
+    try {
+        const response = await axios.post(
+            baseURL + "resendOtp", userData
+        );
+        return response?.data?.data
+    }
+    catch (error: any) {
+        throw (error)
+    }
+}
+
 // Logout Service
 const authLogoutPost = async () => {
 
@@ -50,7 +63,8 @@ const authLogoutPost = async () => {
 const authService = {
     authLoginPost,
     authPostOtp,
-    authLogoutPost
+    authLogoutPost,
+    resendPostOtp
 }
 
 

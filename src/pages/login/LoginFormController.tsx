@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 // import { useSelector } from "react-redux";
-import { loginPost, otpPost } from "../../store/auth/authDataSlice";
+import { loginPost, otpPost, resendOtpPost } from "../../store/auth/authDataSlice";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../../auth/ProtectedRoute';
 import { useFormik } from 'formik';
@@ -32,6 +32,10 @@ const LoginFormController = () => {
     const [otpNumber, setOtpNumber] = useState("");
     const [otpErrorShow, setOtpErrorShow] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
+    const [timer, setTimer] = useState(60);
+    const [isTimerActive, setIsTimerActive] = useState(false);
+    const [isOtpSent, setIsOtpSent] = useState(false);
+    const [email, setEmail] = useState("");
 
     const [email1, setEmail1] = useState("");
     const dataCheck = useAuth();
@@ -100,6 +104,7 @@ const LoginFormController = () => {
             email: event.email,
             password: event.password,
         };
+        setEmail(event.email);
         dispatch(loginPost(userPayload));
 
     };
@@ -135,6 +140,30 @@ const LoginFormController = () => {
         onSubmit: handleSubmit,
     });
 
+    useEffect(() => {
+        if (isTimerActive && timer > 0) {
+          const countdown = setInterval(() => {
+            setTimer(prevTimer => prevTimer - 1);
+          }, 1000);
+    
+          return () => clearInterval(countdown);
+        } else if (timer === 0) {
+          setTimer(60)
+          setIsTimerActive(false);
+        }
+      }, [isTimerActive, timer]);
+    
+      const handleResendOTP = () => {
+        // Logic to trigger OTP resend
+        const userPayload = {
+            email: email,
+        };
+        dispatch(resendOtpPost(userPayload));
+        setIsOtpSent(true);
+        setTimer(60);
+        setIsTimerActive(true);
+      };
+
 
     // All the state and function return to LoginView
     return {
@@ -152,7 +181,10 @@ const LoginFormController = () => {
         isOtpVerifyLoading,
         handleRemember,
         rememberMe,
-        setRememberMe
+        setRememberMe,
+        handleResendOTP,
+        isTimerActive,
+        timer
     }
 
 }
