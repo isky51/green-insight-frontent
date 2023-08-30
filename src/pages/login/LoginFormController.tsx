@@ -67,21 +67,22 @@ const LoginFormController = () => {
 
     // If otp gets verified, redirects to dashboard
     useEffect(() => {
-        console.log(" ataCheck?.userdata ",dataCheck?.userdata);
         if (otpSuccess && dataCheck?.loggedIn) {
             setShow(false)
-            if(dataCheck?.userdata?.role === 1){
-                navigate("/dashboard");
-            }else if(dataCheck?.userdata?.role === 3){
-                navigate("/sustainable");
-            }
+            navigate("/sustainable");
+            // if(dataCheck?.userdata?.role === 1){
+            //     navigate("/dashboard");
+            // }else if(dataCheck?.userdata?.role === 3){
+            //     navigate("/sustainable");
+            // }
         }
         if (isSuccess && !isOtp && dataCheck?.loggedIn) {
-            if(dataCheck?.userdata?.role === 1){
-                navigate("/dashboard");
-            }else if(dataCheck?.userdata?.role === 3){
-                navigate("/sustainable");
-            }
+            navigate("/sustainable");
+            // if(dataCheck?.userdata?.role === 1){
+            //     navigate("/dashboard");
+            // }else if(dataCheck?.userdata?.role === 3){
+            //     navigate("/sustainable");
+            // }
         }
     }, [otpSuccess, isSuccess, isOtp, dataCheck, navigate]);
 
@@ -130,8 +131,6 @@ const LoginFormController = () => {
         }
 
     }
-
-
 
     // formic to control login form
     const formik = useFormik({

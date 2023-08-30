@@ -26,7 +26,6 @@ const getRegions = async (token:{ headers: { Authorization: string } }) => {
     }
 }
 const postCompanyData = async (userData:any, token:{ headers: { Authorization: string } }) => {
-    // console.log(process.env.REACT_API_BASE_URL,"process.env.REACT_API_BASE_URL")
     try {
         const response = await axios.post(
             baseURL + "get-company-data", userData, token

@@ -618,16 +618,16 @@ export function verticalColumnChart(props: any) {
     }
 
     let option ={};
-    if(props.chart==2){
+    if(props.chart===2){
         option = options2;
     }
-    else if(props.chart==4){
+    else if(props.chart===4){
         option = option4;
-    }else if(props.chart=="totalEmission"){
+    }else if(props.chart==="totalEmission"){
         option= optionTotalEmission;
-    }else if(props.chart=="emissionIntensity"){ 
+    }else if(props.chart==="emissionIntensity"){ 
         option= optionEmissionIntenisty
-    }else if(props.chart=="stackedGraph"){
+    }else if(props.chart==="stackedGraph"){
         option=stackedGraph
     }
     return option

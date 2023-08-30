@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/redux.hooks';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useAuth } from '../../auth/ProtectedRoute';
 import { getRegionOverviewDetail, laneGraphData, regionCarrierComparison } from '../../store/lane/laneDetailsSlice';
 import { regionFacilityEmissions } from '../../store/region/regionOverviewSlice';
@@ -37,7 +37,6 @@ const RegionOverviewController = () => {
 
     // Define dispatch and navigate functions
     const dispatch = useAppDispatch();
-    const navigate = useNavigate();
 
     // Fetch data when necessary states change using useEffect
     useEffect(() => {

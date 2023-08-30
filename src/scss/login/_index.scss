@@ -14,15 +14,15 @@
         }
 
         img {
-            width: 90px;
+            width: 70px;
 
             @media (max-width: $xxl) {
-                width: 70px;
+                width: 60px;
             }
         }
 
         .login-map {
-            height: calc(100vh - 125px);
+            height: calc(100vh - 102px);
             display: flex;
             justify-content: center;
             flex-direction: column;
@@ -33,7 +33,7 @@
             }
 
             .login-heading {
-                line-height: 104px;
+                line-height: normal;
                 color: $white;
                 font-family: $fontPoppins;
 

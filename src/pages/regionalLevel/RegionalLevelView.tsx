@@ -96,7 +96,6 @@ const RegionalLevelView = () => {
     setChecked,
     checked
   } = RegionalLevelController()
-  console.log(isRegionState, "isRegionStateisRegionState")
 
   return (
     <>
@@ -1056,7 +1055,6 @@ const RegionalLevelView = () => {
                                         type="checkbox"
                                         checked={isRegionState}
                                         onChange={() => {
-                                          console.log("Checking")
                                           setIsRegionState(!isRegionState)
                                         }}
                                         className="rounded-0"

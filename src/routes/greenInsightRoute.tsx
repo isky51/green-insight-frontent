@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProtectedRoute, { AuthRouteCheck } from "../auth/ProtectedRoute";
 import ErrorPage from "../pages/error/ErrorView";
-import DashboardView from "../pages/dashboard/DashboardView";
 import LoginView from "../pages/login/LoginView";
 import RegionalView from "../pages/region/RegionalView";
 import { useAppDispatch } from "../store/redux.hooks";
@@ -48,7 +47,7 @@ const GreenInsightRoute = () => {
         {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           {/* DashboardView route */}
-          <Route path="/dashboard" element={<DashboardView />} />
+          {/* <Route path="/dashboard" element={<DashboardView />} /> */}
 
           {/* RegionalLevel-Dashboard route */}
           <Route path="/regional-level" element={<RegionalLevelView />} />
@@ -62,6 +61,7 @@ const GreenInsightRoute = () => {
           {/* SustainView route */} 
           <Route path="/sustainable" element={<SustainView />} />
 
+          {/* Carrier route */}
           <Route path="/carrier" element={<CarrierVendorView />} />
         </Route>
 

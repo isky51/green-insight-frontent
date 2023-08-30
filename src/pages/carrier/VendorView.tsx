@@ -18,6 +18,7 @@ import VendorViewController from "./VendorViewController";
 import TitleComponent from "../../component/tittle";
 import ChartHighChart from "../../constant/highchart/chartHighChart";
 import bubbleChart from "../../constant/highchart/bubbleChart";
+import Pagination from "../../component/pagination/Pagination";
 
 export default function CarrierVendorView() {
   const {
@@ -34,9 +35,11 @@ export default function CarrierVendorView() {
     fetchGraphData,
     pageSize,
     regionName,
+    setRelaodData,
     handlePageChange,
     values,
     searchCarrier,
+    currentPage,
     handleSearchCarrier,
     handleChangeOrder,
     col_name,
@@ -51,10 +54,7 @@ export default function CarrierVendorView() {
   const MIN = 60;
   const MAX = 390;
   const rtl = false;
-  console.log(
-    vendorGraphDetails?.data?.responseData,
-    "vendorGraphDetails?.data?.responseData"
-  );
+  
   return (
     <>
       <TitleComponent title={"Segmentation By Carrier"} />
@@ -569,7 +569,7 @@ export default function CarrierVendorView() {
                     <div className="mt-0 lane-pagination d-flex justify-content-end">
                       <nav aria-label="Page navigation example">
                         <ul className="pagination mb-0">
-                          {/* <Pagination
+                          <Pagination
                                   className="pagination-bar"
                                   currentPage={currentPage}
                                   totalCount={
@@ -580,11 +580,11 @@ export default function CarrierVendorView() {
                                       : 1
                                   }
                                   pageSize={pageSize}
-                                  onPageChange={(page) => {
+                                  onPageChange={(page:number) => {
                                     setCurrentPage(page);
                                     setRelaodData(false);
                                   }}
-                                /> */}
+                                />
                         </ul>
                       </nav>
                     </div>

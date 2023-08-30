@@ -64,7 +64,6 @@ const VendorViewController = () => {
     }
   };
   const fetchGraphData = (search = "") => {
-    console.log("check test");
     if (searchCarrier.length >= 3 || searchCarrier.length === 0) {
       const payloadData = {
         region_id: regionalLevel,
@@ -141,13 +140,13 @@ const VendorViewController = () => {
     setCurrentPage(1);
     setRelaodData(false);
   };
-  console.log(vendorGraphDetails, "vendorGraphDetails");
   return {
     fetchTableData,
     regionalLevel,
     setCurrentPage,
     setRegoinDetail,
     regions,
+    currentPage,
     yearlyData,
     handleChangeYear,
     quarterDetails,
@@ -163,6 +162,7 @@ const VendorViewController = () => {
     handleChangeOrder,
     col_name,
     order,
+    setRelaodData,
     emissionDates,
     vendorTableDetails,
     navigate,

@@ -9,7 +9,6 @@ import Up from "../../assets/images/common/up.svg";
 import GArrow from "../../assets/images/common/g-arrow.svg";
 import { yearList, getCompanyName } from "../../constant";
 import { Link } from "react-router-dom";
-import ExportButton from "../../component/export-button";
 import moment from "moment";
 import Form from "react-bootstrap/Form";
 import ChartHighChart from "../../constant/highchart/chartHighChart";
@@ -36,7 +35,6 @@ const SustainView = () => {
     setYearlyData1,
     yearlyDataProject,
     setYearlyDataProject,
-    relaodData,
     setRelaodData,
     graphRegionChart,
     regions,
@@ -52,7 +50,6 @@ const SustainView = () => {
     setCheckedEmissionsReductionGlide,
     emissionDates,
   } = SustainController();
-  console.log("regionEmission?.data  ", regionEmission?.data);
   return (
     <>
       {/* Obfuscation dashboard starts */}
@@ -328,14 +325,6 @@ const SustainView = () => {
                       </div>
                     ) : (
                       regionEmission?.data && (
-                        // <ChartsHigh
-                        //     isLoading={isLoading}
-                        //     options={regionEmission?.data}
-                        //     chart={1}
-                        //     reloadData={relaodData}
-                        //     unitReduction={!checkedEmissionsReductionGlide}
-
-                        // />
                         <ChartHighChart
                           options={lineChart(
                             {

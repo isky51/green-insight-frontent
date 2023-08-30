@@ -17,7 +17,6 @@ export function lineChart(props: any) {
 
     if (props.chart === "emissionReduction") {
         Object.entries(props.options ? props.options : {})?.map((x) => {
-            console.log(x, "check x");
             if (x[0] !== "base_level" && x[0] !== "max" && x[0] !== "year" && x[0] !== "company_level") {
                 emissionsReduction.push({
                     name: x[0] === "targer_level" ? props?.regionName + " Target/Q" : x[0] === "company_level" ? "Company level" : props?.regionName + " Region", data: x[1], color: x[0] === "targer_level" ? "#427c90" : x[0] === "company_level" ? "#325454" : "#285254", marker: {
@@ -335,7 +334,7 @@ export function lineChart(props: any) {
                 useHTML: true,
                 formatter: function (this: any) {
                     if (this.pos === 1) {
-                        return this.value + "<br/>" + `<div style='font-weight:bold;padding-top:12px;'>${props.options?.year[0]}</div>`;
+                        return (this.value + "<br/>" + `<div style='font-weight:bold;padding-top:12px;'>${props.options?.year[0]}</div>`);
                     }
                     else if (this.pos === 5) {
                         return this.value + "<br/>" + `<div style='font-weight:bold;padding-top:12px;'>${props.options?.year[1]}</div>`;

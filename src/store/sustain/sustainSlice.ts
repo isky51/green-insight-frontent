@@ -54,7 +54,6 @@ const getTokenHeader = () => {
     return tokenDetails
 }
 
-const CryptoJS = require("crypto-js");
 export const graphRegionEmission = createAsyncThunk("get/region-emission-graph", async (userData:any, thunkApi) => {
     try {
         

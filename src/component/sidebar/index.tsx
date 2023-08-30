@@ -1,17 +1,8 @@
 import GreensightLogo from "../../assets/images/login/greensightLogo.svg";
 import Dashboardicon from "../../assets/images/sidebar/dashboardicon.svg";
 import Logouticon from "../../assets/images/sidebar/logouticon.svg";
-import bylane from "../../assets/images/sidebar/bylane.svg";
 import bycarrier from "../../assets/images/sidebar/bycarrier.svg";
 import byregion from "../../assets/images/sidebar/byregion.svg";
-import byfacility from "../../assets/images/sidebar/byfacility.svg";
-import Decarb from "../../assets/images/sidebar/decarb.svg";
-import Project from "../../assets/images/sidebar/project.svg";
-import Resources from "../../assets/images/sidebar/resources.svg";
-import methadology from "../../assets/images/sidebar/methadology.svg";
-import Accelaration from "../../assets/images/sidebar/acceration.svg";
-import usermanagenment from "../../assets/images/sidebar/usermanagenment.svg";
-import carrierComparision from "../../assets/images/sidebar/carrierComparision.svg";
 import segmentationIcon from "../../assets/images/sidebar/segmentationIcon.svg";
 import { Accordion } from 'react-bootstrap';
 import { Nav, NavItem } from 'reactstrap';

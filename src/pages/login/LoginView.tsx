@@ -24,7 +24,6 @@ const LoginView: React.FC = () => {
         setEmail1,
         handleClose,
         setOtpNumber,
-        setOtpErrorShow,
         handleSubmitOtp,
         isAuthLoginLoading,
         isOtpVerifyLoading,
@@ -56,7 +55,7 @@ const LoginView: React.FC = () => {
                                         play
                                         style={{ background: "transparent" }}
                                     />
-                                    <h4 className="login-heading font-xxl-70 font-xl-45 font-45 fw-bold mb-0">
+                                    <h4 className="login-heading font-xxl-50 font-xl-40 font-45 fw-bold mb-0">
                                        GreenSight
                                     </h4>
                                 </div>

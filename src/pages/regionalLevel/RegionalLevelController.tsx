@@ -127,7 +127,7 @@ const RegionalLevelController = () => {
         );
       }
   
-    }, [dispatch, id, regionsLevel,])
+    }, [dispatch, id, regionsLevel,quartelyData,yearlyData])
   
     useEffect(() => {
       if (yearlyData1 || regionsLevel) {

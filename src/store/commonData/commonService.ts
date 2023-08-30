@@ -1,7 +1,6 @@
 import axios from "axios";
 
 // Fetch base URLs from environment variables
-const baseURL = process.env.REACT_APP_BASE_URL;
 const baseURL1 = process.env.REACT_APP_BASE_URL1;
 
 /**

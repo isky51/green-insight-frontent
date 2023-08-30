@@ -1,4 +1,3 @@
-import Back from "../../assets/images/common/back.svg";
 import Up from "../../assets/images/common/up.svg";
 import Garrow from "../../assets/images/common/g-arrow.svg";
 import Profileimg from "../../assets/images//common/profile-img-auto.png";
@@ -10,7 +9,6 @@ import {
   Col,
   Input,
 } from 'reactstrap';
-import { Link } from "react-router-dom";
 import ChartHighChart from "../../constant/highchart/chartHighChart";
 import DateTimeShow from "../../component/DateTimeShow";
 import { getQuarterYear, isCompanyEnable, yearList } from "../../constant";

@@ -108,16 +108,6 @@ export const getLaneCarrierCompaire = createAsyncThunk("get/carrier/compaire/det
 })
 
 
-export const resertStore = createAsyncThunk("get/carrier/resertStore", async (userData, thunkApi) => {
-    try {
-        return true;
-    }
-    catch (error: any) {
-        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.string();
-        return thunkApi.rejectWithValue(message)
-    }
-})
-
 export const laneCarrierTableData = createAsyncThunk("get/lane/carrier/table-Data", async (userData, thunkApi) => {
     try {
 
@@ -260,10 +250,6 @@ export const carrierDetailsReducer = createSlice({
                 state.isSuccess = false;
                 state.getLaneCarrierCompaireDtoLoading = false
 
-            })
-            .addCase(resertStore.fulfilled, (state, action) => {
-                state.getLaneCarrierCompaireDto = null;
-                state.vendorTableDetails = null
             })
             .addCase(laneCarrierTableData.pending, (state) => {
                 state.isLoading = true;
