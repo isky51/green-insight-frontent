@@ -160,8 +160,7 @@ export function columnChart(props: any) {
         series: [{
 
             name: '',
-            data: props.lanePageArr ? props.lanePageArr : [['Shanghai', 24]], pointWidth: 17
-            ,
+            data: props.lanePageArr ? props.lanePageArr : [['Shanghai', 24]], pointWidth: 17,
             dataLabels: {
                 enabled: false,
                 rotation: 0,

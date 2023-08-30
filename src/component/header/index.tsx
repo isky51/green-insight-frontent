@@ -51,7 +51,7 @@ const HeaderLayout = () => {
 
                             </div>
                             <div className='d-flex align-items-center gap-4'>
-                                <div className='toogleSwitch'>
+                                <div className='toogleSwitch d-none'>
                                     <input type="checkbox" checked data-toggle="toggle" data-onlabel="Admin" data-offlabel="Application"></input>
                                 </div>
                                 <button type="button" className="btn position-relative badge-btn">

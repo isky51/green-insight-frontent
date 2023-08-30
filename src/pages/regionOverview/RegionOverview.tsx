@@ -443,7 +443,6 @@ const RegionOverview = () => {
                               })
                             }
                             />
-
                         }
                       </div>
                     </div>

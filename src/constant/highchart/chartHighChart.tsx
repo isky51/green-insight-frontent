@@ -7,7 +7,13 @@ interface ChartProps {
   options: any;
 }
 const ChartHighChart: React.FC<ChartProps> = ({ options }) => {
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return <HighchartsReact highcharts={Highcharts} options={{...options, exporting: {
+    buttons: {
+        contextButton: {
+            enabled: false // Disable the context menu button
+        }
+    }
+}}}   />;
 };
 export default ChartHighChart;
 
